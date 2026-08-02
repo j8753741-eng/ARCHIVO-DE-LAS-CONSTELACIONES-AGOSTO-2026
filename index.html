@@ -390,6 +390,108 @@ transform:scale(1);
 }
 
    }
+
+   #warp{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:#000;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+opacity:0;
+
+visibility:hidden;
+
+transition:1.2s;
+
+z-index:99999;
+
+}
+
+#warp.active{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+#warpGlow{
+
+width:14px;
+
+height:14px;
+
+border-radius:50%;
+
+background:white;
+
+box-shadow:
+
+0 0 30px white,
+
+0 0 80px #6fd5ff,
+
+0 0 160px #6fd5ff,
+
+0 0 260px #6fd5ff;
+
+animation:warpPulse 1.3s infinite;
+
+}
+
+#warpText{
+
+margin-top:40px;
+
+color:white;
+
+font-size:28px;
+
+letter-spacing:5px;
+
+font-family:Cinzel;
+
+opacity:.85;
+
+}
+
+@keyframes warpPulse{
+
+0%{
+
+transform:scale(.4);
+
+}
+
+50%{
+
+transform:scale(2.8);
+
+}
+
+100%{
+
+transform:scale(.4);
+
+}
+
+   }
    
 </style>
 
@@ -398,6 +500,18 @@ transform:scale(1);
 <body>
 
 <div id="universe">
+   
+<div id="warp">
+
+<div id="warpGlow"></div>
+
+<div id="warpText">
+
+Abriendo Constelación...
+
+</div>
+
+   </div>
 
 <div id="nebula"></div>
 
@@ -559,9 +673,10 @@ star.classList.add("active");
 
 star.onclick=()=>{
 
-window.location.href=p.link;
+openConstellation(p.link);
 
-}
+   }
+
 
 }else{
 
@@ -728,7 +843,52 @@ clearInterval(timer);
 }
 
 setTimeout(travelEnergy,3000);
-   
+
+   function openConstellation(url){
+
+const warp=document.getElementById("warp");
+
+warp.classList.add("active");
+
+document.body.style.overflow="hidden";
+
+const universe=document.getElementById("universe");
+
+universe.animate([
+
+{
+
+transform:"scale(1)",
+
+filter:"blur(0px)"
+
+},
+
+{
+
+transform:"scale(2)",
+
+filter:"blur(12px)"
+
+}
+
+],{
+
+duration:2200,
+
+fill:"forwards",
+
+easing:"ease-in-out"
+
+});
+
+setTimeout(()=>{
+
+window.location.href=url;
+
+},2100);
+
+   }
 </script>
 
 </div>
