@@ -2,691 +2,335 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>✨ Nuestro Cielo de Cartas ✨</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>✦ La Constelación de Nuestro Amor ✦</title>
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-html,body{
-width:100%;
-height:100%;
-overflow:hidden;
-font-family:Poppins,sans-serif;
-background:#02030c;
-color:white;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
 
-background:
-radial-gradient(circle at 20% 20%,rgba(103,58,183,.28),transparent 35%),
-radial-gradient(circle at 80% 15%,rgba(0,188,212,.18),transparent 32%),
-radial-gradient(circle at 70% 80%,rgba(233,30,99,.18),transparent 30%),
-linear-gradient(#02030c,#06091b,#010204);
+    width:100%;
+    height:100vh;
+    overflow:hidden;
 
-position:relative;
+    background:
+    radial-gradient(circle at top,#17113b,#050512 60%,#000);
+
+    color:white;
+    font-family:"Segoe UI",sans-serif;
+
+}
+
+
+/* CIELO */
+
+#universo{
+
+    position:relative;
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
 
 }
 
-/*==========================
-NEBULOSAS
-==========================*/
 
-.nebula{
+/* NEBULOSAS */
 
-position:absolute;
-border-radius:50%;
-filter:blur(90px);
-opacity:.22;
-animation:nebulaMove 18s ease-in-out infinite alternate;
+.nebulosa{
+
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.35;
 
 }
+
 
 .n1{
 
-width:420px;
-height:420px;
-background:#8f6bff;
-left:-120px;
-top:-80px;
+    width:450px;
+    height:450px;
+    background:#7c4dff;
+    top:-150px;
+    left:-100px;
 
 }
+
 
 .n2{
 
-width:380px;
-height:380px;
-background:#00bcd4;
-right:-120px;
-top:30%;
-
-animation-duration:22s;
+    width:500px;
+    height:500px;
+    background:#00bcd4;
+    right:-150px;
+    bottom:-100px;
 
 }
+
 
 .n3{
 
-width:500px;
-height:500px;
-background:#ff4fa3;
-bottom:-180px;
-left:25%;
-
-animation-duration:26s;
+    width:350px;
+    height:350px;
+    background:#ff4081;
+    left:35%;
+    top:40%;
 
 }
 
-@keyframes nebulaMove{
 
-from{
 
-transform:translateY(-25px) scale(1);
+/* ESTRELLAS PEQUEÑAS DEL FONDO */
 
-}
+.fondo-estrellas span{
 
-to{
+    position:absolute;
 
-transform:translateY(35px) scale(1.12);
+    width:3px;
+    height:3px;
 
-}
+    background:white;
+    border-radius:50%;
 
-}
-
-/*==========================
-ESTRELLAS PEQUEÑAS
-==========================*/
-
-.background-stars{
-
-position:absolute;
-inset:0;
-overflow:hidden;
+    animation:brillar 3s infinite alternate;
 
 }
 
-.background-stars span{
 
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-border-radius:50%;
-animation:twinkle linear infinite;
+@keyframes brillar{
 
-}
+    from{
+        opacity:.2;
+        transform:scale(.7);
+    }
 
-@keyframes twinkle{
-
-0%,100%{
-
-opacity:.15;
-transform:scale(1);
+    to{
+        opacity:1;
+        transform:scale(1.8);
+    }
 
 }
 
-50%{
 
-opacity:1;
-transform:scale(2);
 
-}
+/* CONTENIDO CENTRAL */
 
-}
+.contenido{
 
-/*==========================
-ESTRELLAS FUGACES
-==========================*/
+    position:absolute;
+    z-index:5;
 
-.shooting{
+    top:50%;
+    left:50%;
 
-position:absolute;
-width:170px;
-height:2px;
+    transform:translate(-50%,-50%);
 
-background:linear-gradient(90deg,#fff,transparent);
+    width:90%;
+    max-width:700px;
 
-opacity:0;
-
-transform:rotate(-30deg);
-
-animation:shoot 8s linear infinite;
+    text-align:center;
 
 }
 
-.s2{
-
-animation-delay:3s;
-
-}
-
-.s3{
-
-animation-delay:6s;
-
-}
-
-@keyframes shoot{
-
-0%{
-
-opacity:0;
-transform:translate(-250px,-180px) rotate(-30deg);
-
-}
-
-10%{
-
-opacity:1;
-
-}
-
-35%{
-
-opacity:0;
-transform:translate(1400px,850px) rotate(-30deg);
-
-}
-
-100%{
-
-opacity:0;
-
-}
-
-}
-
-/*==========================
-CONTENIDO
-==========================*/
-
-.container{
-
-position:relative;
-z-index:5;
-
-width:100%;
-height:100%;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-
-padding:30px;
-
-}
 
 h1{
 
-font-family:Cinzel,serif;
+    font-size:clamp(32px,6vw,65px);
 
-font-size:clamp(32px,5vw,60px);
+    font-family:Georgia,serif;
 
-letter-spacing:2px;
+    letter-spacing:3px;
 
-text-align:center;
-
-text-shadow:
-
-0 0 12px rgba(255,255,255,.45),
-0 0 30px rgba(140,120,255,.5);
-
-margin-bottom:10px;
+    text-shadow:
+    0 0 15px #fff,
+    0 0 35px #9b7cff;
 
 }
 
-.subtitle{
 
-font-size:clamp(14px,2vw,20px);
 
-opacity:.85;
+.mensaje{
 
-margin-bottom:50px;
+    margin-top:25px;
 
-text-align:center;
+    padding:25px;
 
-}
+    background:rgba(255,255,255,.08);
 
-/*==========================
-CIELO
-==========================*/
+    border:1px solid rgba(255,255,255,.2);
 
-.sky{
+    border-radius:25px;
 
-position:relative;
+    backdrop-filter:blur(12px);
 
-width:min(1200px,95vw);
+    line-height:1.8;
 
-height:min(72vh,850px);
+    font-size:18px;
 
 }
 
-/*==========================
-ESTRELLAS GRANDES
-==========================*/
 
-.star{
 
-position:absolute;
+/* ZONA DE CONSTELACIÓN */
 
-width:70px;
-height:70px;
+#constelacion{
 
-display:flex;
-justify-content:center;
-align-items:center;
+    position:absolute;
 
-cursor:pointer;
+    inset:0;
 
-user-select:none;
-
-transition:.35s;
-
-animation:float 4s ease-in-out infinite;
+    z-index:3;
 
 }
 
-.star:nth-child(even){
 
-animation-duration:5.5s;
 
-}
+/* ESTRELLAS DE CARTAS */
 
-.star:nth-child(3n){
+.estrella{
 
-animation-duration:6.2s;
+    position:absolute;
 
-}
+    width:55px;
+    height:55px;
 
-.star::before{
+    display:flex;
 
-content:"⭐";
+    justify-content:center;
+    align-items:center;
 
-font-size:46px;
+    cursor:pointer;
 
-filter:
-drop-shadow(0 0 10px rgba(255,255,255,.4));
-
-transition:.35s;
+    transition:.4s;
 
 }
 
-.star.locked::before{
 
-opacity:.45;
-filter:grayscale(1);
+.estrella::before{
 
-}
+    content:"★";
 
-.star.unlocked::before{
+    font-size:42px;
 
-animation:pulse 2.3s infinite;
+    color:#777;
 
 }
 
-.star:hover{
 
-transform:scale(1.12);
+.estrella.bloqueada::after{
 
-}
+    content:"🔒";
 
-.lock{
+    position:absolute;
 
-position:absolute;
+    font-size:18px;
 
-bottom:-4px;
-right:-2px;
+    bottom:-5px;
 
-font-size:18px;
-
-background:#111827;
-
-border-radius:50%;
-
-padding:3px;
-
-box-shadow:0 0 10px rgba(0,0,0,.4);
+    right:-5px;
 
 }
 
-.glow{
 
-position:absolute;
 
-width:100%;
-height:100%;
+.estrella.desbloqueada::before{
 
-border-radius:50%;
+    color:#ffe88a;
 
-background:radial-gradient(circle,
-rgba(255,255,255,.55),
-transparent 70%);
+    text-shadow:
+    0 0 10px #fff,
+    0 0 30px #ffd54f,
+    0 0 60px #ff9800;
 
-filter:blur(12px);
-
-opacity:0;
-
-animation:shine 2.5s infinite;
-
-pointer-events:none;
+    animation:latido 2s infinite;
 
 }
 
-.star.locked .glow{
 
-display:none;
 
-}
+@keyframes latido{
 
-@keyframes shine{
+    50%{
 
-0%,100%{
+        transform:scale(1.25);
 
-opacity:.3;
-transform:scale(.9);
+    }
 
 }
 
-50%{
 
-opacity:1;
-transform:scale(1.25);
 
-}
-
-}
-
-@keyframes pulse{
-
-0%,100%{
-
-transform:scale(1);
-
-}
-
-50%{
-
-transform:scale(1.12);
-
-}
-
-}
-
-@keyframes float{
-
-0%,100%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-12px);
-
-}
-
-}
-
-/* Continúa en la Parte 2... */
-
-<style>
-
-/*==========================
-VENTANA MODAL
-==========================*/
-
-.modal{
-
-position:fixed;
-inset:0;
-
-background:rgba(0,0,0,.82);
-backdrop-filter:blur(8px);
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-opacity:0;
-visibility:hidden;
-
-transition:.35s;
-
-z-index:9999;
-
-}
-
-.modal.active{
-
-opacity:1;
-visibility:visible;
-
-}
-
-.card{
-
-width:min(92vw,540px);
-
-background:rgba(10,12,30,.95);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:28px;
-
-padding:35px 28px;
-
-box-shadow:
-0 0 40px rgba(110,80,255,.35),
-0 0 120px rgba(0,0,0,.5);
-
-text-align:center;
-
-animation:popup .35s ease;
-
-}
-
-@keyframes popup{
-
-from{
-
-transform:scale(.85);
-opacity:0;
-
-}
-
-to{
-
-transform:scale(1);
-opacity:1;
-
-}
-
-}
-
-.card h2{
-
-font-family:Cinzel,serif;
-
-font-size:28px;
-
-margin-bottom:14px;
-
-}
-
-.card p{
-
-line-height:1.7;
-
-opacity:.88;
-
-margin-bottom:24px;
-
-}
-
-.openButton{
-
-display:inline-flex;
-align-items:center;
-justify-content:center;
-
-padding:15px 34px;
-
-border:none;
-
-border-radius:999px;
-
-font-size:16px;
-
-font-weight:600;
-
-cursor:pointer;
-
-background:linear-gradient(135deg,#9b7cff,#5e8dff);
-
-color:white;
-
-transition:.3s;
-
-box-shadow:0 0 25px rgba(140,120,255,.4);
-
-text-decoration:none;
-
-}
-
-.openButton:hover{
-
-transform:translateY(-2px);
-
-box-shadow:0 0 40px rgba(140,120,255,.7);
-
-}
-
-.close{
-
-margin-top:20px;
-
-background:none;
-
-border:none;
-
-color:#cfcfcf;
-
-font-size:15px;
-
-cursor:pointer;
-
-}
-
-/*==========================
-RESPONSIVE
-==========================*/
-
-@media(max-width:700px){
-
-.star{
-
-width:56px;
-height:56px;
-
-}
-
-.star::before{
-
-font-size:38px;
-
-}
-
-.lock{
-
-font-size:15px;
-
-}
-
-.sky{
-
-height:68vh;
-
-}
-
-}
+/* VARIABLES */
 
 </style>
 
 </head>
 
+
 <body>
 
-<div class="nebula n1"></div>
-<div class="nebula n2"></div>
-<div class="nebula n3"></div>
 
-<div class="background-stars" id="backgroundStars"></div>
+<div id="universo">
 
-<div class="shooting" style="top:12%;left:-200px;"></div>
-<div class="shooting s2" style="top:38%;left:-250px;"></div>
-<div class="shooting s3" style="top:65%;left:-180px;"></div>
 
-<div class="container">
+<div class="nebulosa n1"></div>
+<div class="nebulosa n2"></div>
+<div class="nebulosa n3"></div>
 
-<h1>Nuestro Cielo de Cartas</h1>
 
-<p class="subtitle">
-Cada estrella guarda un pedacito de mi corazón.
+<div class="fondo-estrellas" id="fondo"></div>
+
+
+<div id="constelacion"></div>
+
+
+<div class="contenido">
+
+<h1>
+✦ La Constelación de Nuestro Amor ✦
+</h1>
+
+
+<div class="mensaje">
+
+<p>
+Hay quienes miran las estrellas buscando deseos...
 </p>
 
-<div class="sky" id="sky"></div>
+<p>
+Yo construí una constelación para guardar cada pedacito de nuestro amor.
+</p>
 
-</div>
-
-<div class="modal" id="modal">
-
-<div class="card">
-
-<h2 id="tituloCarta"></h2>
-
-<p id="textoCarta"></p>
-
-<a
-id="abrirCarta"
-class="openButton"
-target="_blank">
-
-Abrir Carta ✨
-
-</a>
-
-<br>
-
-<button
-class="close"
-onclick="cerrarModal()">
-
-Cerrar
-
-</button>
+<p>
+Cada estrella tiene una historia esperando ser descubierta.
+</p>
 
 </div>
 
 </div>
+
+
+</div>
+
 
 <script>
 
-/*=========================================
-CONFIGURACIÓN
-=========================================*/
+
+/* CONFIGURACIÓN PRINCIPAL */
+
 
 const ESTRELLAS_DESBLOQUEADAS = 0;
+
 
 const CARTAS = [
 
@@ -725,241 +369,1949 @@ const CARTAS = [
 
 ];
 
-/*=========================================
-POSICIONES
-=========================================*/
+    
+/*========================================
+  POSICIONES DE LA CONSTELACIÓN
+  FORMA DE CORAZÓN (30 ESTRELLAS)
+========================================*/
 
-const POSICIONES=[
+const POSICIONES = [
 
-[8,10],
-[24,8],
-[42,12],
-[63,9],
-[82,14],
+/* Parte izquierda del corazón */
 
-[12,28],
-[30,25],
-[48,30],
-[66,26],
-[86,31],
+[50,18],
+[42,15],
+[34,16],
+[27,22],
+[22,30],
+[20,40],
+[22,50],
+[28,60],
+[35,69],
+[43,77],
+[50,85],
 
-[6,48],
-[22,46],
-[40,49],
-[58,46],
+
+/* Parte derecha del corazón */
+
+[50,85],
+[57,77],
+[65,69],
+[72,60],
 [78,50],
+[80,40],
+[78,30],
+[73,22],
+[66,16],
+[58,15],
 
-[14,67],
-[32,66],
-[50,69],
-[68,65],
-[86,68],
 
-[8,86],
-[24,84],
-[42,88],
-[58,83],
-[74,86],
+/* Interior y unión */
 
-[90,84],
-[52,8],
-[72,42],
-[36,73],
-[90,55]
+[50,28],
+[42,32],
+[35,40],
+[42,48],
+[50,55],
+[58,48],
+[65,40],
+[58,32],
+[50,68],
+[50,42]
 
 ];
 
-/* Continúa en la Parte 3... */
 
-/*=========================================
-REFERENCIAS
-=========================================*/
 
-const sky=document.getElementById("sky");
-const modal=document.getElementById("modal");
-const titulo=document.getElementById("tituloCarta");
-const texto=document.getElementById("textoCarta");
-const boton=document.getElementById("abrirCarta");
+/*========================================
+  CREACIÓN DE ESTRELLAS DEL FONDO
+========================================*/
 
-/*=========================================
-CREAR ESTRELLAS DEL FONDO
-=========================================*/
 
-const fondo=document.getElementById("backgroundStars");
+const fondo = document.getElementById("fondo");
 
-for(let i=0;i<180;i++){
 
-const s=document.createElement("span");
+for(let i=0;i<250;i++){
 
-s.style.left=Math.random()*100+"%";
-s.style.top=Math.random()*100+"%";
+    const estrella = document.createElement("span");
 
-const tam=Math.random()*3+1;
 
-s.style.width=tam+"px";
-s.style.height=tam+"px";
+    estrella.style.left =
+    Math.random()*100+"%";
 
-s.style.animationDuration=(2+Math.random()*5)+"s";
-s.style.animationDelay=(Math.random()*5)+"s";
 
-fondo.appendChild(s);
+    estrella.style.top =
+    Math.random()*100+"%";
 
-}
 
-/*=========================================
-CREAR LAS 30 ESTRELLAS
-=========================================*/
+    const tamaño =
+    Math.random()*3+1;
 
-POSICIONES.forEach((p,index)=>{
 
-const estrella=document.createElement("div");
+    estrella.style.width =
+    tamaño+"px";
 
-estrella.className="star";
 
-if(index<ESTRELLAS_DESBLOQUEADAS){
+    estrella.style.height =
+    tamaño+"px";
 
-estrella.classList.add("unlocked");
 
-}else{
+    estrella.style.animationDelay =
+    Math.random()*5+"s";
 
-estrella.classList.add("locked");
+
+    estrella.style.animationDuration =
+    (2+Math.random()*5)+"s";
+
+
+    fondo.appendChild(estrella);
 
 }
 
-estrella.style.left=p[0]+"%";
-estrella.style.top=p[1]+"%";
 
-estrella.style.transform="translate(-50%,-50%)";
 
-const glow=document.createElement("div");
-glow.className="glow";
+/*========================================
+  CREAR CONSTELACIÓN
+========================================*/
 
-estrella.appendChild(glow);
 
-if(index>=ESTRELLAS_DESBLOQUEADAS){
+const zona =
+document.getElementById("constelacion");
 
-const lock=document.createElement("div");
-lock.className="lock";
-lock.innerHTML="🔒";
-estrella.appendChild(lock);
 
-}
 
-estrella.onclick=()=>abrirCarta(index);
+POSICIONES.forEach((posicion,index)=>{
 
-sky.appendChild(estrella);
+
+    const estrella =
+    document.createElement("div");
+
+
+    estrella.className="estrella";
+
+
+    estrella.style.left =
+    posicion[0]+"%";
+
+
+    estrella.style.top =
+    posicion[1]+"%";
+
+
+
+    estrella.dataset.id=index;
+
+
+
+    if(index < ESTRELLAS_DESBLOQUEADAS){
+
+
+        estrella.classList.add("desbloqueada");
+
+
+    }else{
+
+
+        estrella.classList.add("bloqueada");
+
+
+    }
+
+
+
+    zona.appendChild(estrella);
+
+
 
 });
 
-/*=========================================
-ABRIR CARTA
-=========================================*/
 
-function abrirCarta(numero){
 
-if(numero>=ESTRELLAS_DESBLOQUEADAS){
+/*========================================
+  CREAR LÍNEAS DE LA CONSTELACIÓN
+========================================*/
 
-titulo.innerHTML="⭐ Estrella Bloqueada";
 
-texto.innerHTML=
-"Esta estrella todavía permanece cerrada.<br><br>Regresa cuando llegue el momento de descubrir el siguiente pedacito de mi corazón.";
+const conexiones=[
 
-boton.style.display="none";
+[0,1],
+[1,2],
+[2,3],
+[3,4],
+[4,5],
+[5,6],
+[6,7],
+[7,8],
+[8,9],
+[9,10],
 
-modal.classList.add("active");
 
-return;
+[10,11],
+[11,12],
+[12,13],
+[13,14],
+[14,15],
+[15,16],
+[16,17],
+[17,18],
+[18,19],
+[19,20],
+
+
+[20,21],
+[21,22],
+[22,23],
+[23,24],
+[24,25],
+[25,26],
+[26,27],
+[27,28],
+[28,29],
+
+
+[29,0],
+
+[21,29],
+[22,24],
+[24,27],
+[23,25]
+
+];
+
+
+
+const svg =
+document.createElementNS(
+"http://www.w3.org/2000/svg",
+"svg"
+);
+
+
+
+svg.style.position="absolute";
+svg.style.inset="0";
+svg.style.width="100%";
+svg.style.height="100%";
+
+svg.style.zIndex="-1";
+
+
+
+constelacion.appendChild(svg);
+
+
+
+conexiones.forEach(linea=>{
+
+
+const a=POSICIONES[linea[0]];
+const b=POSICIONES[linea[1]];
+
+
+const l =
+document.createElementNS(
+"http://www.w3.org/2000/svg",
+"line"
+);
+
+
+
+l.setAttribute(
+"x1",
+a[0]+"%"
+);
+
+
+l.setAttribute(
+"y1",
+a[1]+"%"
+);
+
+
+l.setAttribute(
+"x2",
+b[0]+"%"
+);
+
+
+l.setAttribute(
+"y2",
+b[1]+"%"
+);
+
+
+
+l.setAttribute(
+"stroke",
+"rgba(255,220,120,.45)"
+);
+
+
+
+l.setAttribute(
+"stroke-width",
+"1.5"
+);
+
+
+
+l.style.filter=
+"drop-shadow(0 0 6px #ffd54f)";
+
+
+
+svg.appendChild(l);
+
+
+
+});
+
+
+
+/*========================================
+  ANIMACIÓN DE APARICIÓN
+========================================*/
+
+
+setTimeout(()=>{
+
+
+document.querySelectorAll(".estrella")
+.forEach((e,i)=>{
+
+
+setTimeout(()=>{
+
+
+e.style.opacity="1";
+
+
+},i*80);
+
+
+
+});
+
+
+
+},500);
+
+    
+/*========================================
+  ANIMACIÓN DE LAS LÍNEAS DE LA CONSTELACIÓN
+========================================*/
+
+
+const lineas =
+document.querySelectorAll("svg line");
+
+
+lineas.forEach((linea,index)=>{
+
+
+    linea.style.strokeDasharray="1000";
+    linea.style.strokeDashoffset="1000";
+
+
+    setTimeout(()=>{
+
+
+        linea.style.transition=
+        "stroke-dashoffset 2s ease";
+
+
+        linea.style.strokeDashoffset="0";
+
+
+    },index*80);
+
+
+
+});
+
+
+
+/*========================================
+  MOVIMIENTO SUAVE DE ESTRELLAS
+========================================*/
+
+
+document.querySelectorAll(".estrella")
+.forEach((estrella,index)=>{
+
+
+    const velocidad =
+    3 + Math.random()*4;
+
+
+    estrella.style.animation=
+    `flotar ${velocidad}s ease-in-out infinite`;
+
+
+
+    estrella.style.animationDelay =
+    (index*0.15)+"s";
+
+
+
+});
+
+
+
+
+/*========================================
+  ANIMACIÓN FLOTAR
+========================================*/
+
+
+const estiloFlotar =
+document.createElement("style");
+
+
+estiloFlotar.innerHTML=`
+
+@keyframes flotar{
+
+0%,100%{
+
+margin-top:0px;
 
 }
 
-titulo.innerHTML="✨ Carta "+(numero+1);
 
-texto.innerHTML=
-"Esta estrella ya puede abrirse.<br><br>Pulsa el botón para leer la carta.";
+50%{
 
-boton.style.display="inline-flex";
+margin-top:-12px;
 
-if(CARTAS[numero].trim()===""){
+}
 
-boton.removeAttribute("href");
+}
 
-boton.onclick=function(){
 
-alert("Aún no has agregado el enlace de esta carta.");
+`;
+
+
+
+document.head.appendChild(estiloFlotar);
+
+
+
+
+
+/*========================================
+  ESTRELLAS FUGACES
+========================================*/
+
+
+function crearEstrellaFugaz(){
+
+
+const fugaz =
+document.createElement("div");
+
+
+fugaz.style.position="absolute";
+
+
+fugaz.style.width="180px";
+
+fugaz.style.height="2px";
+
+
+fugaz.style.background=
+"linear-gradient(90deg,white,transparent)";
+
+
+fugaz.style.top=
+Math.random()*70+"%";
+
+
+fugaz.style.left="-200px";
+
+
+fugaz.style.transform=
+"rotate(-35deg)";
+
+
+fugaz.style.opacity="0";
+
+
+fugaz.style.zIndex="2";
+
+
+
+document.getElementById("universo")
+.appendChild(fugaz);
+
+
+
+const animacion =
+fugaz.animate([
+
+{
+
+transform:
+"translateX(0) rotate(-35deg)",
+
+opacity:0
+
+},
+
+
+{
+
+opacity:1
+
+},
+
+
+{
+
+transform:
+"translateX(140vw) rotate(-35deg)",
+
+opacity:0
+
+}
+
+],{
+
+
+duration:1800,
+easing:"linear"
+
+
+});
+
+
+
+animacion.onfinish=()=>{
+
+fugaz.remove();
 
 };
 
+
+}
+
+
+
+setInterval(()=>{
+
+
+crearEstrellaFugaz();
+
+
+},7000);
+
+
+
+
+
+/*========================================
+  LUNA
+========================================*/
+
+
+const luna =
+document.createElement("div");
+
+
+luna.innerHTML="🌙";
+
+
+luna.style.position="absolute";
+
+
+luna.style.right="8%";
+
+
+luna.style.top="8%";
+
+
+luna.style.fontSize="75px";
+
+
+luna.style.filter=
+"drop-shadow(0 0 25px white)";
+
+
+luna.style.zIndex="2";
+
+
+document.getElementById("universo")
+.appendChild(luna);
+
+
+
+
+
+/*========================================
+  CONTADOR DE ESTRELLAS
+========================================*/
+
+
+const contador =
+document.createElement("div");
+
+
+contador.style.position="absolute";
+
+contador.style.top="25px";
+
+contador.style.left="50%";
+
+contador.style.transform=
+"translateX(-50%)";
+
+
+contador.style.padding=
+"10px 25px";
+
+
+contador.style.borderRadius=
+"30px";
+
+
+contador.style.background=
+"rgba(255,255,255,.08)";
+
+
+contador.style.border=
+"1px solid rgba(255,255,255,.2)";
+
+
+contador.style.backdropFilter=
+"blur(10px)";
+
+
+contador.style.fontSize="16px";
+
+
+contador.style.zIndex="10";
+
+
+contador.innerHTML=
+
+`
+✨ ${ESTRELLAS_DESBLOQUEADAS} de 30 estrellas descubiertas
+`;
+
+
+
+document.getElementById("universo")
+.appendChild(contador);
+
+
+
+
+/*========================================
+  EFECTO PARALLAX
+========================================*/
+
+
+document.addEventListener(
+"mousemove",
+(e)=>{
+
+
+const x =
+(e.clientX/window.innerWidth-.5)*15;
+
+
+const y =
+(e.clientY/window.innerHeight-.5)*15;
+
+
+
+document.querySelectorAll(".nebulosa")
+.forEach((n,i)=>{
+
+
+n.style.transform=
+`
+translate(
+${x*(i+1)}px,
+${y*(i+1)}px
+)
+
+`;
+
+
+
+});
+
+
+
+});
+
+
+
+/*========================================
+  EFECTO TÁCTIL PARA MÓVILES
+========================================*/
+
+
+document.addEventListener(
+"touchmove",
+(e)=>{
+
+
+const toque=e.touches[0];
+
+
+const x =
+(toque.clientX/window.innerWidth-.5)*10;
+
+
+const y =
+(toque.clientY/window.innerHeight-.5)*10;
+
+
+
+document.querySelectorAll(".nebulosa")
+.forEach((n,i)=>{
+
+
+n.style.transform=
+`
+translate(
+${x*(i+1)}px,
+${y*(i+1)}px
+)
+
+`;
+
+
+
+});
+
+
+
+});
+
+    
+/*========================================
+  SISTEMA DE CARTAS
+========================================*/
+
+
+const estrellas =
+document.querySelectorAll(".estrella");
+
+
+
+/*
+  Cada estrella representa una carta.
+  Cuando agregues un enlace en CARTAS,
+  esa estrella abrirá esa carta.
+*/
+
+
+
+estrellas.forEach((estrella)=>{
+
+
+estrella.addEventListener(
+"click",
+()=>{
+
+
+const numero =
+Number(estrella.dataset.id);
+
+
+
+abrirEstrella(numero);
+
+
+
+});
+
+
+});
+
+
+
+
+
+/*========================================
+  CREAR VENTANA DE CARTA
+========================================*/
+
+
+const modal =
+document.createElement("div");
+
+
+modal.id="modalCarta";
+
+
+modal.innerHTML=`
+
+<div class="cajaCarta">
+
+
+<h2 id="tituloCarta">
+✨ Una estrella para ti ✨
+</h2>
+
+
+<p id="contenidoCarta">
+
+Esta estrella todavía guarda una parte
+de nuestra historia.
+
+</p>
+
+
+<a 
+id="botonCarta"
+target="_blank">
+
+Abrir carta 💌
+
+</a>
+
+
+<button id="cerrarCarta">
+
+Cerrar
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+document.body.appendChild(modal);
+
+
+
+
+
+/*========================================
+  ESTILOS DEL MODAL
+========================================*/
+
+
+const estiloModal =
+document.createElement("style");
+
+
+estiloModal.innerHTML=`
+
+#modalCarta{
+
+position:fixed;
+
+inset:0;
+
+background:
+rgba(0,0,0,.75);
+
+backdrop-filter:
+blur(12px);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.4s;
+
+z-index:100;
+
+}
+
+
+#modalCarta.activo{
+
+opacity:1;
+
+visibility:visible;
+
+}
+
+
+
+.cajaCarta{
+
+width:min(90%,500px);
+
+padding:35px;
+
+border-radius:30px;
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.25);
+
+
+backdrop-filter:
+blur(20px);
+
+
+text-align:center;
+
+
+box-shadow:
+
+0 0 50px rgba(255,200,100,.25);
+
+
+transform:scale(.8);
+
+transition:.4s;
+
+}
+
+
+#modalCarta.activo .cajaCarta{
+
+transform:scale(1);
+
+}
+
+
+
+.cajaCarta h2{
+
+font-family:Georgia,serif;
+
+font-size:32px;
+
+margin-bottom:20px;
+
+text-shadow:
+0 0 15px white;
+
+}
+
+
+
+.cajaCarta p{
+
+line-height:1.7;
+
+font-size:17px;
+
+margin-bottom:25px;
+
+}
+
+
+
+#botonCarta{
+
+display:inline-block;
+
+padding:14px 35px;
+
+border-radius:40px;
+
+background:
+linear-gradient(
+135deg,
+#ffd54f,
+#ff9800
+);
+
+
+color:#111;
+
+font-weight:bold;
+
+text-decoration:none;
+
+
+box-shadow:
+0 0 25px #ffd54f;
+
+
+}
+
+
+
+#cerrarCarta{
+
+margin-top:20px;
+
+display:block;
+
+margin-left:auto;
+
+margin-right:auto;
+
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+}
+
+
+
+`;
+
+
+
+document.head.appendChild(estiloModal);
+
+
+
+
+
+/*========================================
+  ABRIR ESTRELLA
+========================================*/
+
+
+function abrirEstrella(numero){
+
+
+
+const desbloqueada =
+numero < ESTRELLAS_DESBLOQUEADAS;
+
+
+
+const tituloCarta =
+document.getElementById("tituloCarta");
+
+
+const contenido =
+document.getElementById("contenidoCarta");
+
+
+const boton =
+document.getElementById("botonCarta");
+
+
+
+if(!desbloqueada){
+
+
+
+tituloCarta.innerHTML=
+"🔒 Esta estrella duerme";
+
+
+contenido.innerHTML=
+
+`
+Todavía no ha llegado su momento.
+
+Pero incluso las estrellas que esperan
+siguen formando parte de nuestra historia.
+
+✨
+`;
+
+
+
+boton.style.display="none";
+
+
+
 }else{
+
+
+
+tituloCarta.innerHTML=
+"⭐ Carta número "+(numero+1);
+
+
+
+contenido.innerHTML=
+
+`
+Esta estrella guarda un pedacito
+de nuestro amor.
+
+Pulsa el botón para descubrirlo.
+`;
+
+
+
+if(CARTAS[numero] !== ""){
+
 
 boton.href=CARTAS[numero];
 
-boton.onclick=null;
+boton.style.display="inline-block";
+
+
+}else{
+
+
+boton.style.display="none";
+
 
 }
 
-modal.classList.add("active");
+
+
+crearDestello(
+estrellas[numero]
+);
+
+
 
 }
 
-/*=========================================
-CERRAR MODAL
-=========================================*/
 
-function cerrarModal(){
 
-modal.classList.remove("active");
+modal.classList.add("activo");
+
+
 
 }
 
-modal.addEventListener("click",e=>{
+
+
+
+
+/*========================================
+  CERRAR CARTA
+========================================*/
+
+
+document
+.getElementById("cerrarCarta")
+.onclick=()=>{
+
+
+modal.classList.remove("activo");
+
+
+};
+
+
+
+
+modal.onclick=(e)=>{
+
 
 if(e.target===modal){
 
-cerrarModal();
+
+modal.classList.remove("activo");
+
 
 }
 
-});
 
-/*=========================================
-ESC PARA CERRAR
-=========================================*/
+};
 
-document.addEventListener("keydown",e=>{
 
-if(e.key==="Escape"){
 
-cerrarModal();
+
+
+/*========================================
+  DESTELLO AL DESCUBRIR ESTRELLA
+========================================*/
+
+
+function crearDestello(elemento){
+
+
+const luz =
+document.createElement("div");
+
+
+
+luz.style.position="absolute";
+
+luz.style.width="150px";
+
+luz.style.height="150px";
+
+
+luz.style.borderRadius="50%";
+
+
+luz.style.background=
+"radial-gradient(circle,white,transparent)";
+
+
+luz.style.pointerEvents="none";
+
+
+luz.style.transform=
+"translate(-50%,-50%)";
+
+
+
+const rect =
+elemento.getBoundingClientRect();
+
+
+
+luz.style.left =
+rect.left+"px";
+
+
+luz.style.top =
+rect.top+"px";
+
+
+
+luz.style.zIndex="20";
+
+
+
+document.body.appendChild(luz);
+
+
+
+luz.animate([
+
+{
+
+opacity:1,
+
+transform:
+"scale(.3)"
+
+},
+
+{
+
+opacity:0,
+
+transform:
+"scale(2)"
 
 }
 
-});
+],{
 
-/*=========================================
-EFECTO PARALLAX SUAVE
-=========================================*/
 
-document.addEventListener("mousemove",e=>{
-
-const x=(e.clientX/window.innerWidth-.5)*10;
-const y=(e.clientY/window.innerHeight-.5)*10;
-
-document.querySelectorAll(".nebula").forEach((n,i)=>{
-
-const f=(i+1)*0.8;
-
-n.style.transform=
-`translate(${x*f}px,${y*f}px)`;
+duration:900
 
 });
 
+
+
+setTimeout(()=>{
+
+luz.remove();
+
+},900);
+
+
+
+  }
+
+  
+/*========================================
+  EFECTO DE ESCRITURA DEL MENSAJE
+========================================*/
+
+
+const mensajeOriginal =
+
+`Hay quienes miran las estrellas buscando deseos...
+
+Yo construí una constelación para guardar cada instante,
+cada sonrisa y cada pedacito de nuestro amor.
+
+Cada estrella tiene una historia esperando ser descubierta.
+
+Porque incluso el universo sabe que algunas cosas
+merecen esperar el momento perfecto. ✨`;
+
+
+
+const cajaMensaje =
+document.querySelector(".mensaje");
+
+
+
+cajaMensaje.innerHTML =
+"<span id='textoEscritura'></span>";
+
+
+
+const textoEscritura =
+document.getElementById("textoEscritura");
+
+
+
+let posicionTexto = 0;
+
+
+
+function escribirMensaje(){
+
+
+if(posicionTexto < mensajeOriginal.length){
+
+
+textoEscritura.innerHTML +=
+
+mensajeOriginal.charAt(posicionTexto)
+.replace("\n","<br>");
+
+
+posicionTexto++;
+
+
+setTimeout(
+escribirMensaje,
+45
+);
+
+
+
+}
+
+
+
+}
+
+
+
+setTimeout(()=>{
+
+
+escribirMensaje();
+
+
+},1800);
+
+
+
+
+
+
+/*========================================
+  ENTRADA CINEMATOGRÁFICA
+========================================*/
+
+
+document.querySelector(".contenido")
+.style.opacity="0";
+
+
+document.querySelector(".contenido")
+.style.transform=
+"translate(-50%,-40%) scale(.9)";
+
+
+
+setTimeout(()=>{
+
+
+document.querySelector(".contenido")
+.style.transition=
+"1.8s ease";
+
+
+document.querySelector(".contenido")
+.style.opacity="1";
+
+
+document.querySelector(".contenido")
+.style.transform=
+"translate(-50%,-50%) scale(1)";
+
+
+
+},500);
+
+
+
+
+
+
+/*========================================
+  PARTÍCULAS ALREDEDOR DE ESTRELLAS
+========================================*/
+
+
+function crearParticulas(estrella){
+
+
+for(let i=0;i<8;i++){
+
+
+const particula =
+document.createElement("span");
+
+
+
+particula.style.position="absolute";
+
+particula.style.width="5px";
+
+particula.style.height="5px";
+
+
+particula.style.background="#ffe88a";
+
+
+particula.style.borderRadius="50%";
+
+
+particula.style.pointerEvents="none";
+
+
+const rect =
+estrella.getBoundingClientRect();
+
+
+
+particula.style.left =
+rect.left+25+"px";
+
+
+particula.style.top =
+rect.top+25+"px";
+
+
+particula.style.zIndex="50";
+
+
+
+document.body.appendChild(particula);
+
+
+
+const x =
+(Math.random()-0.5)*120;
+
+
+const y =
+(Math.random()-0.5)*120;
+
+
+
+particula.animate([
+
+{
+
+transform:"translate(0,0)",
+
+opacity:1
+
+},
+
+{
+
+transform:
+`translate(${x}px,${y}px)`,
+
+opacity:0
+
+}
+
+],{
+
+
+duration:1200,
+
+easing:"ease-out"
+
+
 });
 
-/*=========================================
-FIN DEL ARCHIVO
-=========================================*/
+
+
+setTimeout(()=>{
+
+particula.remove();
+
+},1200);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+/* Añadir partículas cuando una estrella
+   desbloqueada es tocada */
+
+estrellas.forEach((estrella,index)=>{
+
+
+estrella.addEventListener("click",()=>{
+
+
+if(index < ESTRELLAS_DESBLOQUEADAS){
+
+
+crearParticulas(estrella);
+
+
+}
+
+
+
+});
+
+
+});
+
+
+
+
+
+
+
+/*========================================
+  MODO NOCHE ESPECIAL
+========================================*/
+
+
+let nocheActiva=false;
+
+
+
+function modoNoche(){
+
+
+nocheActiva=!nocheActiva;
+
+
+
+if(nocheActiva){
+
+
+document.body.style.filter=
+"brightness(.75)";
+
+
+}else{
+
+
+document.body.style.filter=
+"brightness(1)";
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+/*========================================
+  EFECTO DE BRILLO AL PASAR SOBRE ESTRELLAS
+========================================*/
+
+
+estrellas.forEach(estrella=>{
+
+
+estrella.addEventListener(
+"mouseenter",
+()=>{
+
+
+estrella.style.filter=
+"drop-shadow(0 0 25px #fff)";
+
+
+});
+
+
+estrella.addEventListener(
+"mouseleave",
+()=>{
+
+
+estrella.style.filter=
+"none";
+
+
+});
+
+
+});
+
+
+
+
+
+
+/*========================================
+  PREPARACIÓN PARA MÚSICA
+========================================*/
+
+
+/*
+
+Puedes colocar aquí un enlace
+de Spotify, YouTube o un audio propio.
+
+Ejemplo:
+
+const MUSICA =
+"TU_LINK_AQUI";
+
+
+*/
+
+
+
+/*========================================
+  GUARDAR PROGRESO FUTURO
+========================================*/
+
+
+/*
+Preparado para agregar después:
+
+localStorage.setItem(
+"estrellasDescubiertas",
+ESTRELLAS_DESBLOQUEADAS
+);
+
+*/
+
+/*========================================
+  MEJORAS PARA MÓVIL Y ESCRITORIO
+========================================*/
+
+
+const ajustePantalla = ()=>{
+
+
+if(window.innerWidth < 700){
+
+
+document.querySelector(".mensaje")
+.style.fontSize="14px";
+
+
+document.querySelector("h1")
+.style.letterSpacing="1px";
+
+
+estrellas.forEach(e=>{
+
+
+e.style.transform+=" scale(.85)";
+
+
+});
+
+
+
+}else{
+
+
+document.querySelector(".mensaje")
+.style.fontSize="18px";
+
+
+}
+
+
+
+};
+
+
+ajustePantalla();
+
+
+window.addEventListener(
+"resize",
+ajustePantalla
+);
+
+
+
+
+
+
+
+/*========================================
+  BOTÓN SECRETO DE AMOR
+========================================*/
+
+
+const botonSecreto =
+document.createElement("button");
+
+
+
+botonSecreto.innerHTML=
+"💜";
+
+
+
+botonSecreto.style.position=
+"absolute";
+
+
+botonSecreto.style.bottom="25px";
+
+
+botonSecreto.style.right="25px";
+
+
+botonSecreto.style.width="50px";
+
+
+botonSecreto.style.height="50px";
+
+
+botonSecreto.style.borderRadius="50%";
+
+
+botonSecreto.style.border="1px solid rgba(255,255,255,.3)";
+
+
+botonSecreto.style.background=
+"rgba(255,255,255,.1)";
+
+
+botonSecreto.style.color="white";
+
+
+botonSecreto.style.fontSize="25px";
+
+
+botonSecreto.style.cursor="pointer";
+
+
+botonSecreto.style.zIndex="20";
+
+
+botonSecreto.style.backdropFilter=
+"blur(10px)";
+
+
+
+document
+.getElementById("universo")
+.appendChild(botonSecreto);
+
+
+
+
+botonSecreto.onclick=()=>{
+
+
+const mensajeFinal =
+document.createElement("div");
+
+
+
+mensajeFinal.style.position="fixed";
+
+
+mensajeFinal.style.inset="0";
+
+
+mensajeFinal.style.background=
+"rgba(0,0,0,.8)";
+
+
+mensajeFinal.style.display=
+"flex";
+
+
+mensajeFinal.style.alignItems=
+"center";
+
+
+mensajeFinal.style.justifyContent=
+"center";
+
+
+mensajeFinal.style.padding="30px";
+
+
+mensajeFinal.style.textAlign="center";
+
+
+mensajeFinal.style.zIndex="200";
+
+
+
+mensajeFinal.innerHTML=
+
+`
+
+<div style="
+max-width:500px;
+padding:35px;
+border-radius:30px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.2);
+">
+
+<h2 style="
+font-family:Georgia;
+font-size:32px;
+margin-bottom:20px;
+">
+Para ti ✨
+</h2>
+
+
+<p style="
+line-height:1.8;
+font-size:18px;
+">
+
+Si alguna vez dudas de cuánto significas para mí,
+recuerda mirar este cielo.
+
+Cada estrella existe porque hubo un sentimiento
+que quiso quedarse para siempre.
+
+❤️
+
+</p>
+
+<button id="cerrarFinal"
+style="
+margin-top:25px;
+padding:12px 30px;
+border-radius:30px;
+border:none;
+cursor:pointer;
+">
+
+Cerrar
+
+</button>
+
+
+</div>
+
+`;
+
+
+
+document.body.appendChild(mensajeFinal);
+
+
+
+document
+.getElementById("cerrarFinal")
+.onclick=()=>{
+
+mensajeFinal.remove();
+
+};
+
+
+
+};
+
+
+
+
+
+
+
+/*========================================
+  ACTIVAR BRILLO CONSTANTE
+  EN ESTRELLAS DESBLOQUEADAS
+========================================*/
+
+
+estrellas.forEach((estrella,index)=>{
+
+
+if(index < ESTRELLAS_DESBLOQUEADAS){
+
+
+const brillo =
+document.createElement("div");
+
+
+brillo.style.position="absolute";
+
+
+brillo.style.width="100%";
+
+
+brillo.style.height="100%";
+
+
+brillo.style.borderRadius="50%";
+
+
+brillo.style.background=
+"radial-gradient(circle,rgba(255,240,150,.7),transparent)";
+
+
+brillo.style.filter=
+"blur(10px)";
+
+
+brillo.style.zIndex="-1";
+
+
+brillo.style.animation=
+"latido 2s infinite";
+
+
+
+estrella.appendChild(brillo);
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+/*========================================
+  CIERRE DEL SISTEMA
+========================================*/
+
+
+console.log(
+"✦ La Constelación de Nuestro Amor está lista ✦"
+);
+
 
 </script>
 
+
 </body>
-</html> 
+
+</html>
