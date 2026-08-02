@@ -317,15 +317,23 @@ stroke-width:2;
 
 fill:none;
 
-opacity:.15;
-
-filter:drop-shadow(0 0 8px #6ecbff);
+opacity:0;
 
 stroke-linecap:round;
 
-animation:lineGlow 5s ease-in-out infinite;
+filter:drop-shadow(0 0 10px #74d8ff);
 
-}
+stroke-dasharray:200;
+
+stroke-dashoffset:200;
+
+animation:
+
+drawLine 2.5s forwards,
+
+lineGlow 5s ease-in-out infinite;
+
+   }
 
 @keyframes lineGlow{
 
@@ -344,6 +352,40 @@ opacity:.55;
 100%{
 
 opacity:.08;
+
+}
+
+   }
+
+   @keyframes drawLine{
+
+to{
+
+stroke-dashoffset:0;
+
+opacity:.45;
+
+}
+
+}
+
+@keyframes pulseStar{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.5);
+
+}
+
+100%{
+
+transform:scale(1);
 
 }
 
@@ -639,15 +681,53 @@ line.setAttribute("class","constellation-line");
 
 svg.appendChild(line);
 
+return line;
+
 }
 
 /* Unir todas las estrellas */
 
 for(let i=0;i<points.length-1;i++){
 
-drawLine(points[i],points[i+1]);
+const line=drawLine(points[i],points[i+1]);
+
+line.style.animationDelay=(i*0.18)+"s";
 
    }
+
+   function travelEnergy(){
+
+const stars=document.querySelectorAll(".constellation-star");
+
+let i=0;
+
+const timer=setInterval(()=>{
+
+if(i>0){
+
+stars[i-1].style.boxShadow=
+"0 0 12px white,0 0 25px #7fbfff";
+
+}
+
+stars[i].style.boxShadow=
+"0 0 35px white,0 0 70px #8ad6ff";
+
+stars[i].style.animation="pulseStar .7s";
+
+i++;
+
+if(i>=stars.length){
+
+clearInterval(timer);
+
+}
+
+},180);
+
+}
+
+setTimeout(travelEnergy,3000);
    
 </script>
 
