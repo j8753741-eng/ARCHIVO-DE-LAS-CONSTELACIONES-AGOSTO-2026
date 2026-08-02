@@ -291,6 +291,64 @@ transform:scale(1);
 
 }
 
+   #constellationLines{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+z-index:4;
+
+pointer-events:none;
+
+}
+
+.constellation-line{
+
+stroke:#8ad6ff;
+
+stroke-width:2;
+
+fill:none;
+
+opacity:.15;
+
+filter:drop-shadow(0 0 8px #6ecbff);
+
+stroke-linecap:round;
+
+animation:lineGlow 5s ease-in-out infinite;
+
+}
+
+@keyframes lineGlow{
+
+0%{
+
+opacity:.08;
+
+}
+
+50%{
+
+opacity:.55;
+
+}
+
+100%{
+
+opacity:.08;
+
+}
+
+   }
+   
 </style>
 
 </head>
@@ -304,6 +362,14 @@ transform:scale(1);
 <div id="stars"></div>
 
 <div id="constellation"></div>
+   
+   <svg id="constellationLines"
+width="100%"
+height="100%"
+viewBox="0 0 1000 1000"
+preserveAspectRatio="none">
+
+   </svg>
 
 <div id="title">
 
@@ -547,6 +613,42 @@ duration:1200
 
 },1800);
 
+
+   /* =====================================
+   DIBUJAR CONSTELACIÓN
+===================================== */
+
+const svg=document.getElementById("constellationLines");
+
+function drawLine(a,b){
+
+const line=document.createElementNS(
+"http://www.w3.org/2000/svg",
+"line"
+);
+
+line.setAttribute("x1",a.left*10);
+
+line.setAttribute("y1",a.top*10);
+
+line.setAttribute("x2",b.left*10);
+
+line.setAttribute("y2",b.top*10);
+
+line.setAttribute("class","constellation-line");
+
+svg.appendChild(line);
+
+}
+
+/* Unir todas las estrellas */
+
+for(let i=0;i<points.length-1;i++){
+
+drawLine(points[i],points[i+1]);
+
+   }
+   
 </script>
 
 </div>
