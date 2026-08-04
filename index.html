@@ -1008,6 +1008,50 @@ contador.innerHTML=
 document.getElementById("universo")
 .appendChild(contador);
 
+/*========================================
+  SUSURROS DEL UNIVERSO
+========================================*/
+
+const FRASES = [
+
+"✨ Cada estrella conoce una historia sobre nosotros.",
+
+"💜 El universo también sonríe cuando piensa en ti.",
+
+"🌙 Ninguna noche sería igual sin tu luz.",
+
+"⭐ Siempre habrá una estrella esperándote aquí.",
+
+"❤️ Mi lugar favorito del universo siempre será contigo.",
+
+"🌌 Este cielo existe porque un día apareciste en mi vida.",
+
+"💫 Cada carta es una estrella. Cada estrella es un 'te amo'.",
+
+"✨ Incluso las constelaciones sienten envidia de tu belleza."
+
+];
+
+const susurro = document.createElement("div");
+
+susurro.style.position="absolute";
+susurro.style.top="65px";
+susurro.style.left="50%";
+susurro.style.transform="translateX(-50%)";
+susurro.style.width="90%";
+susurro.style.maxWidth="650px";
+susurro.style.textAlign="center";
+susurro.style.fontStyle="italic";
+susurro.style.fontSize="15px";
+susurro.style.color="rgba(255,255,255,.85)";
+susurro.style.textShadow="0 0 12px rgba(255,255,255,.35)";
+susurro.style.transition="opacity 2s";
+
+susurro.innerHTML =
+FRASES[Math.floor(Math.random()*FRASES.length)];
+
+document.getElementById("universo").appendChild(susurro);
+    
 
 
 
@@ -2314,7 +2358,21 @@ console.log(
 "✦ La Constelación de Nuestro Amor está lista ✦"
 );
 
+setInterval(()=>{
 
+susurro.style.opacity="0";
+
+setTimeout(()=>{
+
+susurro.innerHTML =
+FRASES[Math.floor(Math.random()*FRASES.length)];
+
+susurro.style.opacity="1";
+
+},1000);
+
+},12000);
+    
 </script>
 
 
