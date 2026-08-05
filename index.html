@@ -2372,6 +2372,103 @@ susurro.style.opacity="1";
 },1000);
 
 },12000);
+
+
+    /*========================================
+  LATIDO DE LA CONSTELACIÓN
+========================================*/
+
+function latidoConstelacion(){
+
+    const lineas =
+    document.querySelectorAll("svg line");
+
+    lineas.forEach((linea,i)=>{
+
+        setTimeout(()=>{
+
+            linea.animate([
+
+                {
+                    stroke:"#FFD54F",
+                    strokeWidth:1.5,
+                    opacity:.45
+                },
+
+                {
+                    stroke:"#FFF7B2",
+                    strokeWidth:3,
+                    opacity:1
+                },
+
+                {
+                    stroke:"#FFD54F",
+                    strokeWidth:1.5,
+                    opacity:.45
+                }
+
+            ],{
+
+                duration:1800,
+                easing:"ease-in-out"
+
+            });
+
+        },i*35);
+
+    });
+
+
+
+    document.querySelectorAll(".estrella.desbloqueada")
+    .forEach((estrella,i)=>{
+
+        setTimeout(()=>{
+
+            estrella.animate([
+
+                {
+
+                    transform:"scale(1)",
+
+                    filter:"drop-shadow(0 0 8px gold)"
+
+                },
+
+                {
+
+                    transform:"scale(1.18)",
+
+                    filter:"drop-shadow(0 0 30px white)"
+
+                },
+
+                {
+
+                    transform:"scale(1)",
+
+                    filter:"drop-shadow(0 0 8px gold)"
+
+                }
+
+            ],{
+
+                duration:1800
+
+            });
+
+        },i*40);
+
+    });
+
+}
+
+setInterval(()=>{
+
+    latidoConstelacion();
+
+},30000);
+
     
 </script>
 
