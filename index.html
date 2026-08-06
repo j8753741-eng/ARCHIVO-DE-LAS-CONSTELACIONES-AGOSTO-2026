@@ -2468,6 +2468,115 @@ setInterval(()=>{
     latidoConstelacion();
 
 },10000);
+
+    /*========================================
+  POLVO DE ESTRELLAS
+========================================*/
+
+function crearPolvo(estrella){
+
+    const particula=document.createElement("div");
+
+    particula.style.position="absolute";
+    particula.style.width="4px";
+    particula.style.height="4px";
+    particula.style.borderRadius="50%";
+    particula.style.background="#fff7b0";
+    particula.style.pointerEvents="none";
+    particula.style.left="50%";
+    particula.style.top="50%";
+    particula.style.boxShadow="0 0 8px #fff";
+
+    estrella.appendChild(particula);
+
+    const angulo=Math.random()*360;
+    const distancia=18+Math.random()*12;
+
+    particula.animate([
+        {
+            transform:"translate(-50%,-50%) rotate(0deg) translateX("+distancia+"px)",
+            opacity:0
+        },
+        {
+            opacity:1
+        },
+        {
+            transform:"translate(-50%,-50%) rotate(360deg) translateX("+distancia+"px)",
+            opacity:0
+        }
+    ],{
+
+        duration:3000+Math.random()*2000,
+        iterations:Infinity
+
+    });
+
+}
+
+document.querySelectorAll(".estrella.desbloqueada")
+.forEach(e=>{
+
+    for(let i=0;i<3;i++){
+
+        crearPolvo(e);
+
+    }
+
+});
+
+    /*========================================
+  ESTRELLA VIVA
+========================================*/
+
+function estrellaViva(){
+
+    const todas=[
+        ...document.querySelectorAll(".estrella")
+    ];
+
+    const estrella=
+    todas[Math.floor(Math.random()*todas.length)];
+
+    estrella.animate([
+
+        {
+
+            transform:"scale(1)",
+
+            filter:"drop-shadow(0 0 10px gold)"
+
+        },
+
+        {
+
+            transform:"scale(1.35)",
+
+            filter:"drop-shadow(0 0 40px white)"
+
+        },
+
+        {
+
+            transform:"scale(1)",
+
+            filter:"drop-shadow(0 0 10px gold)"
+
+        }
+
+    ],{
+
+        duration:1500
+
+    });
+
+}
+
+setInterval(()=>{
+
+    estrellaViva();
+
+},5000);
+
     
 </script>
 
