@@ -2577,6 +2577,75 @@ setInterval(()=>{
 
 },5000);
 
+    /*========================================
+  CORAZÓN OCULTO
+========================================*/
+
+function mostrarCorazon(){
+
+    const universo =
+    document.getElementById("universo");
+
+    const grupo =
+    document.createElement("div");
+
+    grupo.style.position="absolute";
+    grupo.style.left="50%";
+    grupo.style.top="50%";
+    grupo.style.transform="translate(-50%,-50%)";
+    grupo.style.pointerEvents="none";
+    grupo.style.zIndex="1";
+
+    const puntos=[
+
+[-35,-20],[-25,-35],[-10,-40],[10,-40],[25,-35],[35,-20],
+[40,0],[32,20],[20,38],[0,55],[-20,38],[-32,20],[-40,0]
+
+];
+
+    puntos.forEach(p=>{
+
+        const s=document.createElement("div");
+
+        s.style.position="absolute";
+        s.style.left=p[0]+"px";
+        s.style.top=p[1]+"px";
+        s.style.width="5px";
+        s.style.height="5px";
+        s.style.borderRadius="50%";
+        s.style.background="#fff";
+        s.style.boxShadow="0 0 12px #FFD54F";
+        s.style.opacity="0";
+
+        grupo.appendChild(s);
+
+        s.animate([
+            {opacity:0,transform:"scale(.3)"},
+            {opacity:1,transform:"scale(1.4)"},
+            {opacity:0,transform:"scale(.3)"}
+        ],{
+            duration:5000,
+            easing:"ease-in-out"
+        });
+
+    });
+
+    universo.appendChild(grupo);
+
+    setTimeout(()=>{
+
+        grupo.remove();
+
+    },5000);
+
+}
+
+setInterval(()=>{
+
+    mostrarCorazon();
+
+},45000);
+
     
 </script>
 
