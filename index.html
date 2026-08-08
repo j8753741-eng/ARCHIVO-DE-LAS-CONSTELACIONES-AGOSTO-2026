@@ -1518,17 +1518,18 @@ boton.style.display="none";
 
 
 
-crearDestello(
-estrellas[numero]
-);
+caminoDeLuz(estrellas[numero]);
 
+setTimeout(()=>{
+
+    modal.classList.add("activo");
+
+},1200);
+
+return;
 
 
 }
-
-
-
-modal.classList.add("activo");
 
 
 
@@ -2646,6 +2647,263 @@ setInterval(()=>{
 
 },45000);
 
+    /*========================================
+  CAMINO DE LUZ
+========================================*/
+
+function caminoDeLuz(estrella){
+
+    const universo =
+    document.getElementById("universo");
+
+    const rect =
+    estrella.getBoundingClientRect();
+
+    const inicioX =
+    rect.left + rect.width / 2;
+
+    const inicioY =
+    rect.top + rect.height / 2;
+
+    const destinoX =
+    window.innerWidth / 2;
+
+    const destinoY =
+    window.innerHeight / 2;
+
+    const viajera =
+    document.createElement("div");
+
+    viajera.style.position="fixed";
+
+    viajera.style.left=inicioX+"px";
+    viajera.style.top=inicioY+"px";
+
+    viajera.style.width="9px";
+    viajera.style.height="9px";
+
+    viajera.style.borderRadius="50%";
+
+    viajera.style.background="#fff";
+
+    viajera.style.boxShadow=
+    "0 0 8px #fff,"+
+    "0 0 20px #FFD54F,"+
+    "0 0 40px #FFD54F";
+
+    viajera.style.zIndex="150";
+
+    viajera.style.pointerEvents="none";
+
+    document.body.appendChild(viajera);
+
+
+    /* Estela */
+
+    const estela =
+    document.createElement("div");
+
+    estela.style.position="fixed";
+
+    estela.style.left=inicioX+"px";
+    estela.style.top=inicioY+"px";
+
+    estela.style.width="80px";
+    estela.style.height="2px";
+
+    estela.style.transformOrigin="left center";
+
+    estela.style.background=
+    "linear-gradient(90deg,#fff,transparent)";
+
+    estela.style.boxShadow=
+    "0 0 10px #FFD54F";
+
+    estela.style.zIndex="149";
+
+    estela.style.pointerEvents="none";
+
+    document.body.appendChild(estela);
+
+
+    const dx=destinoX-inicioX;
+    const dy=destinoY-inicioY;
+
+    const distancia=
+    Math.sqrt(dx*dx+dy*dy);
+
+    const angulo=
+    Math.atan2(dy,dx)*180/Math.PI;
+
+
+    estela.style.transform=
+    `rotate(${angulo}deg)`;
+
+
+    const movimiento =
+    viajera.animate([
+
+        {
+            transform:"translate(0,0) scale(1)",
+            opacity:1
+        },
+
+        {
+            transform:
+            `translate(${dx}px,${dy}px) scale(1.5)`,
+            opacity:1
+        },
+
+        {
+            transform:
+            `translate(${dx}px,${dy}px) scale(3)`,
+            opacity:0
+        }
+
+    ],{
+
+        duration:
+        Math.min(2200,Math.max(900,distancia*2)),
+
+        easing:"cubic-bezier(.22,.61,.36,1)"
+
+    });
+
+
+    estela.animate([
+
+        {
+            opacity:0,
+            transform:
+            `rotate(${angulo}deg) scaleX(.1)`
+        },
+
+        {
+            opacity:.8,
+            transform:
+            `rotate(${angulo}deg) scaleX(1)`
+        },
+
+        {
+            opacity:0,
+            transform:
+            `rotate(${angulo}deg) scaleX(.2)`
+        }
+
+    ],{
+
+        duration:1700,
+        easing:"ease-in-out"
+
+    });
+
+
+    movimiento.onfinish=()=>{
+
+        crearDestelloCentral(
+            destinoX,
+            destinoY
+        );
+
+        viajera.remove();
+        estela.remove();
+
+    };
+
+}
+
+
+/*========================================
+  DESTELLO CENTRAL
+========================================*/
+
+function crearDestelloCentral(x,y){
+
+    const destello =
+    document.createElement("div");
+
+    destello.style.position="fixed";
+
+    destello.style.left=x+"px";
+    destello.style.top=y+"px";
+
+    destello.style.width="20px";
+    destello.style.height="20px";
+
+    destello.style.borderRadius="50%";
+
+    destello.style.background="#fff";
+
+    destello.style.boxShadow=
+    "0 0 15px #fff,"+
+    "0 0 35px #FFD54F,"+
+    "0 0 70px #FFD54F";
+
+    destello.style.transform=
+    "translate(-50%,-50%)";
+
+    destello.style.zIndex="151";
+
+    destello.style.pointerEvents="none";
+
+
+    document.body.appendChild(destello);
+
+
+    destello.animate([
+
+        {
+            transform:
+            "translate(-50%,-50%) scale(.3)",
+            opacity:1
+        },
+
+        {
+            transform:
+            "translate(-50%,-50%) scale(4)",
+            opacity:.6
+        },
+
+        {
+            transform:
+            "translate(-50%,-50%) scale(7)",
+            opacity:0
+        }
+
+    ],{
+
+        duration:1000,
+        easing:"ease-out"
+
+    });
+
+
+    setTimeout(()=>{
+
+        destello.remove();
+
+    },1000);
+
+}
+
+
+/*========================================
+  CONECTAR CON LAS ESTRELLAS
+========================================*/
+
+estrellas.forEach((estrella,index)=>{
+
+    estrella.addEventListener("click",()=>{
+
+        if(index < ESTRELLAS_DESBLOQUEADAS){
+
+            caminoDeLuz(estrella);
+
+        }
+
+    });
+
+});
     
 </script>
 
