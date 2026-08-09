@@ -3120,6 +3120,195 @@ estiloAurora.innerHTML = `
 `;
 
 document.head.appendChild(estiloAurora);
+
+
+    /*========================================
+  LLUVIA DE ESTRELLAS
+========================================*/
+
+function crearMeteoro(){
+
+    const universo =
+    document.getElementById("universo");
+
+    const meteoro =
+    document.createElement("div");
+
+    meteoro.className="meteoroAmor";
+
+    const inicioX =
+    Math.random()*120 - 10;
+
+    const inicioY =
+    Math.random()*45 - 10;
+
+    meteoro.style.left =
+    inicioX+"%";
+
+    meteoro.style.top =
+    inicioY+"%";
+
+    const longitud =
+    90 + Math.random()*100;
+
+    meteoro.style.width =
+    longitud+"px";
+
+    meteoro.style.transform =
+    "rotate(35deg)";
+
+    universo.appendChild(meteoro);
+
+
+    const recorrido =
+    meteoro.animate([
+
+        {
+            transform:
+            "translate(0,0) rotate(35deg)",
+            opacity:0
+        },
+
+        {
+            transform:
+            "translate(0,0) rotate(35deg)",
+            opacity:1
+        },
+
+        {
+            transform:
+            "translate(70vw,55vh) rotate(35deg)",
+            opacity:0
+        }
+
+    ],{
+
+        duration:
+        1100 + Math.random()*700,
+
+        easing:"ease-out"
+
+    });
+
+
+    recorrido.onfinish=()=>{
+
+        meteoro.remove();
+
+    };
+
+}
+
+
+/*========================================
+  LANZAR LLUVIA
+========================================*/
+
+function lluviaDeEstrellas(){
+
+    const cantidad =
+    3 + Math.floor(Math.random()*3);
+
+    for(let i=0;i<cantidad;i++){
+
+        setTimeout(()=>{
+
+            crearMeteoro();
+
+        },i*450);
+
+    }
+
+}
+
+
+/* Primera lluvia */
+
+setTimeout(()=>{
+
+    lluviaDeEstrellas();
+
+},6000);
+
+
+/* Después cada 25 segundos */
+
+setInterval(()=>{
+
+    lluviaDeEstrellas();
+
+},25000);
+
+
+
+/*========================================
+  ESTILOS DE LOS METEOROS
+========================================*/
+
+const estiloMeteoros =
+document.createElement("style");
+
+estiloMeteoros.innerHTML=`
+
+.meteoroAmor{
+
+    position:absolute;
+
+    height:3px;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    z-index:4;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,0),
+        rgba(255,255,255,.65),
+        #ffffff
+    );
+
+    box-shadow:
+    0 0 6px #ffffff,
+    0 0 14px #b9a7ff,
+    0 0 25px rgba(150,120,255,.8);
+
+}
+
+
+.meteoroAmor::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-4px;
+
+    top:50%;
+
+    width:8px;
+
+    height:8px;
+
+    transform:
+    translateY(-50%);
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+    0 0 8px white,
+    0 0 20px #ffffff;
+
+}
+
+
+`;
+
+document.head.appendChild(estiloMeteoros);
     
 </script>
 
