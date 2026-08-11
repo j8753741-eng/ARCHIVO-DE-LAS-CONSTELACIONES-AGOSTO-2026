@@ -4237,26 +4237,20 @@ lunaSecreta.addEventListener(
         "textoSecretoLuna"
     );
 
-    /* Limpiar completamente el mensaje anterior */
+    /* Preparar el mensaje */
 
-    texto.textContent="";
+    texto.textContent = mensaje;
 
-    texto.style.opacity="1";
+    /* El texto queda completamente visible */
 
-    /* Mostrar la ventana */
+    texto.style.opacity = "1";
+    texto.style.transform = "none";
+
+    /* Mostrar el secreto */
 
     secretoLuna.classList.add(
         "activo"
     );
-
-    /* Escribir el secreto suavemente */
-
-    setTimeout(()=>{
-
-        texto.textContent =
-        mensaje;
-
-    },300);
 
 });
     
