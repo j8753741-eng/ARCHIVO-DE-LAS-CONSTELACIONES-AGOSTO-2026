@@ -3903,9 +3903,6 @@ const MENSAJES_LUNA = [
 ];
 
 
-const lunaActual =
-document.querySelector("#universo > div:last-of-type");
-
 
 
 
@@ -4139,10 +4136,22 @@ estiloLunaSecreta.innerHTML = `
 
     line-height:1.8;
 
+min-height:90px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+opacity:1 !important;
+
+
     text-shadow:
     0 0 12px
     rgba(255,255,255,.25);
 
+    
 }
 
 
@@ -4228,41 +4237,29 @@ lunaSecreta.addEventListener(
         "textoSecretoLuna"
     );
 
-    texto.style.opacity="0";
+    /* Limpiar completamente el mensaje anterior */
+
+    texto.textContent="";
+
+    texto.style.opacity="1";
+
+    /* Mostrar la ventana */
 
     secretoLuna.classList.add(
         "activo"
     );
+
+    /* Escribir el secreto suavemente */
 
     setTimeout(()=>{
 
         texto.textContent =
         mensaje;
 
-        texto.animate([
-
-            {
-                opacity:0,
-                transform:"translateY(10px)"
-            },
-
-            {
-                opacity:1,
-                transform:"translateY(0)"
-            }
-
-        ],{
-
-            duration:700,
-            easing:"ease-out"
-
-        });
-
-    },350);
+    },300);
 
 });
-
-
+    
 /*========================================
   CERRAR
 ========================================*/
