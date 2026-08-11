@@ -3560,6 +3560,337 @@ document.head.appendChild(
     estiloProtagonista
 );
 
+    /*========================================
+  ⭐ LA ESTRELLA DE HOY
+========================================*/
+
+function activarEstrellaDelDia(){
+
+    if(ESTRELLAS_DESBLOQUEADAS <= 0){
+        return;
+    }
+
+    const numero =
+    ESTRELLAS_DESBLOQUEADAS - 1;
+
+    const estrellasActuales =
+    document.querySelectorAll(".estrella");
+
+    const estrellaHoy =
+    estrellasActuales[numero];
+
+    if(!estrellaHoy){
+        return;
+    }
+
+
+    /* Marcar la estrella */
+
+    estrellaHoy.classList.add(
+        "estrella-del-dia"
+    );
+
+
+    /* Crear anillo */
+
+    const anillo =
+    document.createElement("span");
+
+    anillo.className =
+    "anillo-estrella-hoy";
+
+    estrellaHoy.appendChild(anillo);
+
+
+    /* Crear segundo anillo */
+
+    const anillo2 =
+    document.createElement("span");
+
+    anillo2.className =
+    "anillo-estrella-hoy segundo";
+
+    estrellaHoy.appendChild(anillo2);
+
+
+    /* Crear etiqueta */
+
+    const etiqueta =
+    document.createElement("div");
+
+    etiqueta.className =
+    "etiqueta-estrella-hoy";
+
+    etiqueta.innerHTML =
+    "✦ La estrella de hoy ✦";
+
+    estrellaHoy.appendChild(etiqueta);
+
+}
+
+
+/*========================================
+  ESTILOS DE LA ESTRELLA DEL DÍA
+========================================*/
+
+const estiloEstrellaHoy =
+document.createElement("style");
+
+estiloEstrellaHoy.innerHTML = `
+
+.estrella-del-dia{
+
+    z-index:40 !important;
+
+}
+
+
+/* Halo exterior */
+
+.estrella-del-dia::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:78px;
+    height:78px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,230,130,.65);
+
+    box-shadow:
+    0 0 15px
+    rgba(255,220,100,.7),
+
+    inset 0 0 15px
+    rgba(255,220,100,.25);
+
+    animation:
+    respirarEstrellaHoy
+    2.2s ease-in-out infinite;
+
+    pointer-events:none;
+
+}
+
+
+/* Anillos */
+
+.anillo-estrella-hoy{
+
+    position:absolute;
+
+    width:72px;
+    height:28px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+    translate(-50%,-50%)
+    rotate(25deg);
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,235,150,.7);
+
+    box-shadow:
+    0 0 10px
+    rgba(255,220,100,.5);
+
+    animation:
+    girarAnilloHoy
+    4s linear infinite;
+
+    pointer-events:none;
+
+}
+
+
+.anillo-estrella-hoy.segundo{
+
+    width:88px;
+    height:34px;
+
+    transform:
+    translate(-50%,-50%)
+    rotate(-35deg);
+
+    opacity:.45;
+
+    animation:
+    girarAnilloHoy2
+    6s linear infinite;
+
+}
+
+
+/* Texto */
+
+.etiqueta-estrella-hoy{
+
+    position:absolute;
+
+    left:50%;
+
+    top:
+    calc(100% + 18px);
+
+    transform:
+    translateX(-50%);
+
+    white-space:nowrap;
+
+    padding:
+    5px 12px;
+
+    border-radius:20px;
+
+    background:
+    rgba(20,15,40,.72);
+
+    border:
+    1px solid
+    rgba(255,220,120,.35);
+
+    color:
+    rgba(255,240,190,.95);
+
+    font-size:10px;
+
+    letter-spacing:1px;
+
+    backdrop-filter:
+    blur(8px);
+
+    box-shadow:
+    0 0 15px
+    rgba(255,210,100,.15);
+
+    opacity:.85;
+
+    pointer-events:none;
+
+}
+
+
+/* Respiración */
+
+@keyframes respirarEstrellaHoy{
+
+    0%,100%{
+
+        transform:
+        translate(-50%,-50%)
+        scale(.85);
+
+        opacity:.45;
+
+    }
+
+    50%{
+
+        transform:
+        translate(-50%,-50%)
+        scale(1.2);
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* Anillo 1 */
+
+@keyframes girarAnilloHoy{
+
+    from{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(25deg);
+
+    }
+
+    to{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(385deg);
+
+    }
+
+}
+
+
+/* Anillo 2 */
+
+@keyframes girarAnilloHoy2{
+
+    from{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(-35deg);
+
+    }
+
+    to{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(-395deg);
+
+    }
+
+}
+
+
+/* Móvil */
+
+@media(max-width:700px){
+
+    .etiqueta-estrella-hoy{
+
+        font-size:9px;
+
+        padding:
+        4px 9px;
+
+    }
+
+    .estrella-del-dia::after{
+
+        width:68px;
+        height:68px;
+
+    }
+
+}
+
+`;
+
+document.head.appendChild(
+    estiloEstrellaHoy
+);
+
+
+/* Activar */
+
+activarEstrellaDelDia();
     
 </script>
 
