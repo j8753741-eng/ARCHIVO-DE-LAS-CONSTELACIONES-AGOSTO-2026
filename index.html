@@ -914,40 +914,28 @@ crearEstrellaFugaz();
 
 
 
+
 /*========================================
-  LUNA
+  🌙 LUNA SECRETA
 ========================================*/
 
+const lunaSecreta =
+document.createElement("button");
 
-const luna =
-document.createElement("div");
+lunaSecreta.className =
+"luna-secreta";
 
+lunaSecreta.innerHTML =
+"🌙";
 
-luna.innerHTML="🌙";
+lunaSecreta.setAttribute(
+"aria-label",
+"Secreto de la luna"
+);
 
-
-luna.style.position="absolute";
-
-
-luna.style.right="8%";
-
-
-luna.style.top="8%";
-
-
-luna.style.fontSize="75px";
-
-
-luna.style.filter=
-"drop-shadow(0 0 25px white)";
-
-
-luna.style.zIndex="2";
-
-
-document.getElementById("universo")
-.appendChild(luna);
-
+document
+.getElementById("universo")
+.appendChild(lunaSecreta);
 
 
 
