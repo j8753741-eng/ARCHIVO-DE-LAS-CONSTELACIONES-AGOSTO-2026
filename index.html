@@ -3891,6 +3891,442 @@ document.head.appendChild(
 /* Activar */
 
 activarEstrellaDelDia();
+
+
+
+/*========================================
+  🌙 MENSAJE SECRETO DE LA LUNA
+========================================*/
+
+const MENSAJES_LUNA = [
+
+    "Si llegaste hasta aquí, es porque incluso entre todas las estrellas decidiste buscar una más. 🌙",
+
+    "Esta luna no guarda una carta. Guarda un pedacito de mi corazón. ❤️",
+
+    "Hay cosas que no necesitan una estrella para brillar. Tú eres una de ellas. ✨",
+
+    "Si alguna vez miras este cielo y sonríes, entonces todo esto habrá valido la pena. 💜",
+
+    "Entre millones de estrellas, mi lugar favorito sigue siendo donde estás tú. 🌌",
+
+    "Esta noche el universo tiene un secreto: te quiero más de lo que cabría en todas sus estrellas. ⭐"
+
+];
+
+
+const lunaActual =
+document.querySelector("#universo > div:last-of-type");
+
+
+/* Crear una luna propia para evitar
+   depender de la luna anterior */
+
+const lunaSecreta =
+document.createElement("button");
+
+lunaSecreta.innerHTML = "🌙";
+
+lunaSecreta.className =
+"luna-secreta";
+
+lunaSecreta.setAttribute(
+"aria-label",
+"Descubrir mensaje secreto"
+);
+
+document.getElementById("universo")
+.appendChild(lunaSecreta);
+
+
+/*========================================
+  VENTANA DEL MENSAJE
+========================================*/
+
+const secretoLuna =
+document.createElement("div");
+
+secretoLuna.className =
+"secreto-luna";
+
+secretoLuna.innerHTML = `
+
+    <div class="caja-secreto-luna">
+
+        <div class="mini-luna">
+            🌙
+        </div>
+
+        <div
+        class="texto-secreto-luna"
+        id="textoSecretoLuna">
+        </div>
+
+        <button
+        id="cerrarSecretoLuna">
+            Guardar este secreto ✦
+        </button>
+
+    </div>
+
+`;
+
+document.body.appendChild(secretoLuna);
+
+
+/*========================================
+  ESTILOS
+========================================*/
+
+const estiloLunaSecreta =
+document.createElement("style");
+
+estiloLunaSecreta.innerHTML = `
+
+.luna-secreta{
+
+    position:absolute;
+
+    right:7%;
+    top:7%;
+
+    width:72px;
+    height:72px;
+
+    border:none;
+
+    background:transparent;
+
+    font-size:58px;
+
+    cursor:pointer;
+
+    z-index:12;
+
+    filter:
+    drop-shadow(0 0 10px white)
+    drop-shadow(0 0 25px rgba(170,150,255,.8));
+
+    animation:
+    lunaRespira 4s ease-in-out infinite;
+
+    transition:
+    transform .4s ease;
+
+}
+
+
+.luna-secreta:hover{
+
+    transform:
+    scale(1.15)
+    rotate(-8deg);
+
+}
+
+
+.luna-secreta:active{
+
+    transform:
+    scale(.9);
+
+}
+
+
+@keyframes lunaRespira{
+
+    0%,100%{
+
+        filter:
+        drop-shadow(0 0 10px white)
+        drop-shadow(0 0 22px rgba(170,150,255,.65));
+
+    }
+
+    50%{
+
+        filter:
+        drop-shadow(0 0 18px white)
+        drop-shadow(0 0 40px rgba(190,160,255,.95));
+
+    }
+
+}
+
+
+/* Fondo */
+
+.secreto-luna{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:25px;
+
+    background:
+    rgba(0,0,0,.78);
+
+    backdrop-filter:
+    blur(14px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+    opacity .5s ease,
+    visibility .5s ease;
+
+    z-index:300;
+
+}
+
+
+.secreto-luna.activo{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+/* Caja */
+
+.caja-secreto-luna{
+
+    width:min(90%,480px);
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    border-radius:32px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        rgba(255,255,255,.04)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.25);
+
+    backdrop-filter:
+    blur(25px);
+
+    box-shadow:
+    0 0 60px
+    rgba(130,100,255,.25);
+
+    transform:
+    scale(.8)
+    translateY(20px);
+
+    transition:
+    transform .6s ease;
+
+}
+
+
+.secreto-luna.activo
+.caja-secreto-luna{
+
+    transform:
+    scale(1)
+    translateY(0);
+
+}
+
+
+.mini-luna{
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+    filter:
+    drop-shadow(0 0 20px white);
+
+}
+
+
+.texto-secreto-luna{
+
+    color:white;
+
+    font-family:Georgia,serif;
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    text-shadow:
+    0 0 12px
+    rgba(255,255,255,.25);
+
+}
+
+
+#cerrarSecretoLuna{
+
+    margin-top:28px;
+
+    padding:11px 22px;
+
+    border-radius:30px;
+
+    border:
+    1px solid
+    rgba(255,255,255,.25);
+
+    background:
+    rgba(255,255,255,.08);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+#cerrarSecretoLuna:hover{
+
+    background:
+    rgba(255,255,255,.16);
+
+}
+
+
+/* Móvil */
+
+@media(max-width:700px){
+
+    .luna-secreta{
+
+        right:4%;
+
+        top:6%;
+
+        font-size:48px;
+
+    }
+
+    .texto-secreto-luna{
+
+        font-size:17px;
+
+    }
+
+}
+
+`;
+
+document.head.appendChild(
+    estiloLunaSecreta
+);
+
+
+/*========================================
+  ABRIR SECRETO
+========================================*/
+
+lunaSecreta.addEventListener(
+"click",
+()=>{
+
+    const mensaje =
+    MENSAJES_LUNA[
+        Math.floor(
+            Math.random() *
+            MENSAJES_LUNA.length
+        )
+    ];
+
+    const texto =
+    document.getElementById(
+        "textoSecretoLuna"
+    );
+
+    texto.style.opacity="0";
+
+    secretoLuna.classList.add(
+        "activo"
+    );
+
+    setTimeout(()=>{
+
+        texto.textContent =
+        mensaje;
+
+        texto.animate([
+
+            {
+                opacity:0,
+                transform:"translateY(10px)"
+            },
+
+            {
+                opacity:1,
+                transform:"translateY(0)"
+            }
+
+        ],{
+
+            duration:700,
+            easing:"ease-out"
+
+        });
+
+    },350);
+
+});
+
+
+/*========================================
+  CERRAR
+========================================*/
+
+document
+.getElementById(
+    "cerrarSecretoLuna"
+)
+.addEventListener(
+"click",
+()=>{
+
+    secretoLuna.classList.remove(
+        "activo"
+    );
+
+});
+
+
+/* También cerrar tocando fuera */
+
+secretoLuna.addEventListener(
+"click",
+(e)=>{
+
+    if(e.target === secretoLuna){
+
+        secretoLuna.classList.remove(
+            "activo"
+        );
+
+    }
+
+});
     
 </script>
 
