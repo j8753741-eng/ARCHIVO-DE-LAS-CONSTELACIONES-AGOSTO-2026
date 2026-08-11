@@ -3919,24 +3919,6 @@ const lunaActual =
 document.querySelector("#universo > div:last-of-type");
 
 
-/* Crear una luna propia para evitar
-   depender de la luna anterior */
-
-const lunaSecreta =
-document.createElement("button");
-
-lunaSecreta.innerHTML = "🌙";
-
-lunaSecreta.className =
-"luna-secreta";
-
-lunaSecreta.setAttribute(
-"aria-label",
-"Descubrir mensaje secreto"
-);
-
-document.getElementById("universo")
-.appendChild(lunaSecreta);
 
 
 /*========================================
