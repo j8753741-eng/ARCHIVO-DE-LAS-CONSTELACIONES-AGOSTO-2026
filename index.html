@@ -4290,6 +4290,114 @@ secretoLuna.addEventListener(
     }
 
 });
+
+    /*========================================
+  ✦ EL LATIDO SECRETO DE LA CONSTELACIÓN ✦
+  Actualización — 11 de agosto de 2026
+========================================*/
+
+function latidoSecreto(){
+
+    const desbloqueadas =
+    [...document.querySelectorAll(
+        ".estrella.desbloqueada"
+    )];
+
+    if(!desbloqueadas.length){
+        return;
+    }
+
+    const elegida =
+    desbloqueadas[
+        Math.floor(
+            Math.random() *
+            desbloqueadas.length
+        )
+    ];
+
+
+    /* Mensaje */
+
+    const mensaje =
+    document.createElement("div");
+
+    mensaje.className =
+    "mensajeLatido";
+
+    mensaje.innerHTML = `
+        <span>✦</span>
+        El universo acaba de recordar
+        una razón para amarte
+        <span>✦</span>
+    `;
+
+
+    document
+    .getElementById("universo")
+    .appendChild(mensaje);
+
+
+    /* Hacer que la estrella elegida
+       tenga un brillo especial */
+
+    elegida.classList.add(
+        "latido-secreto"
+    );
+
+
+    /* Crear pequeño resplandor */
+
+    const resplandor =
+    document.createElement("div");
+
+    resplandor.className =
+    "resplandorLatido";
+
+    elegida.appendChild(
+        resplandor
+    );
+
+
+    /* Quitar después */
+
+    setTimeout(()=>{
+
+        mensaje.classList.add(
+            "desaparecerLatido"
+        );
+
+        elegida.classList.remove(
+            "latido-secreto"
+        );
+
+        setTimeout(()=>{
+
+            mensaje.remove();
+            resplandor.remove();
+
+        },1200);
+
+    },5000);
+
+}
+
+
+/* Primera aparición */
+
+setTimeout(()=>{
+
+    latidoSecreto();
+
+},12000);
+
+
+/* Después aparece periódicamente */
+
+setInterval(()=>{
+
+    latidoSecreto();
+
+},30000);
     
 </script>
 
