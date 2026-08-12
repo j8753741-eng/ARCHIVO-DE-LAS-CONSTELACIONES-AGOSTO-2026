@@ -4398,7 +4398,246 @@ setInterval(()=>{
     latidoSecreto();
 
 },30000);
-    
+    /*========================================
+  ESTILO DEL LATIDO SECRETO
+========================================*/
+
+const estiloLatidoSecreto =
+document.createElement("style");
+
+estiloLatidoSecreto.innerHTML = `
+
+.mensajeLatido{
+
+    position:absolute;
+
+    top:105px;
+
+    left:50%;
+
+    transform:
+    translateX(-50%);
+
+    width:90%;
+
+    max-width:500px;
+
+    text-align:center;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    background:
+    rgba(20,15,45,.55);
+
+    border:
+    1px solid
+    rgba(255,225,140,.25);
+
+    backdrop-filter:
+    blur(10px);
+
+    color:
+    rgba(255,240,190,.95);
+
+    font-family:
+    Georgia,serif;
+
+    font-size:13px;
+
+    letter-spacing:.5px;
+
+    text-shadow:
+    0 0 12px
+    rgba(255,220,120,.5);
+
+    z-index:35;
+
+    animation:
+    aparecerLatido
+    1s ease forwards;
+
+}
+
+
+.mensajeLatido span{
+
+    margin:0 8px;
+
+    color:#ffe88a;
+
+}
+
+
+.latido-secreto{
+
+    z-index:45 !important;
+
+}
+
+
+.latido-secreto::before{
+
+    color:#fffbd0 !important;
+
+    animation:
+    latidoEspecial
+    1.4s ease-in-out infinite !important;
+
+}
+
+
+.resplandorLatido{
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,235,140,.45),
+        transparent 70%
+    );
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    animation:
+    resplandorEspecial
+    1.8s ease-in-out infinite;
+
+}
+
+
+@keyframes aparecerLatido{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,0);
+
+    }
+
+}
+
+
+@keyframes latidoEspecial{
+
+    0%,100%{
+
+        transform:scale(1);
+
+        filter:
+        drop-shadow(0 0 10px white)
+        drop-shadow(0 0 25px #ffd54f);
+
+    }
+
+    50%{
+
+        transform:scale(1.35);
+
+        filter:
+        drop-shadow(0 0 20px white)
+        drop-shadow(0 0 55px #ffd54f);
+
+    }
+
+}
+
+
+@keyframes resplandorEspecial{
+
+    0%,100%{
+
+        opacity:.25;
+
+        transform:
+        translate(-50%,-50%)
+        scale(.7);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        scale(1.3);
+
+    }
+
+}
+
+
+.desaparecerLatido{
+
+    animation:
+    desaparecerLatido
+    1.2s ease forwards;
+
+}
+
+
+@keyframes desaparecerLatido{
+
+    to{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,-12px);
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .mensajeLatido{
+
+        top:100px;
+
+        font-size:11px;
+
+        padding:8px 12px;
+
+    }
+
+}
+
+`;
+
+document.head.appendChild(
+    estiloLatidoSecreto
+);
 </script>
 
 
