@@ -4638,9 +4638,1514 @@ estiloLatidoSecreto.innerHTML = `
 document.head.appendChild(
     estiloLatidoSecreto
 );
-
-                    
+</script>
     
+    <script>
+(function () {
+
+    /* =====================================================
+       CONFIGURACIÓN
+    ===================================================== */
+
+    const FECHA_ESPECIAL = "2026-08-12";
+    const CLAVE_MEMORIA = "horaUniverso_12Agosto2026";
+
+    const ahora = new Date();
+
+    /*
+       Solo funciona durante el 12 de agosto de 2026
+       según la fecha local del dispositivo.
+    */
+    const fechaLocal =
+        ahora.getFullYear() + "-" +
+        String(ahora.getMonth() + 1).padStart(2, "0") + "-" +
+        String(ahora.getDate()).padStart(2, "0");
+
+    if (fechaLocal !== FECHA_ESPECIAL) {
+        return;
+    }
+
+
+    /* =====================================================
+       CREAR ELEMENTOS
+    ===================================================== */
+
+    const universo =
+        document.getElementById("universo") ||
+        document.body;
+
+
+    /*
+       Pequeño aviso inicial.
+       No aparece inmediatamente para que parezca
+       que el cielo está descubriendo algo.
+    */
+
+    const aviso = document.createElement("div");
+
+    aviso.className = "hora-universo-aviso";
+
+    aviso.innerHTML = `
+        <div class="hora-aviso-luz"></div>
+
+        <span>
+            esta noche el cielo guarda algo...
+        </span>
+    `;
+
+    document.body.appendChild(aviso);
+
+
+    /* =====================================================
+       ESTILOS
+    ===================================================== */
+
+    const estiloHora =
+        document.createElement("style");
+
+    estiloHora.textContent = `
+
+    /* =====================================================
+       AVISO
+    ===================================================== */
+
+    .hora-universo-aviso{
+
+        position:fixed;
+
+        left:50%;
+
+        bottom:42px;
+
+        transform:
+            translateX(-50%)
+            translateY(15px);
+
+        z-index:900;
+
+        display:flex;
+
+        align-items:center;
+
+        gap:10px;
+
+        padding:
+            9px 17px;
+
+        border-radius:30px;
+
+        background:
+            rgba(8,7,24,.55);
+
+        border:
+            1px solid
+            rgba(255,255,255,.10);
+
+        backdrop-filter:
+            blur(14px);
+
+        -webkit-backdrop-filter:
+            blur(14px);
+
+        color:
+            rgba(255,255,255,.50);
+
+        font-family:
+            Georgia, serif;
+
+        font-size:11px;
+
+        letter-spacing:.6px;
+
+        opacity:0;
+
+        pointer-events:none;
+
+        transition:
+            opacity 1.5s ease,
+            transform 1.5s ease;
+
+    }
+
+
+    .hora-universo-aviso.visible{
+
+        opacity:.8;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+
+    .hora-aviso-luz{
+
+        width:5px;
+
+        height:5px;
+
+        border-radius:50%;
+
+        background:#fff;
+
+        box-shadow:
+            0 0 8px #fff,
+            0 0 18px #bca7ff;
+
+        animation:
+            horaLatido 2s ease-in-out infinite;
+
+    }
+
+
+    @keyframes horaLatido{
+
+        0%,100%{
+            transform:scale(.7);
+            opacity:.5;
+        }
+
+        50%{
+            transform:scale(1.4);
+            opacity:1;
+        }
+
+    }
+
+
+    /* =====================================================
+       CAPA PRINCIPAL
+    ===================================================== */
+
+    .hora-universo{
+
+        position:fixed;
+
+        inset:0;
+
+        z-index:1000;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        overflow:hidden;
+
+        background:
+            radial-gradient(
+                circle at center,
+                rgba(30,24,65,.45),
+                rgba(0,0,8,.94) 72%
+            );
+
+        backdrop-filter:
+            blur(0px);
+
+        -webkit-backdrop-filter:
+            blur(0px);
+
+        opacity:0;
+
+        visibility:hidden;
+
+        pointer-events:none;
+
+        transition:
+            opacity 1.4s ease,
+            visibility 1.4s ease,
+            backdrop-filter 1.4s ease;
+
+    }
+
+
+    .hora-universo.activo{
+
+        opacity:1;
+
+        visibility:visible;
+
+        pointer-events:auto;
+
+        backdrop-filter:
+            blur(10px);
+
+        -webkit-backdrop-filter:
+            blur(10px);
+
+    }
+
+
+    /* =====================================================
+       ESTRELLAS DEL RELOJ
+    ===================================================== */
+
+    .hora-reloj-estrellas{
+
+        position:absolute;
+
+        inset:0;
+
+        pointer-events:none;
+
+        opacity:0;
+
+        transition:
+            opacity 2s ease;
+
+    }
+
+
+    .hora-universo.reloj-visible
+    .hora-reloj-estrellas{
+
+        opacity:1;
+
+    }
+
+
+    .estrella-hora{
+
+        position:absolute;
+
+        width:3px;
+
+        height:3px;
+
+        border-radius:50%;
+
+        background:white;
+
+        box-shadow:
+            0 0 5px white,
+            0 0 14px rgba(180,160,255,.8);
+
+        opacity:.7;
+
+        animation:
+            estrellaRespira
+            3s ease-in-out infinite;
+
+    }
+
+
+    @keyframes estrellaRespira{
+
+        0%,100%{
+            transform:scale(.7);
+            opacity:.35;
+        }
+
+        50%{
+            transform:scale(1.5);
+            opacity:1;
+        }
+
+    }
+
+
+    /* =====================================================
+       CONTENIDO
+    ===================================================== */
+
+    .hora-contenedor{
+
+        position:relative;
+
+        z-index:5;
+
+        width:min(90%,560px);
+
+        text-align:center;
+
+        padding:30px;
+
+    }
+
+
+    .hora-pequena{
+
+        font-family:
+            Georgia, serif;
+
+        font-size:11px;
+
+        letter-spacing:
+            4px;
+
+        text-transform:
+            uppercase;
+
+        color:
+            rgba(255,255,255,.42);
+
+        margin-bottom:22px;
+
+        opacity:0;
+
+        transform:
+            translateY(12px);
+
+        transition:
+            opacity 1.5s ease,
+            transform 1.5s ease;
+
+    }
+
+
+    .hora-universo.mostrar
+    .hora-pequena{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    /* =====================================================
+       RELOJ
+    ===================================================== */
+
+    .hora-reloj{
+
+        position:relative;
+
+        display:inline-block;
+
+        font-family:
+            Georgia, serif;
+
+        font-size:
+            clamp(58px,15vw,110px);
+
+        line-height:1;
+
+        letter-spacing:
+            7px;
+
+        font-weight:
+            400;
+
+        color:
+            rgba(255,255,255,.96);
+
+        text-shadow:
+
+            0 0 10px
+            rgba(255,255,255,.7),
+
+            0 0 35px
+            rgba(170,145,255,.65),
+
+            0 0 80px
+            rgba(120,100,255,.35);
+
+        opacity:0;
+
+        transform:
+            scale(.75);
+
+        transition:
+            opacity 2s ease,
+            transform 2s
+            cubic-bezier(.22,.61,.36,1);
+
+    }
+
+
+    .hora-universo.reloj-visible
+    .hora-reloj{
+
+        opacity:1;
+
+        transform:
+            scale(1);
+
+    }
+
+
+    .hora-punto{
+
+        opacity:.55;
+
+        animation:
+            puntoHora 1.5s
+            ease-in-out infinite;
+
+    }
+
+
+    @keyframes puntoHora{
+
+        0%,100%{
+            opacity:.25;
+        }
+
+        50%{
+            opacity:1;
+        }
+
+    }
+
+
+    /* =====================================================
+       FRASE DEL RELOJ
+    ===================================================== */
+
+    .hora-frase-reloj{
+
+        margin-top:25px;
+
+        font-family:
+            Georgia, serif;
+
+        font-style:italic;
+
+        font-size:
+            clamp(15px,4vw,19px);
+
+        line-height:1.7;
+
+        color:
+            rgba(255,240,210,.78);
+
+        opacity:0;
+
+        transform:
+            translateY(15px);
+
+        transition:
+            opacity 1.6s ease 1s,
+            transform 1.6s ease 1s;
+
+    }
+
+
+    .hora-universo.reloj-visible
+    .hora-frase-reloj{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+
+    /* =====================================================
+       FECHA CELESTIAL
+    ===================================================== */
+
+    .hora-fecha{
+
+        margin-top:35px;
+
+        font-family:
+            Georgia, serif;
+
+        font-size:12px;
+
+        letter-spacing:
+            5px;
+
+        color:
+            rgba(255,255,255,.35);
+
+        opacity:0;
+
+        transition:
+            opacity 2s ease 1.8s;
+
+    }
+
+
+    .hora-universo.reloj-visible
+    .hora-fecha{
+
+        opacity:1;
+
+    }
+
+
+    /* =====================================================
+       TRANSICIÓN AL MENSAJE
+    ===================================================== */
+
+    .hora-mensaje{
+
+        position:absolute;
+
+        z-index:10;
+
+        width:min(90%,620px);
+
+        padding:30px;
+
+        text-align:center;
+
+        opacity:0;
+
+        transform:
+            translateY(30px)
+            scale(.96);
+
+        pointer-events:none;
+
+        transition:
+            opacity 2s ease,
+            transform 2s ease;
+
+    }
+
+
+    .hora-universo.mensaje-visible
+    .hora-mensaje{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+
+    .hora-mensaje
+    .hora-contenido-principal{
+
+        color:
+            rgba(255,255,255,.92);
+
+    }
+
+
+    .hora-titulo{
+
+        font-family:
+            Georgia, serif;
+
+        font-size:
+            clamp(20px,5vw,30px);
+
+        letter-spacing:
+            2px;
+
+        line-height:1.5;
+
+        color:#fff;
+
+        text-shadow:
+            0 0 25px
+            rgba(190,170,255,.55);
+
+    }
+
+
+    .hora-linea{
+
+        width:70px;
+
+        height:1px;
+
+        margin:22px auto;
+
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,230,170,.7),
+                transparent
+            );
+
+        box-shadow:
+            0 0 12px
+            rgba(255,220,150,.4);
+
+    }
+
+
+    .hora-texto{
+
+        font-family:
+            Georgia, serif;
+
+        font-size:
+            clamp(16px,4vw,20px);
+
+        line-height:2;
+
+        color:
+            rgba(255,255,255,.78);
+
+    }
+
+
+    .hora-destacado{
+
+        margin-top:25px;
+
+        font-family:
+            Georgia, serif;
+
+        font-size:
+            clamp(18px,4.5vw,23px);
+
+        line-height:1.7;
+
+        color:
+            rgba(255,231,177,.94);
+
+        text-shadow:
+            0 0 18px
+            rgba(255,210,120,.25);
+
+    }
+
+
+    /* =====================================================
+       HORA GUARDADA
+    ===================================================== */
+
+    .hora-guardada{
+
+        margin-top:27px;
+
+        font-size:11px;
+
+        letter-spacing:2px;
+
+        color:
+            rgba(255,255,255,.35);
+
+    }
+
+
+    .hora-guardada strong{
+
+        display:block;
+
+        margin-top:7px;
+
+        color:
+            rgba(255,231,180,.75);
+
+        font-size:14px;
+
+        letter-spacing:3px;
+
+    }
+
+
+    /* =====================================================
+       BOTÓN FINAL
+    ===================================================== */
+
+    .hora-cerrar{
+
+        margin-top:30px;
+
+        padding:
+            11px 25px;
+
+        border-radius:30px;
+
+        border:
+            1px solid
+            rgba(255,255,255,.16);
+
+        background:
+            rgba(255,255,255,.06);
+
+        color:
+            rgba(255,255,255,.65);
+
+        font-family:
+            Georgia, serif;
+
+        cursor:pointer;
+
+        transition:
+            .4s ease;
+
+    }
+
+
+    .hora-cerrar:hover{
+
+        background:
+            rgba(255,255,255,.12);
+
+        color:white;
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 0 25px
+            rgba(150,130,255,.2);
+
+    }
+
+
+    /* =====================================================
+       PUNTOS QUE FORMAN LA FECHA
+    ===================================================== */
+
+    .fecha-estelar{
+
+        position:absolute;
+
+        inset:0;
+
+        z-index:2;
+
+        pointer-events:none;
+
+        opacity:0;
+
+        transition:
+            opacity 2s ease;
+
+    }
+
+
+    .hora-universo.fecha-visible
+    .fecha-estelar{
+
+        opacity:.8;
+
+    }
+
+
+    .punto-fecha{
+
+        position:absolute;
+
+        width:2px;
+
+        height:2px;
+
+        border-radius:50%;
+
+        background:#fff;
+
+        box-shadow:
+            0 0 8px #fff,
+            0 0 18px rgba(190,170,255,.8);
+
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media(max-width:600px){
+
+        .hora-contenedor{
+
+            padding:20px;
+
+        }
+
+        .hora-reloj{
+
+            letter-spacing:4px;
+
+        }
+
+        .hora-texto{
+
+            line-height:1.8;
+
+        }
+
+        .hora-universo-aviso{
+
+            bottom:30px;
+
+        }
+
+    }
+
+    `;
+
+    document.head.appendChild(estiloHora);
+
+
+    /* =====================================================
+       CREAR CAPA
+    ===================================================== */
+
+    const capa =
+        document.createElement("div");
+
+    capa.className =
+        "hora-universo";
+
+    capa.innerHTML = `
+
+        <div
+            class="hora-reloj-estrellas"
+            id="estrellasHora">
+        </div>
+
+        <div
+            class="fecha-estelar"
+            id="fechaEstelar">
+        </div>
+
+
+        <!-- RELOJ -->
+
+        <div
+            class="hora-contenedor"
+            id="horaInicio">
+
+            <div class="hora-pequena">
+                ESTA NOCHE
+            </div>
+
+
+            <div
+                class="hora-reloj"
+                id="relojCelestial">
+            </div>
+
+
+            <div
+                class="hora-frase-reloj"
+                id="fraseReloj">
+
+                Esta hora no volverá a ser
+                exactamente la misma.
+
+            </div>
+
+
+            <div
+                class="hora-fecha">
+
+                12 · VIII · 2026
+
+            </div>
+
+        </div>
+
+
+        <!-- MENSAJE -->
+
+        <div
+            class="hora-mensaje"
+            id="mensajeHora">
+
+            <div class="hora-titulo">
+
+                ✦ EL UNIVERSO NOS GUARDÓ ESTA HORA ✦
+
+            </div>
+
+
+            <div class="hora-linea"></div>
+
+
+            <div
+                class="hora-texto"
+                id="textoHora">
+
+            </div>
+
+
+            <div
+                class="hora-destacado"
+                id="destacadoHora">
+
+            </div>
+
+
+            <div
+                class="hora-guardada"
+                id="memoriaHora">
+
+            </div>
+
+
+            <button
+                class="hora-cerrar"
+                id="cerrarHora">
+
+                Volver a nuestro cielo ✦
+
+            </button>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(capa);
+
+
+    /* =====================================================
+       GENERAR ESTRELLAS
+    ===================================================== */
+
+    const estrellasHora =
+        document.getElementById(
+            "estrellasHora"
+        );
+
+    for(let i = 0; i < 90; i++){
+
+        const estrella =
+            document.createElement("span");
+
+        estrella.className =
+            "estrella-hora";
+
+        estrella.style.left =
+            Math.random() * 100 + "%";
+
+        estrella.style.top =
+            Math.random() * 100 + "%";
+
+        estrella.style.animationDelay =
+            (Math.random() * 3) + "s";
+
+        estrella.style.animationDuration =
+            (2 + Math.random() * 3) + "s";
+
+        estrellasHora.appendChild(
+            estrella
+        );
+
+    }
+
+
+    /* =====================================================
+       HORA REAL
+    ===================================================== */
+
+    function obtenerHora(){
+
+        const ahora =
+            new Date();
+
+        const horas =
+            String(
+                ahora.getHours()
+            ).padStart(2,"0");
+
+        const minutos =
+            String(
+                ahora.getMinutes()
+            ).padStart(2,"0");
+
+        return {
+            horas,
+            minutos
+        };
+
+    }
+
+
+    const horaActual =
+        obtenerHora();
+
+
+    /*
+       El reloj utiliza puntos luminosos
+       alrededor de los números.
+    */
+
+    const reloj =
+        document.getElementById(
+            "relojCelestial"
+        );
+
+    reloj.innerHTML = `
+
+        ${horaActual.horas}
+
+        <span class="hora-punto">
+            :
+        </span>
+
+        ${horaActual.minutos}
+
+    `;
+
+
+    /* =====================================================
+       MENSAJES SEGÚN LA HORA
+    ===================================================== */
+
+    const horaNumero =
+        parseInt(
+            horaActual.horas,
+            10
+        );
+
+
+    let texto;
+    let destacado;
+
+
+    if(horaNumero < 20){
+
+        texto = `
+            Todavía queda noche por delante...
+            pero ya encontré mi pensamiento favorito.
+        `;
+
+        destacado = `
+            Y ese pensamiento eres tú.
+        `;
+
+    }
+
+    else if(horaNumero < 21){
+
+        texto = `
+            Mientras el mundo sigue haciendo ruido,
+            yo solamente quería que esta hora
+            tuviera tu nombre.
+        `;
+
+        destacado = `
+            Porque algunas horas se sienten
+            diferentes cuando pienso en ti.
+        `;
+
+    }
+
+    else if(horaNumero < 22){
+
+        texto = `
+            La noche avanza,
+            pero hay personas que hacen
+            que uno quiera detener el tiempo.
+        `;
+
+        destacado = `
+            Y tú eres esa persona para mí.
+        `;
+
+    }
+
+    else if(horaNumero < 23){
+
+        texto = `
+            Ya casi termina esta noche...
+            pero lo que siento por ti
+            no tiene hora de cierre.
+        `;
+
+        destacado = `
+            Si pudiera detener un momento,
+            guardaría este contigo.
+        `;
+
+    }
+
+    else{
+
+        texto = `
+            El día está a punto de desaparecer,
+            pero hay pensamientos que se niegan
+            a dormir.
+        `;
+
+        destacado = `
+            Esta noche termina.
+            Lo que siento por ti, no.
+        `;
+
+    }
+
+
+    document.getElementById(
+        "textoHora"
+    ).innerHTML = texto;
+
+
+    document.getElementById(
+        "destacadoHora"
+    ).innerHTML = destacado;
+
+
+    /* =====================================================
+       MEMORIA
+    ===================================================== */
+
+    let memoria =
+        localStorage.getItem(
+            CLAVE_MEMORIA
+        );
+
+
+    const horaFormateada =
+        horaActual.horas +
+        ":" +
+        horaActual.minutos;
+
+
+    if(!memoria){
+
+        memoria =
+            horaFormateada;
+
+        localStorage.setItem(
+            CLAVE_MEMORIA,
+            memoria
+        );
+
+    }
+
+
+    document.getElementById(
+        "memoriaHora"
+    ).innerHTML = `
+
+        Esta noche quedará guardada
+        en nuestro cielo.
+
+        <strong>
+            ${memoria}
+        </strong>
+
+    `;
+
+
+    /* =====================================================
+       FECHA FORMADA POR ESTRELLAS
+    ===================================================== */
+
+    const fechaEstelar =
+        document.getElementById(
+            "fechaEstelar"
+        );
+
+
+    /*
+       Distribución delicada de estrellas.
+       No forma texto perfectamente tipográfico;
+       parece una pequeña escritura celestial.
+    */
+
+    const posiciones = [
+
+        [39,43],
+        [42,41],
+        [45,44],
+        [48,41],
+
+        [52,44],
+        [55,42],
+
+        [59,43],
+        [62,41],
+
+        [42,49],
+        [45,51],
+        [48,49],
+
+        [53,50],
+        [56,48],
+
+        [60,51],
+        [63,49]
+
+    ];
+
+
+    posiciones.forEach(
+        (posicion,index)=>{
+
+            const punto =
+                document.createElement("span");
+
+            punto.className =
+                "punto-fecha";
+
+            punto.style.left =
+                posicion[0] + "%";
+
+            punto.style.top =
+                posicion[1] + "%";
+
+            punto.style.opacity =
+                .3 +
+                Math.random() * .7;
+
+            punto.style.transition =
+                `opacity 1s ease ${index * .08}s`;
+
+            fechaEstelar.appendChild(
+                punto
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       MOSTRAR AVISO
+    ===================================================== */
+
+    setTimeout(()=>{
+
+        aviso.classList.add(
+            "visible"
+        );
+
+    },6500);
+
+
+    /*
+       El aviso desaparece después.
+    */
+
+    setTimeout(()=>{
+
+        aviso.classList.remove(
+            "visible"
+        );
+
+    },11000);
+
+
+    /* =====================================================
+       ABRIR EXPERIENCIA
+    ===================================================== */
+
+    function abrirHora(){
+
+        capa.classList.add(
+            "activo"
+        );
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        setTimeout(()=>{
+
+            capa.classList.add(
+                "mostrar"
+            );
+
+        },300);
+
+
+        setTimeout(()=>{
+
+            capa.classList.add(
+                "reloj-visible"
+            );
+
+        },1100);
+
+
+        setTimeout(()=>{
+
+            capa.classList.add(
+                "fecha-visible"
+            );
+
+        },2500);
+
+
+        setTimeout(()=>{
+
+            document
+                .getElementById(
+                    "horaInicio"
+                )
+                .style.opacity = "0";
+
+
+            document
+                .getElementById(
+                    "horaInicio"
+                )
+                .style.transform =
+                    "scale(.94)";
+
+
+            document
+                .getElementById(
+                    "mensajeHora"
+                )
+                .classList.add(
+                    "mostrar"
+                );
+
+            capa.classList.add(
+                "mensaje-visible"
+            );
+
+        },5200);
+
+    }
+
+
+    /* =====================================================
+       ACTIVAR DESDE EL AVISO
+       ===================================================== */
+
+    aviso.addEventListener(
+        "click",
+        abrirHora
+    );
+
+
+    aviso.style.pointerEvents =
+        "auto";
+
+    aviso.style.cursor =
+        "pointer";
+
+
+    /* =====================================================
+       ACTIVACIÓN DISCRETA
+       
+       También puedes abrirlo tocando
+       una zona vacía del cielo 5 veces.
+    ===================================================== */
+
+    let toquesCielo = 0;
+
+    let ultimoToque = 0;
+
+
+    document.addEventListener(
+        "click",
+        function(e){
+
+            if(
+                capa.contains(e.target) ||
+                aviso.contains(e.target)
+            ){
+
+                return;
+
+            }
+
+
+            const ahoraClick =
+                Date.now();
+
+
+            if(
+                ahoraClick -
+                ultimoToque >
+                1300
+            ){
+
+                toquesCielo = 0;
+
+            }
+
+
+            ultimoToque =
+                ahoraClick;
+
+
+            toquesCielo++;
+
+
+            if(
+                toquesCielo >= 5
+            ){
+
+                toquesCielo = 0;
+
+                abrirHora();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CERRAR
+    ===================================================== */
+
+    document
+        .getElementById(
+            "cerrarHora"
+        )
+        .addEventListener(
+            "click",
+            function(){
+
+                capa.classList.remove(
+                    "mensaje-visible"
+                );
+
+                capa.classList.remove(
+                    "fecha-visible"
+                );
+
+                capa.classList.remove(
+                    "reloj-visible"
+                );
+
+                capa.classList.remove(
+                    "mostrar"
+                );
+
+
+                setTimeout(()=>{
+
+                    capa.classList.remove(
+                        "activo"
+                    );
+
+                    document.body.style.overflow =
+                        "";
+
+                },900);
+
+            }
+        );
+
+
+    /* =====================================================
+       ESCAPE
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function(e){
+
+            if(
+                e.key === "Escape" &&
+                capa.classList.contains(
+                    "activo"
+                )
+            ){
+
+                document
+                    .getElementById(
+                        "cerrarHora"
+                    )
+                    .click();
+
+            }
+
+        }
+    );
+
+
+})();
+
 </script>
 
 
