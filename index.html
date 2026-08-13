@@ -4638,6 +4638,977 @@ estiloLatidoSecreto.innerHTML = `
 document.head.appendChild(
     estiloLatidoSecreto
 );
+
+    /*========================================
+  🌌 MAPA DE NUESTRO CIELO
+  Actualización — 12 de agosto de 2026
+========================================*/
+
+const botonMapa =
+document.createElement("button");
+
+botonMapa.innerHTML = "🧭";
+
+botonMapa.className =
+"boton-mapa-cielo";
+
+document
+.getElementById("universo")
+.appendChild(botonMapa);
+
+
+/*========================================
+  VENTANA DEL MAPA
+========================================*/
+
+const mapaCielo =
+document.createElement("div");
+
+mapaCielo.className =
+"mapa-cielo";
+
+mapaCielo.innerHTML = `
+
+    <div class="caja-mapa">
+
+        <button
+        class="cerrar-mapa"
+        id="cerrarMapa">
+            ×
+        </button>
+
+
+        <div class="icono-mapa">
+            🌌
+        </div>
+
+
+        <div class="titulo-mapa">
+            El mapa de nuestro cielo
+        </div>
+
+
+        <div class="subtitulo-mapa">
+            Una pequeña parte del universo
+            que construimos juntos.
+        </div>
+
+
+        <div class="progreso-mapa">
+
+            <div
+            class="barra-progreso">
+
+                <div
+                class="barra-progreso-llena"
+                id="barraMapa">
+                </div>
+
+            </div>
+
+
+            <div
+            class="texto-progreso"
+            id="textoMapa">
+            </div>
+
+        </div>
+
+
+        <div class="zonas-mapa">
+
+            <div class="zona-mapa">
+
+                <span class="icono-zona">
+                    🌙
+                </span>
+
+                <div>
+
+                    <strong>
+                        Lo que ya vivimos
+                    </strong>
+
+                    <small>
+                        ${ESTRELLAS_DESBLOQUEADAS}
+                        estrellas encendidas
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div
+            class="zona-mapa zona-actual">
+
+                <span class="icono-zona">
+                    ✨
+                </span>
+
+                <div>
+
+                    <strong>
+                        La estrella de hoy
+                    </strong>
+
+                    <small>
+                        Una nueva noche,
+                        una nueva historia
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="zona-mapa">
+
+                <span class="icono-zona">
+                    🌌
+                </span>
+
+                <div>
+
+                    <strong>
+                        Lo que todavía nos espera
+                    </strong>
+
+                    <small>
+                        ${30 - ESTRELLAS_DESBLOQUEADAS}
+                        estrellas por descubrir
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="frase-mapa">
+
+            “Nuestro cielo todavía no está
+            completo... pero cada noche
+            se parece un poquito más
+            a nosotros.”
+
+        </div>
+
+
+        <div
+        class="secreto-mapa"
+        id="secretoMapa">
+
+            ❤️
+
+        </div>
+
+
+        <div class="contador-toques">
+
+            Estrellas descubiertas:
+            
+            <strong>
+                ${ESTRELLAS_DESBLOQUEADAS}/30
+            </strong>
+
+        </div>
+
+    </div>
+
+`;
+
+document.body.appendChild(mapaCielo);
+
+
+/*========================================
+  ESTILOS DEL MAPA
+========================================*/
+
+const estiloMapa =
+document.createElement("style");
+
+estiloMapa.innerHTML = `
+
+.boton-mapa-cielo{
+
+    position:absolute;
+
+    bottom:25px;
+
+    left:25px;
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,255,255,.25);
+
+    background:
+    rgba(255,255,255,.08);
+
+    backdrop-filter:
+    blur(12px);
+
+    color:white;
+
+    font-size:23px;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    box-shadow:
+    0 0 20px
+    rgba(140,120,255,.2);
+
+    transition:.4s;
+
+}
+
+
+.boton-mapa-cielo:hover{
+
+    transform:
+    scale(1.12)
+    rotate(15deg);
+
+    box-shadow:
+    0 0 30px
+    rgba(170,140,255,.6);
+
+}
+
+
+.mapa-cielo{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+    rgba(0,0,0,.82);
+
+    backdrop-filter:
+    blur(16px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+    opacity .5s ease,
+    visibility .5s ease;
+
+    z-index:500;
+
+}
+
+
+.mapa-cielo.activo{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+.caja-mapa{
+
+    position:relative;
+
+    width:min(92%,520px);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    padding:
+    38px 28px 30px;
+
+    border-radius:34px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        rgba(80,60,150,.08)
+    );
+
+    border:
+    1px solid
+    rgba(255,255,255,.22);
+
+    backdrop-filter:
+    blur(25px);
+
+    box-shadow:
+
+    0 0 80px
+    rgba(100,80,255,.25),
+
+    inset 0 0 30px
+    rgba(255,255,255,.03);
+
+    transform:
+    scale(.82)
+    translateY(30px);
+
+    transition:
+    transform .6s
+    cubic-bezier(.22,.61,.36,1);
+
+    text-align:center;
+
+}
+
+
+.mapa-cielo.activo
+.caja-mapa{
+
+    transform:
+    scale(1)
+    translateY(0);
+
+}
+
+
+.cerrar-mapa{
+
+    position:absolute;
+
+    top:14px;
+
+    right:17px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,255,255,.18);
+
+    background:
+    rgba(255,255,255,.06);
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+
+.icono-mapa{
+
+    font-size:52px;
+
+    margin-bottom:8px;
+
+    filter:
+    drop-shadow(0 0 18px
+    rgba(150,130,255,.9));
+
+}
+
+
+.titulo-mapa{
+
+    font-family:
+    Georgia,serif;
+
+    font-size:30px;
+
+    color:#fff;
+
+    text-shadow:
+    0 0 18px
+    rgba(255,255,255,.4);
+
+}
+
+
+.subtitulo-mapa{
+
+    margin-top:8px;
+
+    color:
+    rgba(255,255,255,.65);
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+
+.progreso-mapa{
+
+    margin-top:27px;
+
+}
+
+
+.barra-progreso{
+
+    width:100%;
+
+    height:8px;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+    border:
+    1px solid
+    rgba(255,255,255,.1);
+
+}
+
+
+.barra-progreso-llena{
+
+    width:
+    calc(
+        ${ESTRELLAS_DESBLOQUEADAS}
+        / 30 * 100%
+    );
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #8f7cff,
+        #ffd86b
+    );
+
+    box-shadow:
+    0 0 15px
+    rgba(255,215,100,.7);
+
+}
+
+
+.texto-progreso{
+
+    margin-top:9px;
+
+    color:
+    rgba(255,240,190,.9);
+
+    font-size:13px;
+
+}
+
+
+.zonas-mapa{
+
+    margin-top:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+.zona-mapa{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px;
+
+    text-align:left;
+
+    border-radius:20px;
+
+    background:
+    rgba(255,255,255,.045);
+
+    border:
+    1px solid
+    rgba(255,255,255,.09);
+
+    transition:.3s;
+
+}
+
+
+.zona-mapa:hover{
+
+    background:
+    rgba(255,255,255,.08);
+
+    transform:
+    translateX(4px);
+
+}
+
+
+.zona-actual{
+
+    border-color:
+    rgba(255,220,120,.3);
+
+    box-shadow:
+    0 0 20px
+    rgba(255,210,100,.08);
+
+}
+
+
+.icono-zona{
+
+    font-size:28px;
+
+    width:38px;
+
+    text-align:center;
+
+}
+
+
+.zona-mapa strong{
+
+    display:block;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+
+.zona-mapa small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:
+    rgba(255,255,255,.55);
+
+    font-size:12px;
+
+}
+
+
+.frase-mapa{
+
+    margin-top:25px;
+
+    padding:
+    18px 15px;
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.1);
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.1);
+
+    color:
+    rgba(255,240,200,.9);
+
+    font-family:
+    Georgia,serif;
+
+    font-style:italic;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+}
+
+
+.secreto-mapa{
+
+    margin:22px auto 0;
+
+    width:45px;
+
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    opacity:.55;
+
+    cursor:pointer;
+
+    transition:.5s;
+
+}
+
+
+.secreto-mapa:hover{
+
+    opacity:1;
+
+    transform:scale(1.2);
+
+    filter:
+    drop-shadow(0 0 18px
+    #ff5c9d);
+
+}
+
+
+.contador-toques{
+
+    margin-top:12px;
+
+    font-size:11px;
+
+    color:
+    rgba(255,255,255,.35);
+
+}
+
+
+.contador-toques strong{
+
+    color:
+    rgba(255,230,150,.8);
+
+}
+
+
+@media(max-width:700px){
+
+    .boton-mapa-cielo{
+
+        bottom:22px;
+
+        left:20px;
+
+        width:46px;
+
+        height:46px;
+
+        font-size:20px;
+
+    }
+
+
+    .caja-mapa{
+
+        padding:
+        32px 20px 25px;
+
+    }
+
+
+    .titulo-mapa{
+
+        font-size:25px;
+
+    }
+
+
+    .subtitulo-mapa{
+
+        font-size:13px;
+
+    }
+
+
+    .zona-mapa{
+
+        padding:13px;
+
+    }
+
+}
+
+`;
+
+document.head.appendChild(estiloMapa);
+
+
+/*========================================
+  ABRIR MAPA
+========================================*/
+
+botonMapa.addEventListener(
+"click",
+()=>{
+
+    mapaCielo.classList.add(
+        "activo"
+    );
+
+});
+
+
+/*========================================
+  CERRAR MAPA
+========================================*/
+
+document
+.getElementById("cerrarMapa")
+.addEventListener(
+"click",
+()=>{
+
+    mapaCielo.classList.remove(
+        "activo"
+    );
+
+});
+
+
+mapaCielo.addEventListener(
+"click",
+(e)=>{
+
+    if(e.target === mapaCielo){
+
+        mapaCielo.classList.remove(
+            "activo"
+        );
+
+    }
+
+});
+
+
+/*========================================
+  ❤️ PEQUEÑO SECRETO DEL MAPA
+========================================*/
+
+let toquesMapa = 0;
+
+const secreto =
+document.getElementById(
+    "secretoMapa"
+);
+
+
+secreto.addEventListener(
+"click",
+()=>{
+
+    toquesMapa++;
+
+
+    if(
+        toquesMapa >= 10
+    ){
+
+        toquesMapa = 0;
+
+
+        const revelacion =
+        document.createElement("div");
+
+        revelacion.className =
+        "revelacionMapa";
+
+
+        revelacion.innerHTML = `
+
+            <div>
+
+                <div
+                class="corazon-revelacion">
+                    ❤️
+                </div>
+
+                <p>
+                    Encontraste un rincón
+                    que no estaba destinado
+                    a encontrarse tan fácilmente.
+                </p>
+
+                <strong>
+                    Te amo. ✦
+                </strong>
+
+                <button>
+                    Cerrar
+                </button>
+
+            </div>
+
+        `;
+
+
+        document.body.appendChild(
+            revelacion
+        );
+
+
+        revelacion
+        .querySelector("button")
+        .onclick=()=>{
+
+            revelacion.remove();
+
+        };
+
+    }
+
+});
+
+
+/*========================================
+  ESTILO DE LA REVELACIÓN
+========================================*/
+
+const estiloRevelacion =
+document.createElement("style");
+
+estiloRevelacion.innerHTML = `
+
+.revelacionMapa{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
+
+    background:
+    rgba(0,0,0,.86);
+
+    backdrop-filter:
+    blur(15px);
+
+}
+
+
+.revelacionMapa > div{
+
+    width:min(90%,430px);
+
+    padding:40px 28px;
+
+    text-align:center;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid
+    rgba(255,255,255,.2);
+
+    box-shadow:
+    0 0 60px
+    rgba(255,70,150,.18);
+
+}
+
+
+.corazon-revelacion{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+    animation:
+    latido 1.5s
+    ease-in-out infinite;
+
+}
+
+
+.revelacionMapa p{
+
+    color:white;
+
+    font-family:
+    Georgia,serif;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+
+.revelacionMapa strong{
+
+    display:block;
+
+    margin-top:15px;
+
+    color:#ffdca0;
+
+    font-size:20px;
+
+}
+
+
+.revelacionMapa button{
+
+    margin-top:25px;
+
+    padding:10px 25px;
+
+    border-radius:25px;
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+`;
+
+document.head.appendChild(
+estiloRevelacion
+);
+
+    
 </script>
 
 
