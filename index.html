@@ -4640,34 +4640,51 @@ document.head.appendChild(
 );
 </script>
     
-    <script>
-(function () {
+<!-- =========================================================
+     ✦ LA HORA QUE EL UNIVERSO NOS GUARDÓ ✦
+     EXPERIENCIA ESPECIAL — 12 DE AGOSTO DE 2026
+
+     BLOQUE INDEPENDIENTE
+     Pegar AL FINAL del index.html
+========================================================= -->
+
+<script>
+(function(){
 
     /* =====================================================
        CONFIGURACIÓN
     ===================================================== */
 
     const FECHA_ESPECIAL = "2026-08-12";
-    const CLAVE_MEMORIA = "horaUniverso_12Agosto2026";
 
     const ahora = new Date();
 
-    /*
-       Solo funciona durante el 12 de agosto de 2026
-       según la fecha local del dispositivo.
-    */
     const fechaLocal =
         ahora.getFullYear() + "-" +
-        String(ahora.getMonth() + 1).padStart(2, "0") + "-" +
-        String(ahora.getDate()).padStart(2, "0");
+        String(ahora.getMonth() + 1).padStart(2,"0") + "-" +
+        String(ahora.getDate()).padStart(2,"0");
 
-    if (fechaLocal !== FECHA_ESPECIAL) {
+    /*
+       Esta experiencia solamente existe
+       durante el 12 de agosto de 2026.
+    */
+
+    if(fechaLocal !== FECHA_ESPECIAL){
         return;
     }
 
 
     /* =====================================================
-       CREAR ELEMENTOS
+       EVITAR DUPLICADOS
+    ===================================================== */
+
+    if(document.getElementById("estrellaHoraEspecial")){
+        return;
+    }
+
+
+    /* =====================================================
+       UNIVERSO PRINCIPAL
     ===================================================== */
 
     const universo =
@@ -4675,102 +4692,163 @@ document.head.appendChild(
         document.body;
 
 
-    /*
-       Pequeño aviso inicial.
-       No aparece inmediatamente para que parezca
-       que el cielo está descubriendo algo.
-    */
-
-    const aviso = document.createElement("div");
-
-    aviso.className = "hora-universo-aviso";
-
-    aviso.innerHTML = `
-        <div class="hora-aviso-luz"></div>
-
-        <span>
-            esta noche el cielo guarda algo...
-        </span>
-    `;
-
-    document.body.appendChild(aviso);
-
-
     /* =====================================================
        ESTILOS
     ===================================================== */
 
-    const estiloHora =
+    const estilo =
         document.createElement("style");
 
-    estiloHora.textContent = `
+    estilo.textContent = `
 
     /* =====================================================
-       AVISO
+       ✦ ESTRELLA SECRETA
     ===================================================== */
 
-    .hora-universo-aviso{
+    #estrellaHoraEspecial{
 
-        position:fixed;
+        position:absolute;
+
+        right:8%;
+        top:20%;
+
+        width:58px;
+        height:58px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        border:none;
+
+        background:transparent;
+
+        color:white;
+
+        font-size:35px;
+
+        cursor:pointer;
+
+        z-index:30;
+
+        opacity:0;
+
+        animation:
+            aparecerEstrellaHora 2s ease forwards,
+            respirarEstrellaHora 3s ease-in-out infinite 2s;
+
+        filter:
+            drop-shadow(0 0 8px white)
+            drop-shadow(0 0 20px #bba7ff)
+            drop-shadow(0 0 40px #8c70ff);
+
+        transition:.5s ease;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+    }
+
+
+    #estrellaHoraEspecial::before{
+
+        content:"";
+
+        position:absolute;
+
+        inset:4px;
+
+        border-radius:50%;
+
+        background:
+            radial-gradient(
+                circle,
+                rgba(255,255,255,.8),
+                rgba(180,150,255,.18) 35%,
+                transparent 70%
+            );
+
+        filter:blur(3px);
+
+        z-index:-1;
+
+    }
+
+
+    #estrellaHoraEspecial:hover{
+
+        transform:
+            scale(1.25)
+            rotate(12deg);
+
+        filter:
+            drop-shadow(0 0 10px white)
+            drop-shadow(0 0 30px #d3c5ff)
+            drop-shadow(0 0 60px #9a7cff);
+
+    }
+
+
+    #estrellaHoraEspecial:active{
+
+        transform:
+            scale(.85);
+
+    }
+
+
+    .etiquetaEstrellaHora{
+
+        position:absolute;
+
+        top:58px;
 
         left:50%;
 
-        bottom:42px;
-
         transform:
             translateX(-50%)
-            translateY(15px);
+            translateY(5px);
 
-        z-index:900;
-
-        display:flex;
-
-        align-items:center;
-
-        gap:10px;
+        width:max-content;
 
         padding:
-            9px 17px;
+            6px 12px;
 
-        border-radius:30px;
+        border-radius:20px;
 
         background:
-            rgba(8,7,24,.55);
+            rgba(5,4,20,.55);
 
         border:
             1px solid
-            rgba(255,255,255,.10);
+            rgba(255,255,255,.12);
 
         backdrop-filter:
-            blur(14px);
-
-        -webkit-backdrop-filter:
-            blur(14px);
+            blur(10px);
 
         color:
-            rgba(255,255,255,.50);
+            rgba(255,255,255,.55);
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
-        font-size:11px;
+        font-size:9px;
 
-        letter-spacing:.6px;
+        letter-spacing:1.5px;
 
         opacity:0;
 
         pointer-events:none;
 
-        transition:
-            opacity 1.5s ease,
-            transform 1.5s ease;
+        transition:.6s ease;
 
     }
 
 
-    .hora-universo-aviso.visible{
+    #estrellaHoraEspecial:hover
+    .etiquetaEstrellaHora{
 
-        opacity:.8;
+        opacity:.9;
 
         transform:
             translateX(-50%)
@@ -4779,52 +4857,55 @@ document.head.appendChild(
     }
 
 
-    .hora-aviso-luz{
+    @keyframes aparecerEstrellaHora{
 
-        width:5px;
+        from{
+            opacity:0;
+            transform:scale(.2);
+        }
 
-        height:5px;
-
-        border-radius:50%;
-
-        background:#fff;
-
-        box-shadow:
-            0 0 8px #fff,
-            0 0 18px #bca7ff;
-
-        animation:
-            horaLatido 2s ease-in-out infinite;
+        to{
+            opacity:1;
+            transform:scale(1);
+        }
 
     }
 
 
-    @keyframes horaLatido{
+    @keyframes respirarEstrellaHora{
 
         0%,100%{
-            transform:scale(.7);
-            opacity:.5;
+
+            filter:
+                drop-shadow(0 0 7px white)
+                drop-shadow(0 0 18px #bba7ff)
+                drop-shadow(0 0 35px #8c70ff);
+
         }
 
         50%{
-            transform:scale(1.4);
-            opacity:1;
+
+            filter:
+                drop-shadow(0 0 12px white)
+                drop-shadow(0 0 35px #d0c0ff)
+                drop-shadow(0 0 70px #967cff);
+
         }
 
     }
 
 
     /* =====================================================
-       CAPA PRINCIPAL
+       ✦ EXPERIENCIA COMPLETA
     ===================================================== */
 
-    .hora-universo{
+    .universo-hora-especial{
 
         position:fixed;
 
         inset:0;
 
-        z-index:1000;
+        z-index:9999;
 
         display:flex;
 
@@ -4835,17 +4916,18 @@ document.head.appendChild(
         overflow:hidden;
 
         background:
+
             radial-gradient(
-                circle at center,
-                rgba(30,24,65,.45),
-                rgba(0,0,8,.94) 72%
+                circle at 50% 45%,
+                rgba(48,38,100,.48),
+                rgba(4,3,15,.97) 72%
             );
 
         backdrop-filter:
-            blur(0px);
+            blur(0);
 
         -webkit-backdrop-filter:
-            blur(0px);
+            blur(0);
 
         opacity:0;
 
@@ -4855,13 +4937,12 @@ document.head.appendChild(
 
         transition:
             opacity 1.4s ease,
-            visibility 1.4s ease,
             backdrop-filter 1.4s ease;
 
     }
 
 
-    .hora-universo.activo{
+    .universo-hora-especial.activo{
 
         opacity:1;
 
@@ -4870,25 +4951,25 @@ document.head.appendChild(
         pointer-events:auto;
 
         backdrop-filter:
-            blur(10px);
+            blur(12px);
 
         -webkit-backdrop-filter:
-            blur(10px);
+            blur(12px);
 
     }
 
 
     /* =====================================================
-       ESTRELLAS DEL RELOJ
+       ESTRELLAS DEL FONDO
     ===================================================== */
 
-    .hora-reloj-estrellas{
+    .universo-hora-estrellas{
 
         position:absolute;
 
         inset:0;
 
-        pointer-events:none;
+        overflow:hidden;
 
         opacity:0;
 
@@ -4898,21 +4979,20 @@ document.head.appendChild(
     }
 
 
-    .hora-universo.reloj-visible
-    .hora-reloj-estrellas{
+    .universo-hora-especial.activo
+    .universo-hora-estrellas{
 
         opacity:1;
 
     }
 
 
-    .estrella-hora{
+    .estrella-hora-fondo{
 
         position:absolute;
 
-        width:3px;
-
-        height:3px;
+        width:2px;
+        height:2px;
 
         border-radius:50%;
 
@@ -4920,73 +5000,74 @@ document.head.appendChild(
 
         box-shadow:
             0 0 5px white,
-            0 0 14px rgba(180,160,255,.8);
+            0 0 15px rgba(190,170,255,.8);
 
-        opacity:.7;
+        opacity:.25;
 
         animation:
-            estrellaRespira
-            3s ease-in-out infinite;
+            brillarHora 3s ease-in-out infinite;
 
     }
 
 
-    @keyframes estrellaRespira{
+    @keyframes brillarHora{
 
         0%,100%{
+
+            opacity:.2;
             transform:scale(.7);
-            opacity:.35;
+
         }
 
         50%{
-            transform:scale(1.5);
+
             opacity:1;
+            transform:scale(1.5);
+
         }
 
     }
 
 
     /* =====================================================
-       CONTENIDO
+       CONTENEDOR
     ===================================================== */
 
-    .hora-contenedor{
+    .hora-experiencia-contenido{
 
         position:relative;
 
         z-index:5;
 
-        width:min(90%,560px);
+        width:min(92%,650px);
 
         text-align:center;
-
-        padding:30px;
 
     }
 
 
-    .hora-pequena{
+    /* =====================================================
+       PEQUEÑO ENCABEZADO
+    ===================================================== */
+
+    .hora-indicador{
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
-        font-size:11px;
+        font-size:10px;
 
-        letter-spacing:
-            4px;
-
-        text-transform:
-            uppercase;
+        letter-spacing:5px;
 
         color:
-            rgba(255,255,255,.42);
+            rgba(255,255,255,.35);
 
-        margin-bottom:22px;
+        margin-bottom:25px;
 
         opacity:0;
 
         transform:
-            translateY(12px);
+            translateY(15px);
 
         transition:
             opacity 1.5s ease,
@@ -4995,8 +5076,8 @@ document.head.appendChild(
     }
 
 
-    .hora-universo.mostrar
-    .hora-pequena{
+    .universo-hora-especial.mostrar
+    .hora-indicador{
 
         opacity:1;
 
@@ -5010,44 +5091,34 @@ document.head.appendChild(
        RELOJ
     ===================================================== */
 
-    .hora-reloj{
-
-        position:relative;
-
-        display:inline-block;
+    .hora-gigante{
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
         font-size:
-            clamp(58px,15vw,110px);
+            clamp(65px,18vw,125px);
+
+        font-weight:400;
+
+        letter-spacing:7px;
 
         line-height:1;
 
-        letter-spacing:
-            7px;
-
-        font-weight:
-            400;
-
-        color:
-            rgba(255,255,255,.96);
+        color:white;
 
         text-shadow:
 
-            0 0 10px
-            rgba(255,255,255,.7),
+            0 0 10px rgba(255,255,255,.8),
 
-            0 0 35px
-            rgba(170,145,255,.65),
+            0 0 35px rgba(180,160,255,.75),
 
-            0 0 80px
-            rgba(120,100,255,.35);
+            0 0 80px rgba(120,90,255,.45);
 
         opacity:0;
 
         transform:
-            scale(.75);
+            scale(.65);
 
         transition:
             opacity 2s ease,
@@ -5057,8 +5128,8 @@ document.head.appendChild(
     }
 
 
-    .hora-universo.reloj-visible
-    .hora-reloj{
+    .universo-hora-especial.reloj
+    .hora-gigante{
 
         opacity:1;
 
@@ -5068,21 +5139,20 @@ document.head.appendChild(
     }
 
 
-    .hora-punto{
+    .punto-reloj{
 
-        opacity:.55;
+        opacity:.3;
 
         animation:
-            puntoHora 1.5s
-            ease-in-out infinite;
+            parpadeoPunto 1.4s ease-in-out infinite;
 
     }
 
 
-    @keyframes puntoHora{
+    @keyframes parpadeoPunto{
 
         0%,100%{
-            opacity:.25;
+            opacity:.2;
         }
 
         50%{
@@ -5093,40 +5163,74 @@ document.head.appendChild(
 
 
     /* =====================================================
-       FRASE DEL RELOJ
+       FECHA
     ===================================================== */
 
-    .hora-frase-reloj{
+    .hora-fecha-especial{
 
-        margin-top:25px;
+        margin-top:28px;
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
+
+        font-size:11px;
+
+        letter-spacing:6px;
+
+        color:
+            rgba(255,255,255,.32);
+
+        opacity:0;
+
+        transition:
+            opacity 2s ease 1s;
+
+    }
+
+
+    .universo-hora-especial.reloj
+    .hora-fecha-especial{
+
+        opacity:1;
+
+    }
+
+
+    /* =====================================================
+       FRASE
+    ===================================================== */
+
+    .hora-susurro{
+
+        margin-top:30px;
+
+        font-family:
+            Georgia,serif;
 
         font-style:italic;
 
         font-size:
             clamp(15px,4vw,19px);
 
-        line-height:1.7;
+        line-height:1.8;
 
         color:
-            rgba(255,240,210,.78);
+            rgba(255,240,215,.72);
 
         opacity:0;
 
         transform:
-            translateY(15px);
+            translateY(20px);
 
         transition:
-            opacity 1.6s ease 1s,
-            transform 1.6s ease 1s;
+            opacity 1.7s ease 1s,
+            transform 1.7s ease 1s;
 
     }
 
 
-    .hora-universo.reloj-visible
-    .hora-frase-reloj{
+    .universo-hora-especial.reloj
+    .hora-susurro{
 
         opacity:1;
 
@@ -5137,106 +5241,127 @@ document.head.appendChild(
 
 
     /* =====================================================
-       FECHA CELESTIAL
+       SEPARADOR
     ===================================================== */
 
-    .hora-fecha{
+    .hora-separador{
 
-        margin-top:35px;
+        width:90px;
 
-        font-family:
-            Georgia, serif;
+        height:1px;
 
-        font-size:12px;
+        margin:30px auto;
 
-        letter-spacing:
-            5px;
+        background:
+            linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,225,160,.8),
+                transparent
+            );
 
-        color:
-            rgba(255,255,255,.35);
-
-        opacity:0;
-
-        transition:
-            opacity 2s ease 1.8s;
-
-    }
-
-
-    .hora-universo.reloj-visible
-    .hora-fecha{
-
-        opacity:1;
+        box-shadow:
+            0 0 15px
+            rgba(255,220,150,.5);
 
     }
 
 
     /* =====================================================
-       TRANSICIÓN AL MENSAJE
+       MENSAJE FINAL
     ===================================================== */
 
-    .hora-mensaje{
+    .hora-mensaje-final{
 
         position:absolute;
 
-        z-index:10;
+        inset:0;
 
-        width:min(90%,620px);
+        display:flex;
 
-        padding:30px;
+        align-items:center;
 
-        text-align:center;
+        justify-content:center;
+
+        padding:25px;
 
         opacity:0;
 
         transform:
-            translateY(30px)
-            scale(.96);
+            scale(.94)
+            translateY(25px);
 
         pointer-events:none;
 
         transition:
-            opacity 2s ease,
-            transform 2s ease;
+            opacity 1.8s ease,
+            transform 1.8s ease;
 
     }
 
 
-    .hora-universo.mensaje-visible
-    .hora-mensaje{
+    .universo-hora-especial.final
+    .hora-mensaje-final{
 
         opacity:1;
 
         transform:
-            translateY(0)
-            scale(1);
+            scale(1)
+            translateY(0);
+
+        pointer-events:auto;
 
     }
 
 
-    .hora-mensaje
-    .hora-contenido-principal{
+    .hora-carta{
 
-        color:
-            rgba(255,255,255,.92);
+        width:min(92%,580px);
+
+        padding:
+            38px 28px;
+
+        border-radius:30px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,.09),
+                rgba(100,75,180,.06)
+            );
+
+        border:
+            1px solid
+            rgba(255,255,255,.16);
+
+        box-shadow:
+
+            0 0 70px
+            rgba(120,95,255,.18),
+
+            inset 0 0 35px
+            rgba(255,255,255,.025);
+
+        backdrop-filter:
+            blur(22px);
+
+        -webkit-backdrop-filter:
+            blur(22px);
 
     }
 
 
-    .hora-titulo{
+    .hora-titulo-final{
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
         font-size:
             clamp(20px,5vw,30px);
 
-        letter-spacing:
-            2px;
-
         line-height:1.5;
 
-        color:#fff;
+        color:white;
 
         text-shadow:
             0 0 25px
@@ -5245,51 +5370,30 @@ document.head.appendChild(
     }
 
 
-    .hora-linea{
+    .hora-texto-final{
 
-        width:70px;
-
-        height:1px;
-
-        margin:22px auto;
-
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(255,230,170,.7),
-                transparent
-            );
-
-        box-shadow:
-            0 0 12px
-            rgba(255,220,150,.4);
-
-    }
-
-
-    .hora-texto{
+        margin-top:22px;
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
         font-size:
-            clamp(16px,4vw,20px);
+            clamp(15px,4vw,19px);
 
         line-height:2;
 
         color:
-            rgba(255,255,255,.78);
+            rgba(255,255,255,.76);
 
     }
 
 
-    .hora-destacado{
+    .hora-destello-final{
 
-        margin-top:25px;
+        margin-top:23px;
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
         font-size:
             clamp(18px,4.5vw,23px);
@@ -5297,59 +5401,55 @@ document.head.appendChild(
         line-height:1.7;
 
         color:
-            rgba(255,231,177,.94);
+            rgba(255,228,170,.95);
 
         text-shadow:
             0 0 18px
-            rgba(255,210,120,.25);
+            rgba(255,210,120,.3);
 
     }
 
 
-    /* =====================================================
-       HORA GUARDADA
-    ===================================================== */
+    .hora-memoria{
 
-    .hora-guardada{
+        margin-top:24px;
 
-        margin-top:27px;
-
-        font-size:11px;
+        font-size:10px;
 
         letter-spacing:2px;
 
         color:
-            rgba(255,255,255,.35);
+            rgba(255,255,255,.3);
 
     }
 
 
-    .hora-guardada strong{
+    .hora-memoria strong{
 
         display:block;
 
         margin-top:7px;
 
         color:
-            rgba(255,231,180,.75);
+            rgba(255,225,165,.75);
 
         font-size:14px;
 
-        letter-spacing:3px;
+        letter-spacing:4px;
 
     }
 
 
     /* =====================================================
-       BOTÓN FINAL
+       BOTÓN
     ===================================================== */
 
-    .hora-cerrar{
+    .cerrar-hora-especial{
 
-        margin-top:30px;
+        margin-top:27px;
 
         padding:
-            11px 25px;
+            11px 24px;
 
         border-radius:30px;
 
@@ -5358,115 +5458,76 @@ document.head.appendChild(
             rgba(255,255,255,.16);
 
         background:
-            rgba(255,255,255,.06);
+            rgba(255,255,255,.055);
 
         color:
-            rgba(255,255,255,.65);
+            rgba(255,255,255,.68);
 
         font-family:
-            Georgia, serif;
+            Georgia,serif;
 
         cursor:pointer;
 
-        transition:
-            .4s ease;
+        transition:.4s ease;
 
     }
 
 
-    .hora-cerrar:hover{
-
-        background:
-            rgba(255,255,255,.12);
+    .cerrar-hora-especial:hover{
 
         color:white;
+
+        background:
+            rgba(255,255,255,.11);
 
         transform:
             translateY(-2px);
 
         box-shadow:
             0 0 25px
-            rgba(150,130,255,.2);
+            rgba(160,140,255,.25);
 
     }
 
 
     /* =====================================================
-       PUNTOS QUE FORMAN LA FECHA
-    ===================================================== */
-
-    .fecha-estelar{
-
-        position:absolute;
-
-        inset:0;
-
-        z-index:2;
-
-        pointer-events:none;
-
-        opacity:0;
-
-        transition:
-            opacity 2s ease;
-
-    }
-
-
-    .hora-universo.fecha-visible
-    .fecha-estelar{
-
-        opacity:.8;
-
-    }
-
-
-    .punto-fecha{
-
-        position:absolute;
-
-        width:2px;
-
-        height:2px;
-
-        border-radius:50%;
-
-        background:#fff;
-
-        box-shadow:
-            0 0 8px #fff,
-            0 0 18px rgba(190,170,255,.8);
-
-    }
-
-
-    /* =====================================================
-       RESPONSIVE
+       MÓVIL
     ===================================================== */
 
     @media(max-width:600px){
 
-        .hora-contenedor{
+        #estrellaHoraEspecial{
 
-            padding:20px;
+            right:7%;
+
+            top:18%;
+
+            width:52px;
+            height:52px;
+
+            font-size:31px;
 
         }
 
-        .hora-reloj{
+
+        .hora-gigante{
 
             letter-spacing:4px;
 
         }
 
-        .hora-texto{
 
-            line-height:1.8;
+        .hora-carta{
+
+            padding:
+                30px 20px;
 
         }
 
-        .hora-universo-aviso{
 
-            bottom:30px;
+        .hora-texto-final{
+
+            line-height:1.8;
 
         }
 
@@ -5474,113 +5535,168 @@ document.head.appendChild(
 
     `;
 
-    document.head.appendChild(estiloHora);
+    document.head.appendChild(estilo);
 
 
     /* =====================================================
-       CREAR CAPA
+       CREAR ESTRELLA ESPECIAL
+    ===================================================== */
+
+    const estrellaEspecial =
+        document.createElement("button");
+
+    estrellaEspecial.id =
+        "estrellaHoraEspecial";
+
+    estrellaEspecial.innerHTML = `
+        ✦
+
+        <span
+            class="etiquetaEstrellaHora">
+            una noche
+        </span>
+    `;
+
+    estrellaEspecial.setAttribute(
+        "aria-label",
+        "Una noche especial"
+    );
+
+    universo.appendChild(
+        estrellaEspecial
+    );
+
+
+    /* =====================================================
+       CREAR EXPERIENCIA
     ===================================================== */
 
     const capa =
         document.createElement("div");
 
     capa.className =
-        "hora-universo";
+        "universo-hora-especial";
 
     capa.innerHTML = `
 
         <div
-            class="hora-reloj-estrellas"
-            id="estrellasHora">
-        </div>
-
-        <div
-            class="fecha-estelar"
-            id="fechaEstelar">
+            class="universo-hora-estrellas"
+            id="estrellasHoraEspecial">
         </div>
 
 
-        <!-- RELOJ -->
+        <!-- =============================================
+             RELOJ
+        ============================================== -->
 
         <div
-            class="hora-contenedor"
-            id="horaInicio">
+            class="hora-experiencia-contenido"
+            id="inicioHoraEspecial">
 
-            <div class="hora-pequena">
+            <div class="hora-indicador">
                 ESTA NOCHE
             </div>
 
 
             <div
-                class="hora-reloj"
-                id="relojCelestial">
+                class="hora-gigante"
+                id="horaGigante">
             </div>
 
 
             <div
-                class="hora-frase-reloj"
-                id="fraseReloj">
-
-                Esta hora no volverá a ser
-                exactamente la misma.
-
-            </div>
-
-
-            <div
-                class="hora-fecha">
+                class="hora-fecha-especial">
 
                 12 · VIII · 2026
+
+            </div>
+
+
+            <div
+                class="hora-susurro">
+
+                Hay momentos que no parecen
+                importantes mientras suceden...
+
+                <br><br>
+
+                hasta que alguien decide
+                guardarlos para siempre.
 
             </div>
 
         </div>
 
 
-        <!-- MENSAJE -->
+        <!-- =============================================
+             MENSAJE FINAL
+        ============================================== -->
 
         <div
-            class="hora-mensaje"
-            id="mensajeHora">
+            class="hora-mensaje-final"
+            id="mensajeFinalHora">
 
-            <div class="hora-titulo">
+            <div class="hora-carta">
 
-                ✦ EL UNIVERSO NOS GUARDÓ ESTA HORA ✦
+                <div class="hora-titulo-final">
+
+                    ✦ LA HORA QUE EL UNIVERSO
+                    NOS GUARDÓ ✦
+
+                </div>
+
+
+                <div class="hora-separador"></div>
+
+
+                <div class="hora-texto-final">
+
+                    De todas las horas que existen
+                    en este inmenso universo,
+
+                    <br><br>
+
+                    esta noche hubo una que quise
+                    guardar especialmente para ti.
+
+                    <br><br>
+
+                    No porque fuera diferente para
+                    el mundo...
+
+                    <br>
+
+                    sino porque en ella estabas tú
+                    dentro de mis pensamientos.
+
+                </div>
+
+
+                <div class="hora-destello-final">
+
+                    Si alguna vez olvidamos esta noche,
+                    que esta pequeña estrella nos
+                    recuerde que una vez estuvimos aquí,
+                    amándonos.
+
+                </div>
+
+
+                <div
+                    class="hora-memoria"
+                    id="memoriaHoraEspecial">
+                </div>
+
+
+                <button
+                    class="cerrar-hora-especial"
+                    id="cerrarHoraEspecial">
+
+                    Volver a nuestro cielo ✦
+
+                </button>
 
             </div>
-
-
-            <div class="hora-linea"></div>
-
-
-            <div
-                class="hora-texto"
-                id="textoHora">
-
-            </div>
-
-
-            <div
-                class="hora-destacado"
-                id="destacadoHora">
-
-            </div>
-
-
-            <div
-                class="hora-guardada"
-                id="memoriaHora">
-
-            </div>
-
-
-            <button
-                class="hora-cerrar"
-                id="cerrarHora">
-
-                Volver a nuestro cielo ✦
-
-            </button>
 
         </div>
 
@@ -5590,35 +5706,35 @@ document.head.appendChild(
 
 
     /* =====================================================
-       GENERAR ESTRELLAS
+       CREAR ESTRELLAS INTERNAS
     ===================================================== */
 
-    const estrellasHora =
+    const estrellasInternas =
         document.getElementById(
-            "estrellasHora"
+            "estrellasHoraEspecial"
         );
 
-    for(let i = 0; i < 90; i++){
+    for(let i=0;i<110;i++){
 
         const estrella =
             document.createElement("span");
 
         estrella.className =
-            "estrella-hora";
+            "estrella-hora-fondo";
 
         estrella.style.left =
-            Math.random() * 100 + "%";
+            Math.random()*100+"%";
 
         estrella.style.top =
-            Math.random() * 100 + "%";
+            Math.random()*100+"%";
 
         estrella.style.animationDelay =
-            (Math.random() * 3) + "s";
+            Math.random()*4+"s";
 
         estrella.style.animationDuration =
-            (2 + Math.random() * 3) + "s";
+            (2+Math.random()*4)+"s";
 
-        estrellasHora.appendChild(
+        estrellasInternas.appendChild(
             estrella
         );
 
@@ -5626,180 +5742,57 @@ document.head.appendChild(
 
 
     /* =====================================================
-       HORA REAL
+       HORA ACTUAL
     ===================================================== */
 
-    function obtenerHora(){
-
-        const ahora =
-            new Date();
-
-        const horas =
-            String(
-                ahora.getHours()
-            ).padStart(2,"0");
-
-        const minutos =
-            String(
-                ahora.getMinutes()
-            ).padStart(2,"0");
-
-        return {
-            horas,
-            minutos
-        };
-
-    }
-
-
     const horaActual =
-        obtenerHora();
+        new Date();
+
+    const horas =
+        String(
+            horaActual.getHours()
+        ).padStart(2,"0");
+
+    const minutos =
+        String(
+            horaActual.getMinutes()
+        ).padStart(2,"0");
 
 
-    /*
-       El reloj utiliza puntos luminosos
-       alrededor de los números.
-    */
+    document.getElementById(
+        "horaGigante"
+    ).innerHTML = `
 
-    const reloj =
-        document.getElementById(
-            "relojCelestial"
-        );
+        ${horas}
 
-    reloj.innerHTML = `
-
-        ${horaActual.horas}
-
-        <span class="hora-punto">
+        <span class="punto-reloj">
             :
         </span>
 
-        ${horaActual.minutos}
+        ${minutos}
 
     `;
 
 
     /* =====================================================
-       MENSAJES SEGÚN LA HORA
+       GUARDAR LA HORA
     ===================================================== */
 
-    const horaNumero =
-        parseInt(
-            horaActual.horas,
-            10
-        );
+    const CLAVE =
+        "laHoraUniverso_12Agosto2026";
 
-
-    let texto;
-    let destacado;
-
-
-    if(horaNumero < 20){
-
-        texto = `
-            Todavía queda noche por delante...
-            pero ya encontré mi pensamiento favorito.
-        `;
-
-        destacado = `
-            Y ese pensamiento eres tú.
-        `;
-
-    }
-
-    else if(horaNumero < 21){
-
-        texto = `
-            Mientras el mundo sigue haciendo ruido,
-            yo solamente quería que esta hora
-            tuviera tu nombre.
-        `;
-
-        destacado = `
-            Porque algunas horas se sienten
-            diferentes cuando pienso en ti.
-        `;
-
-    }
-
-    else if(horaNumero < 22){
-
-        texto = `
-            La noche avanza,
-            pero hay personas que hacen
-            que uno quiera detener el tiempo.
-        `;
-
-        destacado = `
-            Y tú eres esa persona para mí.
-        `;
-
-    }
-
-    else if(horaNumero < 23){
-
-        texto = `
-            Ya casi termina esta noche...
-            pero lo que siento por ti
-            no tiene hora de cierre.
-        `;
-
-        destacado = `
-            Si pudiera detener un momento,
-            guardaría este contigo.
-        `;
-
-    }
-
-    else{
-
-        texto = `
-            El día está a punto de desaparecer,
-            pero hay pensamientos que se niegan
-            a dormir.
-        `;
-
-        destacado = `
-            Esta noche termina.
-            Lo que siento por ti, no.
-        `;
-
-    }
-
-
-    document.getElementById(
-        "textoHora"
-    ).innerHTML = texto;
-
-
-    document.getElementById(
-        "destacadoHora"
-    ).innerHTML = destacado;
-
-
-    /* =====================================================
-       MEMORIA
-    ===================================================== */
 
     let memoria =
-        localStorage.getItem(
-            CLAVE_MEMORIA
-        );
-
-
-    const horaFormateada =
-        horaActual.horas +
-        ":" +
-        horaActual.minutos;
+        localStorage.getItem(CLAVE);
 
 
     if(!memoria){
 
         memoria =
-            horaFormateada;
+            horas + ":" + minutos;
 
         localStorage.setItem(
-            CLAVE_MEMORIA,
+            CLAVE,
             memoria
         );
 
@@ -5807,10 +5800,10 @@ document.head.appendChild(
 
 
     document.getElementById(
-        "memoriaHora"
+        "memoriaHoraEspecial"
     ).innerHTML = `
 
-        Esta noche quedará guardada
+        Esta noche quedó guardada
         en nuestro cielo.
 
         <strong>
@@ -5821,113 +5814,14 @@ document.head.appendChild(
 
 
     /* =====================================================
-       FECHA FORMADA POR ESTRELLAS
-    ===================================================== */
-
-    const fechaEstelar =
-        document.getElementById(
-            "fechaEstelar"
-        );
-
-
-    /*
-       Distribución delicada de estrellas.
-       No forma texto perfectamente tipográfico;
-       parece una pequeña escritura celestial.
-    */
-
-    const posiciones = [
-
-        [39,43],
-        [42,41],
-        [45,44],
-        [48,41],
-
-        [52,44],
-        [55,42],
-
-        [59,43],
-        [62,41],
-
-        [42,49],
-        [45,51],
-        [48,49],
-
-        [53,50],
-        [56,48],
-
-        [60,51],
-        [63,49]
-
-    ];
-
-
-    posiciones.forEach(
-        (posicion,index)=>{
-
-            const punto =
-                document.createElement("span");
-
-            punto.className =
-                "punto-fecha";
-
-            punto.style.left =
-                posicion[0] + "%";
-
-            punto.style.top =
-                posicion[1] + "%";
-
-            punto.style.opacity =
-                .3 +
-                Math.random() * .7;
-
-            punto.style.transition =
-                `opacity 1s ease ${index * .08}s`;
-
-            fechaEstelar.appendChild(
-                punto
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       MOSTRAR AVISO
-    ===================================================== */
-
-    setTimeout(()=>{
-
-        aviso.classList.add(
-            "visible"
-        );
-
-    },6500);
-
-
-    /*
-       El aviso desaparece después.
-    */
-
-    setTimeout(()=>{
-
-        aviso.classList.remove(
-            "visible"
-        );
-
-    },11000);
-
-
-    /* =====================================================
        ABRIR EXPERIENCIA
     ===================================================== */
 
-    function abrirHora(){
+    function abrirExperiencia(){
 
         capa.classList.add(
             "activo"
         );
-
 
         document.body.style.overflow =
             "hidden";
@@ -5939,135 +5833,58 @@ document.head.appendChild(
                 "mostrar"
             );
 
-        },300);
+        },250);
 
 
         setTimeout(()=>{
 
             capa.classList.add(
-                "reloj-visible"
+                "reloj"
             );
 
-        },1100);
+        },900);
 
+
+        /*
+           Después de unos segundos,
+           el reloj desaparece suavemente
+           y aparece el mensaje.
+        */
 
         setTimeout(()=>{
 
-            capa.classList.add(
-                "fecha-visible"
-            );
-
-        },2500);
-
-
-        setTimeout(()=>{
-
-            document
-                .getElementById(
-                    "horaInicio"
-                )
-                .style.opacity = "0";
-
-
-            document
-                .getElementById(
-                    "horaInicio"
-                )
-                .style.transform =
-                    "scale(.94)";
-
-
-            document
-                .getElementById(
-                    "mensajeHora"
-                )
-                .classList.add(
-                    "mostrar"
+            const inicio =
+                document.getElementById(
+                    "inicioHoraEspecial"
                 );
 
+            inicio.style.opacity =
+                "0";
+
+            inicio.style.transform =
+                "scale(.92) translateY(-20px)";
+
+
             capa.classList.add(
-                "mensaje-visible"
+                "final"
             );
 
-        },5200);
+        },5500);
 
     }
 
 
     /* =====================================================
-       ACTIVAR DESDE EL AVISO
-       ===================================================== */
-
-    aviso.addEventListener(
-        "click",
-        abrirHora
-    );
-
-
-    aviso.style.pointerEvents =
-        "auto";
-
-    aviso.style.cursor =
-        "pointer";
-
-
-    /* =====================================================
-       ACTIVACIÓN DISCRETA
-       
-       También puedes abrirlo tocando
-       una zona vacía del cielo 5 veces.
+       TOCAR ESTRELLA
     ===================================================== */
 
-    let toquesCielo = 0;
-
-    let ultimoToque = 0;
-
-
-    document.addEventListener(
+    estrellaEspecial.addEventListener(
         "click",
         function(e){
 
-            if(
-                capa.contains(e.target) ||
-                aviso.contains(e.target)
-            ){
+            e.stopPropagation();
 
-                return;
-
-            }
-
-
-            const ahoraClick =
-                Date.now();
-
-
-            if(
-                ahoraClick -
-                ultimoToque >
-                1300
-            ){
-
-                toquesCielo = 0;
-
-            }
-
-
-            ultimoToque =
-                ahoraClick;
-
-
-            toquesCielo++;
-
-
-            if(
-                toquesCielo >= 5
-            ){
-
-                toquesCielo = 0;
-
-                abrirHora();
-
-            }
+            abrirExperiencia();
 
         }
     );
@@ -6079,22 +5896,18 @@ document.head.appendChild(
 
     document
         .getElementById(
-            "cerrarHora"
+            "cerrarHoraEspecial"
         )
         .addEventListener(
             "click",
             function(){
 
                 capa.classList.remove(
-                    "mensaje-visible"
+                    "final"
                 );
 
                 capa.classList.remove(
-                    "fecha-visible"
-                );
-
-                capa.classList.remove(
-                    "reloj-visible"
+                    "reloj"
                 );
 
                 capa.classList.remove(
@@ -6134,7 +5947,7 @@ document.head.appendChild(
 
                 document
                     .getElementById(
-                        "cerrarHora"
+                        "cerrarHoraEspecial"
                     )
                     .click();
 
@@ -6145,8 +5958,12 @@ document.head.appendChild(
 
 
 })();
-
 </script>
+
+<!-- =========================================================
+     FIN DE
+     «LA HORA QUE EL UNIVERSO NOS GUARDÓ»
+========================================================= -->
 
 
 </body>
