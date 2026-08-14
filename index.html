@@ -4638,58 +4638,67 @@ estiloLatidoSecreto.innerHTML = `
 document.head.appendChild(
     estiloLatidoSecreto
 );
-</script>
-    
-<!-- =========================================================
-     ✦ LA HORA QUE EL UNIVERSO NOS GUARDÓ ✦
-     EXPERIENCIA ESPECIAL — 12 DE AGOSTO DE 2026
 
-     BLOQUE INDEPENDIENTE
-     Pegar AL FINAL del index.html
-========================================================= -->
 
-<script>
 (function(){
 
     /* =====================================================
-       CONFIGURACIÓN
-    ===================================================== */
-
-    const FECHA_ESPECIAL = "2026-08-12";
-
-    const ahora = new Date();
-
-    const fechaLocal =
-        ahora.getFullYear() + "-" +
-        String(ahora.getMonth() + 1).padStart(2,"0") + "-" +
-        String(ahora.getDate()).padStart(2,"0");
-
-    /*
-       Esta experiencia solamente existe
-       durante el 12 de agosto de 2026.
-    */
-
-    if(fechaLocal !== FECHA_ESPECIAL){
-        return;
-    }
-
-
-    /* =====================================================
-       EVITAR DUPLICADOS
-    ===================================================== */
-
-    if(document.getElementById("estrellaHoraEspecial")){
-        return;
-    }
-
-
-    /* =====================================================
-       UNIVERSO PRINCIPAL
+       CONTENEDOR
     ===================================================== */
 
     const universo =
         document.getElementById("universo") ||
         document.body;
+
+
+    /* =====================================================
+       CREAR CAPA CÓSMICA
+    ===================================================== */
+
+    const cieloNuevo =
+        document.createElement("div");
+
+    cieloNuevo.className =
+        "cielo-amor-permanente";
+
+    cieloNuevo.innerHTML = `
+
+        <!-- NEBULOSA -->
+
+        <div class="nebulosa-nosotros nebulosa-uno"></div>
+        <div class="nebulosa-nosotros nebulosa-dos"></div>
+        <div class="nebulosa-nosotros nebulosa-tres"></div>
+
+        <div class="polvo-cosmico"
+             id="polvoCosmico">
+        </div>
+
+
+        <!-- ESTELA -->
+
+        <div class="estela-amor"
+             id="estelaAmor">
+
+            <div class="halo-estela"></div>
+
+            <div class="cuerpo-estela"></div>
+
+            <div class="cola-estela">
+
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    universo.appendChild(cieloNuevo);
 
 
     /* =====================================================
@@ -4702,790 +4711,543 @@ document.head.appendChild(
     estilo.textContent = `
 
     /* =====================================================
-       ✦ ESTRELLA SECRETA
+       CAPA GENERAL
     ===================================================== */
 
-    #estrellaHoraEspecial{
+    .cielo-amor-permanente{
 
         position:absolute;
 
-        right:8%;
-        top:20%;
+        inset:0;
 
-        width:58px;
-        height:58px;
+        overflow:hidden;
 
-        display:flex;
-        align-items:center;
-        justify-content:center;
+        pointer-events:none;
 
-        border:none;
-
-        background:transparent;
-
-        color:white;
-
-        font-size:35px;
-
-        cursor:pointer;
-
-        z-index:30;
-
-        opacity:0;
-
-        animation:
-            aparecerEstrellaHora 2s ease forwards,
-            respirarEstrellaHora 3s ease-in-out infinite 2s;
-
-        filter:
-            drop-shadow(0 0 8px white)
-            drop-shadow(0 0 20px #bba7ff)
-            drop-shadow(0 0 40px #8c70ff);
-
-        transition:.5s ease;
-
-        -webkit-tap-highlight-color:
-            transparent;
+        z-index:1;
 
     }
 
 
-    #estrellaHoraEspecial::before{
+    /* =====================================================
+       NEBULOSAS
+    ===================================================== */
 
-        content:"";
+    .nebulosa-nosotros{
 
         position:absolute;
 
-        inset:4px;
+        width:65vw;
+
+        height:65vw;
+
+        max-width:700px;
+
+        max-height:700px;
+
+        border-radius:50%;
+
+        filter:blur(55px);
+
+        opacity:.10;
+
+        mix-blend-mode:screen;
+
+        transform-origin:center;
+
+    }
+
+
+    .nebulosa-uno{
+
+        left:-18%;
+
+        top:12%;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+                rgba(132,105,255,.75) 0%,
+                rgba(96,72,210,.40) 27%,
+                rgba(50,30,140,.16) 50%,
+                transparent 72%
+            );
+
+        animation:
+            nebulosaMovimientoUno
+            24s ease-in-out infinite;
+
+    }
+
+
+    .nebulosa-dos{
+
+        right:-20%;
+
+        top:35%;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+                rgba(255,130,205,.42) 0%,
+                rgba(130,85,190,.28) 32%,
+                rgba(60,40,150,.12) 55%,
+                transparent 75%
+            );
+
+        opacity:.075;
+
+        animation:
+            nebulosaMovimientoDos
+            31s ease-in-out infinite;
+
+    }
+
+
+    .nebulosa-tres{
+
+        left:25%;
+
+        bottom:-38%;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+                rgba(100,170,255,.32),
+                rgba(80,70,190,.16) 40%,
+                transparent 72%
+            );
+
+        opacity:.065;
+
+        animation:
+            nebulosaMovimientoTres
+            37s ease-in-out infinite;
+
+    }
+
+
+    @keyframes nebulosaMovimientoUno{
+
+        0%,100%{
+
+            transform:
+                translate3d(0,0,0)
+                scale(1);
+
+        }
+
+        50%{
+
+            transform:
+                translate3d(7vw,4vh,0)
+                scale(1.12);
+
+        }
+
+    }
+
+
+    @keyframes nebulosaMovimientoDos{
+
+        0%,100%{
+
+            transform:
+                translate3d(0,0,0)
+                scale(1);
+
+        }
+
+        50%{
+
+            transform:
+                translate3d(-6vw,-3vh,0)
+                scale(1.16);
+
+        }
+
+    }
+
+
+    @keyframes nebulosaMovimientoTres{
+
+        0%,100%{
+
+            transform:
+                translate3d(0,0,0)
+                scale(1);
+
+        }
+
+        50%{
+
+            transform:
+                translate3d(-5vw,-5vh,0)
+                scale(1.1);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       POLVO CÓSMICO
+    ===================================================== */
+
+    .polvo-cosmico{
+
+        position:absolute;
+
+        inset:0;
+
+    }
+
+
+    .particula-amor{
+
+        position:absolute;
+
+        width:2px;
+
+        height:2px;
+
+        border-radius:50%;
+
+        background:
+            rgba(255,255,255,.85);
+
+        box-shadow:
+            0 0 5px rgba(255,255,255,.7),
+            0 0 10px rgba(160,140,255,.5);
+
+        opacity:.15;
+
+        animation:
+            polvoRespira
+            var(--duracion)
+            ease-in-out infinite;
+
+        animation-delay:
+            var(--retraso);
+
+    }
+
+
+    @keyframes polvoRespira{
+
+        0%,100%{
+
+            opacity:.08;
+
+            transform:
+                scale(.7)
+                translateY(0);
+
+        }
+
+        50%{
+
+            opacity:.65;
+
+            transform:
+                scale(1.5)
+                translateY(-8px);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       ESTELA ESPECIAL
+    ===================================================== */
+
+    .estela-amor{
+
+        position:absolute;
+
+        width:15px;
+
+        height:15px;
+
+        left:-30px;
+
+        top:25%;
+
+        opacity:0;
+
+        transform:
+            rotate(-25deg);
+
+        filter:
+            drop-shadow(
+                0 0 10px
+                rgba(255,255,255,.9)
+            );
+
+    }
+
+
+    .halo-estela{
+
+        position:absolute;
+
+        width:45px;
+
+        height:45px;
+
+        left:-15px;
+
+        top:-15px;
 
         border-radius:50%;
 
         background:
             radial-gradient(
                 circle,
-                rgba(255,255,255,.8),
-                rgba(180,150,255,.18) 35%,
+                rgba(255,255,255,.38),
+                rgba(180,150,255,.15) 35%,
                 transparent 70%
             );
 
         filter:blur(3px);
 
-        z-index:-1;
+        animation:
+            haloRespira
+            1.8s ease-in-out infinite;
 
     }
 
 
-    #estrellaHoraEspecial:hover{
-
-        transform:
-            scale(1.25)
-            rotate(12deg);
-
-        filter:
-            drop-shadow(0 0 10px white)
-            drop-shadow(0 0 30px #d3c5ff)
-            drop-shadow(0 0 60px #9a7cff);
-
-    }
-
-
-    #estrellaHoraEspecial:active{
-
-        transform:
-            scale(.85);
-
-    }
-
-
-    .etiquetaEstrellaHora{
+    .cuerpo-estela{
 
         position:absolute;
 
-        top:58px;
+        width:9px;
 
-        left:50%;
-
-        transform:
-            translateX(-50%)
-            translateY(5px);
-
-        width:max-content;
-
-        padding:
-            6px 12px;
-
-        border-radius:20px;
-
-        background:
-            rgba(5,4,20,.55);
-
-        border:
-            1px solid
-            rgba(255,255,255,.12);
-
-        backdrop-filter:
-            blur(10px);
-
-        color:
-            rgba(255,255,255,.55);
-
-        font-family:
-            Georgia,serif;
-
-        font-size:9px;
-
-        letter-spacing:1.5px;
-
-        opacity:0;
-
-        pointer-events:none;
-
-        transition:.6s ease;
-
-    }
-
-
-    #estrellaHoraEspecial:hover
-    .etiquetaEstrellaHora{
-
-        opacity:.9;
-
-        transform:
-            translateX(-50%)
-            translateY(0);
-
-    }
-
-
-    @keyframes aparecerEstrellaHora{
-
-        from{
-            opacity:0;
-            transform:scale(.2);
-        }
-
-        to{
-            opacity:1;
-            transform:scale(1);
-        }
-
-    }
-
-
-    @keyframes respirarEstrellaHora{
-
-        0%,100%{
-
-            filter:
-                drop-shadow(0 0 7px white)
-                drop-shadow(0 0 18px #bba7ff)
-                drop-shadow(0 0 35px #8c70ff);
-
-        }
-
-        50%{
-
-            filter:
-                drop-shadow(0 0 12px white)
-                drop-shadow(0 0 35px #d0c0ff)
-                drop-shadow(0 0 70px #967cff);
-
-        }
-
-    }
-
-
-    /* =====================================================
-       ✦ EXPERIENCIA COMPLETA
-    ===================================================== */
-
-    .universo-hora-especial{
-
-        position:fixed;
-
-        inset:0;
-
-        z-index:9999;
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
-
-        overflow:hidden;
-
-        background:
-
-            radial-gradient(
-                circle at 50% 45%,
-                rgba(48,38,100,.48),
-                rgba(4,3,15,.97) 72%
-            );
-
-        backdrop-filter:
-            blur(0);
-
-        -webkit-backdrop-filter:
-            blur(0);
-
-        opacity:0;
-
-        visibility:hidden;
-
-        pointer-events:none;
-
-        transition:
-            opacity 1.4s ease,
-            backdrop-filter 1.4s ease;
-
-    }
-
-
-    .universo-hora-especial.activo{
-
-        opacity:1;
-
-        visibility:visible;
-
-        pointer-events:auto;
-
-        backdrop-filter:
-            blur(12px);
-
-        -webkit-backdrop-filter:
-            blur(12px);
-
-    }
-
-
-    /* =====================================================
-       ESTRELLAS DEL FONDO
-    ===================================================== */
-
-    .universo-hora-estrellas{
-
-        position:absolute;
-
-        inset:0;
-
-        overflow:hidden;
-
-        opacity:0;
-
-        transition:
-            opacity 2s ease;
-
-    }
-
-
-    .universo-hora-especial.activo
-    .universo-hora-estrellas{
-
-        opacity:1;
-
-    }
-
-
-    .estrella-hora-fondo{
-
-        position:absolute;
-
-        width:2px;
-        height:2px;
+        height:9px;
 
         border-radius:50%;
 
         background:white;
 
         box-shadow:
+
             0 0 5px white,
-            0 0 15px rgba(190,170,255,.8);
 
-        opacity:.25;
+            0 0 12px white,
 
-        animation:
-            brillarHora 3s ease-in-out infinite;
+            0 0 25px #c5b5ff,
 
-    }
-
-
-    @keyframes brillarHora{
-
-        0%,100%{
-
-            opacity:.2;
-            transform:scale(.7);
-
-        }
-
-        50%{
-
-            opacity:1;
-            transform:scale(1.5);
-
-        }
+            0 0 45px rgba(170,140,255,.7);
 
     }
 
 
-    /* =====================================================
-       CONTENEDOR
-    ===================================================== */
+    .cola-estela{
 
-    .hora-experiencia-contenido{
+        position:absolute;
 
-        position:relative;
+        right:8px;
 
-        z-index:5;
+        top:4px;
 
-        width:min(92%,650px);
+        width:160px;
 
-        text-align:center;
+        height:7px;
 
-    }
-
-
-    /* =====================================================
-       PEQUEÑO ENCABEZADO
-    ===================================================== */
-
-    .hora-indicador{
-
-        font-family:
-            Georgia,serif;
-
-        font-size:10px;
-
-        letter-spacing:5px;
-
-        color:
-            rgba(255,255,255,.35);
-
-        margin-bottom:25px;
-
-        opacity:0;
-
-        transform:
-            translateY(15px);
-
-        transition:
-            opacity 1.5s ease,
-            transform 1.5s ease;
-
-    }
-
-
-    .universo-hora-especial.mostrar
-    .hora-indicador{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
-
-    /* =====================================================
-       RELOJ
-    ===================================================== */
-
-    .hora-gigante{
-
-        font-family:
-            Georgia,serif;
-
-        font-size:
-            clamp(65px,18vw,125px);
-
-        font-weight:400;
-
-        letter-spacing:7px;
-
-        line-height:1;
-
-        color:white;
-
-        text-shadow:
-
-            0 0 10px rgba(255,255,255,.8),
-
-            0 0 35px rgba(180,160,255,.75),
-
-            0 0 80px rgba(120,90,255,.45);
-
-        opacity:0;
-
-        transform:
-            scale(.65);
-
-        transition:
-            opacity 2s ease,
-            transform 2s
-            cubic-bezier(.22,.61,.36,1);
-
-    }
-
-
-    .universo-hora-especial.reloj
-    .hora-gigante{
-
-        opacity:1;
-
-        transform:
-            scale(1);
-
-    }
-
-
-    .punto-reloj{
-
-        opacity:.3;
-
-        animation:
-            parpadeoPunto 1.4s ease-in-out infinite;
-
-    }
-
-
-    @keyframes parpadeoPunto{
-
-        0%,100%{
-            opacity:.2;
-        }
-
-        50%{
-            opacity:1;
-        }
-
-    }
-
-
-    /* =====================================================
-       FECHA
-    ===================================================== */
-
-    .hora-fecha-especial{
-
-        margin-top:28px;
-
-        font-family:
-            Georgia,serif;
-
-        font-size:11px;
-
-        letter-spacing:6px;
-
-        color:
-            rgba(255,255,255,.32);
-
-        opacity:0;
-
-        transition:
-            opacity 2s ease 1s;
-
-    }
-
-
-    .universo-hora-especial.reloj
-    .hora-fecha-especial{
-
-        opacity:1;
-
-    }
-
-
-    /* =====================================================
-       FRASE
-    ===================================================== */
-
-    .hora-susurro{
-
-        margin-top:30px;
-
-        font-family:
-            Georgia,serif;
-
-        font-style:italic;
-
-        font-size:
-            clamp(15px,4vw,19px);
-
-        line-height:1.8;
-
-        color:
-            rgba(255,240,215,.72);
-
-        opacity:0;
-
-        transform:
-            translateY(20px);
-
-        transition:
-            opacity 1.7s ease 1s,
-            transform 1.7s ease 1s;
-
-    }
-
-
-    .universo-hora-especial.reloj
-    .hora-susurro{
-
-        opacity:1;
-
-        transform:
-            translateY(0);
-
-    }
-
-
-    /* =====================================================
-       SEPARADOR
-    ===================================================== */
-
-    .hora-separador{
-
-        width:90px;
-
-        height:1px;
-
-        margin:30px auto;
+        transform-origin:right center;
 
         background:
             linear-gradient(
                 90deg,
-                transparent,
-                rgba(255,225,160,.8),
-                transparent
+                rgba(255,255,255,0),
+                rgba(190,170,255,.08),
+                rgba(255,255,255,.7)
             );
 
-        box-shadow:
-            0 0 15px
-            rgba(255,220,150,.5);
+        filter:blur(2px);
+
+        opacity:.75;
 
     }
 
 
-    /* =====================================================
-       MENSAJE FINAL
-    ===================================================== */
-
-    .hora-mensaje-final{
+    .cola-estela i{
 
         position:absolute;
 
-        inset:0;
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:center;
-
-        padding:25px;
-
-        opacity:0;
-
-        transform:
-            scale(.94)
-            translateY(25px);
-
-        pointer-events:none;
-
-        transition:
-            opacity 1.8s ease,
-            transform 1.8s ease;
-
-    }
-
-
-    .universo-hora-especial.final
-    .hora-mensaje-final{
-
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-        pointer-events:auto;
-
-    }
-
-
-    .hora-carta{
-
-        width:min(92%,580px);
-
-        padding:
-            38px 28px;
-
-        border-radius:30px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(255,255,255,.09),
-                rgba(100,75,180,.06)
+        right:
+            calc(
+                var(--i) * 25px
             );
 
-        border:
-            1px solid
-            rgba(255,255,255,.16);
+        top:
+            calc(
+                var(--i) * -1px
+            );
+
+        width:4px;
+
+        height:4px;
+
+        border-radius:50%;
+
+        background:white;
 
         box-shadow:
+            0 0 8px white,
+            0 0 15px #b9a8ff;
 
-            0 0 70px
-            rgba(120,95,255,.18),
-
-            inset 0 0 35px
-            rgba(255,255,255,.025);
-
-        backdrop-filter:
-            blur(22px);
-
-        -webkit-backdrop-filter:
-            blur(22px);
+        opacity:
+            calc(
+                1 - var(--i) * .15
+            );
 
     }
 
 
-    .hora-titulo-final{
+    .cola-estela i:nth-child(1){
+        --i:1;
+    }
 
-        font-family:
-            Georgia,serif;
+    .cola-estela i:nth-child(2){
+        --i:2;
+    }
 
-        font-size:
-            clamp(20px,5vw,30px);
+    .cola-estela i:nth-child(3){
+        --i:3;
+    }
 
-        line-height:1.5;
+    .cola-estela i:nth-child(4){
+        --i:4;
+    }
 
-        color:white;
-
-        text-shadow:
-            0 0 25px
-            rgba(190,170,255,.55);
-
+    .cola-estela i:nth-child(5){
+        --i:5;
     }
 
 
-    .hora-texto-final{
+    @keyframes haloRespira{
 
-        margin-top:22px;
+        0%,100%{
 
-        font-family:
-            Georgia,serif;
+            transform:scale(.8);
 
-        font-size:
-            clamp(15px,4vw,19px);
+            opacity:.5;
 
-        line-height:2;
+        }
 
-        color:
-            rgba(255,255,255,.76);
+        50%{
 
-    }
+            transform:scale(1.25);
 
+            opacity:1;
 
-    .hora-destello-final{
-
-        margin-top:23px;
-
-        font-family:
-            Georgia,serif;
-
-        font-size:
-            clamp(18px,4.5vw,23px);
-
-        line-height:1.7;
-
-        color:
-            rgba(255,228,170,.95);
-
-        text-shadow:
-            0 0 18px
-            rgba(255,210,120,.3);
-
-    }
-
-
-    .hora-memoria{
-
-        margin-top:24px;
-
-        font-size:10px;
-
-        letter-spacing:2px;
-
-        color:
-            rgba(255,255,255,.3);
-
-    }
-
-
-    .hora-memoria strong{
-
-        display:block;
-
-        margin-top:7px;
-
-        color:
-            rgba(255,225,165,.75);
-
-        font-size:14px;
-
-        letter-spacing:4px;
+        }
 
     }
 
 
     /* =====================================================
-       BOTÓN
+       MOVIMIENTO DE LA ESTELA
+       
+       No aparece constantemente.
+       Hace un recorrido lento y vuelve a descansar.
     ===================================================== */
 
-    .cerrar-hora-especial{
+    @keyframes recorridoEstela{
 
-        margin-top:27px;
+        0%{
 
-        padding:
-            11px 24px;
+            left:-12%;
 
-        border-radius:30px;
+            top:22%;
 
-        border:
-            1px solid
-            rgba(255,255,255,.16);
+            opacity:0;
 
-        background:
-            rgba(255,255,255,.055);
+        }
 
-        color:
-            rgba(255,255,255,.68);
+        5%{
 
-        font-family:
-            Georgia,serif;
+            opacity:1;
 
-        cursor:pointer;
+        }
 
-        transition:.4s ease;
+        25%{
+
+            left:25%;
+
+            top:30%;
+
+            opacity:1;
+
+        }
+
+        48%{
+
+            left:58%;
+
+            top:18%;
+
+            opacity:1;
+
+        }
+
+        70%{
+
+            left:88%;
+
+            top:35%;
+
+            opacity:.8;
+
+        }
+
+        76%{
+
+            left:105%;
+
+            top:28%;
+
+            opacity:0;
+
+        }
+
+        100%{
+
+            left:105%;
+
+            top:28%;
+
+            opacity:0;
+
+        }
 
     }
 
 
-    .cerrar-hora-especial:hover{
+    .estela-amor{
 
-        color:white;
+        animation:
+            recorridoEstela
+            24s
+            cubic-bezier(.45,.05,.55,.95)
+            infinite;
 
-        background:
-            rgba(255,255,255,.11);
+        animation-delay:
+            8s;
 
-        transform:
-            translateY(-2px);
+    }
 
-        box-shadow:
-            0 0 25px
-            rgba(160,140,255,.25);
+
+    /* =====================================================
+       EVITAR INTERFERENCIA CON CONTENIDO
+    ===================================================== */
+
+    #universo > .cielo-amor-permanente{
+
+        pointer-events:none;
 
     }
 
@@ -5496,38 +5258,61 @@ document.head.appendChild(
 
     @media(max-width:600px){
 
-        #estrellaHoraEspecial{
+        .nebulosa-nosotros{
 
-            right:7%;
+            filter:blur(42px);
+
+        }
+
+
+        .nebulosa-uno{
+
+            left:-35%;
 
             top:18%;
 
-            width:52px;
-            height:52px;
+        }
 
-            font-size:31px;
+
+        .nebulosa-dos{
+
+            right:-35%;
+
+            top:40%;
 
         }
 
 
-        .hora-gigante{
+        .nebulosa-tres{
 
-            letter-spacing:4px;
+            left:10%;
 
-        }
-
-
-        .hora-carta{
-
-            padding:
-                30px 20px;
+            bottom:-30%;
 
         }
 
 
-        .hora-texto-final{
+        .cola-estela{
 
-            line-height:1.8;
+            width:110px;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       REDUCIR MOVIMIENTO SI EL DISPOSITIVO LO PIDE
+    ===================================================== */
+
+    @media(prefers-reduced-motion:reduce){
+
+        .nebulosa-nosotros,
+        .particula-amor,
+        .estela-amor,
+        .halo-estela{
+
+            animation:none !important;
 
         }
 
@@ -5539,433 +5324,68 @@ document.head.appendChild(
 
 
     /* =====================================================
-       CREAR ESTRELLA ESPECIAL
+       CREAR POLVO CÓSMICO
     ===================================================== */
 
-    const estrellaEspecial =
-        document.createElement("button");
-
-    estrellaEspecial.id =
-        "estrellaHoraEspecial";
-
-    estrellaEspecial.innerHTML = `
-        ✦
-
-        <span
-            class="etiquetaEstrellaHora">
-            una noche
-        </span>
-    `;
-
-    estrellaEspecial.setAttribute(
-        "aria-label",
-        "Una noche especial"
-    );
-
-    universo.appendChild(
-        estrellaEspecial
-    );
-
-
-    /* =====================================================
-       CREAR EXPERIENCIA
-    ===================================================== */
-
-    const capa =
-        document.createElement("div");
-
-    capa.className =
-        "universo-hora-especial";
-
-    capa.innerHTML = `
-
-        <div
-            class="universo-hora-estrellas"
-            id="estrellasHoraEspecial">
-        </div>
-
-
-        <!-- =============================================
-             RELOJ
-        ============================================== -->
-
-        <div
-            class="hora-experiencia-contenido"
-            id="inicioHoraEspecial">
-
-            <div class="hora-indicador">
-                ESTA NOCHE
-            </div>
-
-
-            <div
-                class="hora-gigante"
-                id="horaGigante">
-            </div>
-
-
-            <div
-                class="hora-fecha-especial">
-
-                12 · VIII · 2026
-
-            </div>
-
-
-            <div
-                class="hora-susurro">
-
-                Hay momentos que no parecen
-                importantes mientras suceden...
-
-                <br><br>
-
-                hasta que alguien decide
-                guardarlos para siempre.
-
-            </div>
-
-        </div>
-
-
-        <!-- =============================================
-             MENSAJE FINAL
-        ============================================== -->
-
-        <div
-            class="hora-mensaje-final"
-            id="mensajeFinalHora">
-
-            <div class="hora-carta">
-
-                <div class="hora-titulo-final">
-
-                    ✦ LA HORA QUE EL UNIVERSO
-                    NOS GUARDÓ ✦
-
-                </div>
-
-
-                <div class="hora-separador"></div>
-
-
-                <div class="hora-texto-final">
-
-                    De todas las horas que existen
-                    en este inmenso universo,
-
-                    <br><br>
-
-                    esta noche hubo una que quise
-                    guardar especialmente para ti.
-
-                    <br><br>
-
-                    No porque fuera diferente para
-                    el mundo...
-
-                    <br>
-
-                    sino porque en ella estabas tú
-                    dentro de mis pensamientos.
-
-                </div>
-
-
-                <div class="hora-destello-final">
-
-                    Si alguna vez olvidamos esta noche,
-                    que esta pequeña estrella nos
-                    recuerde que una vez estuvimos aquí,
-                    amándonos.
-
-                </div>
-
-
-                <div
-                    class="hora-memoria"
-                    id="memoriaHoraEspecial">
-                </div>
-
-
-                <button
-                    class="cerrar-hora-especial"
-                    id="cerrarHoraEspecial">
-
-                    Volver a nuestro cielo ✦
-
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
-    document.body.appendChild(capa);
-
-
-    /* =====================================================
-       CREAR ESTRELLAS INTERNAS
-    ===================================================== */
-
-    const estrellasInternas =
+    const polvo =
         document.getElementById(
-            "estrellasHoraEspecial"
+            "polvoCosmico"
         );
 
-    for(let i=0;i<110;i++){
 
-        const estrella =
+    for(let i = 0; i < 85; i++){
+
+        const particula =
             document.createElement("span");
 
-        estrella.className =
-            "estrella-hora-fondo";
+        particula.className =
+            "particula-amor";
 
-        estrella.style.left =
-            Math.random()*100+"%";
 
-        estrella.style.top =
-            Math.random()*100+"%";
+        particula.style.left =
+            Math.random() * 100 + "%";
 
-        estrella.style.animationDelay =
-            Math.random()*4+"s";
 
-        estrella.style.animationDuration =
-            (2+Math.random()*4)+"s";
+        particula.style.top =
+            Math.random() * 100 + "%";
 
-        estrellasInternas.appendChild(
-            estrella
+
+        particula.style.setProperty(
+            "--duracion",
+            (3 + Math.random() * 5) + "s"
         );
 
-    }
 
-
-    /* =====================================================
-       HORA ACTUAL
-    ===================================================== */
-
-    const horaActual =
-        new Date();
-
-    const horas =
-        String(
-            horaActual.getHours()
-        ).padStart(2,"0");
-
-    const minutos =
-        String(
-            horaActual.getMinutes()
-        ).padStart(2,"0");
-
-
-    document.getElementById(
-        "horaGigante"
-    ).innerHTML = `
-
-        ${horas}
-
-        <span class="punto-reloj">
-            :
-        </span>
-
-        ${minutos}
-
-    `;
-
-
-    /* =====================================================
-       GUARDAR LA HORA
-    ===================================================== */
-
-    const CLAVE =
-        "laHoraUniverso_12Agosto2026";
-
-
-    let memoria =
-        localStorage.getItem(CLAVE);
-
-
-    if(!memoria){
-
-        memoria =
-            horas + ":" + minutos;
-
-        localStorage.setItem(
-            CLAVE,
-            memoria
+        particula.style.setProperty(
+            "--retraso",
+            (Math.random() * -6) + "s"
         );
-
-    }
-
-
-    document.getElementById(
-        "memoriaHoraEspecial"
-    ).innerHTML = `
-
-        Esta noche quedó guardada
-        en nuestro cielo.
-
-        <strong>
-            ${memoria}
-        </strong>
-
-    `;
-
-
-    /* =====================================================
-       ABRIR EXPERIENCIA
-    ===================================================== */
-
-    function abrirExperiencia(){
-
-        capa.classList.add(
-            "activo"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-
-
-        setTimeout(()=>{
-
-            capa.classList.add(
-                "mostrar"
-            );
-
-        },250);
-
-
-        setTimeout(()=>{
-
-            capa.classList.add(
-                "reloj"
-            );
-
-        },900);
 
 
         /*
-           Después de unos segundos,
-           el reloj desaparece suavemente
-           y aparece el mensaje.
+           Algunas partículas son más pequeñas
+           para dar sensación de profundidad.
         */
 
-        setTimeout(()=>{
-
-            const inicio =
-                document.getElementById(
-                    "inicioHoraEspecial"
-                );
-
-            inicio.style.opacity =
-                "0";
-
-            inicio.style.transform =
-                "scale(.92) translateY(-20px)";
+        const escala =
+            .5 + Math.random() * 1.5;
 
 
-            capa.classList.add(
-                "final"
-            );
+        particula.style.transform =
+            `scale(${escala})`;
 
-        },5500);
+
+        polvo.appendChild(
+            particula
+        );
 
     }
 
 
-    /* =====================================================
-       TOCAR ESTRELLA
-    ===================================================== */
-
-    estrellaEspecial.addEventListener(
-        "click",
-        function(e){
-
-            e.stopPropagation();
-
-            abrirExperiencia();
-
-        }
-    );
-
-
-    /* =====================================================
-       CERRAR
-    ===================================================== */
-
-    document
-        .getElementById(
-            "cerrarHoraEspecial"
-        )
-        .addEventListener(
-            "click",
-            function(){
-
-                capa.classList.remove(
-                    "final"
-                );
-
-                capa.classList.remove(
-                    "reloj"
-                );
-
-                capa.classList.remove(
-                    "mostrar"
-                );
-
-
-                setTimeout(()=>{
-
-                    capa.classList.remove(
-                        "activo"
-                    );
-
-                    document.body.style.overflow =
-                        "";
-
-                },900);
-
-            }
-        );
-
-
-    /* =====================================================
-       ESCAPE
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function(e){
-
-            if(
-                e.key === "Escape" &&
-                capa.classList.contains(
-                    "activo"
-                )
-            ){
-
-                document
-                    .getElementById(
-                        "cerrarHoraEspecial"
-                    )
-                    .click();
-
-            }
-
-        }
-    );
-
-
 })();
+
 </script>
-
-<!-- =========================================================
-     FIN DE
-     «LA HORA QUE EL UNIVERSO NOS GUARDÓ»
-========================================================= -->
-
-
+    
 </body>
 
     </html>
