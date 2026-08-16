@@ -5384,6 +5384,661 @@ document.head.appendChild(
 
 })();
 
+
+    
+(function(){
+
+    /* =====================================================
+       CONTENEDOR
+    ===================================================== */
+
+    const universo =
+        document.getElementById("universo") ||
+        document.body;
+
+
+    /* =====================================================
+       CREAR EL CORAZÓN
+    ===================================================== */
+
+    const corazonNebular =
+        document.createElement("div");
+
+    corazonNebular.className =
+        "corazon-nebular";
+
+    corazonNebular.innerHTML = `
+
+        <div class="corazon-resplandor"></div>
+
+        <div
+            class="corazon-particulas"
+            id="particulasCorazon">
+        </div>
+
+        <div
+            class="corazon-polvo"
+            id="polvoCorazon">
+        </div>
+
+    `;
+
+    universo.appendChild(
+        corazonNebular
+    );
+
+
+    /* =====================================================
+       ESTILOS
+    ===================================================== */
+
+    const estilo =
+        document.createElement("style");
+
+    estilo.textContent = `
+
+    /* =====================================================
+       ZONA GENERAL
+    ===================================================== */
+
+    .corazon-nebular{
+
+        position:absolute;
+
+        width:
+            min(72vw, 620px);
+
+        height:
+            min(72vw, 620px);
+
+        left:50%;
+
+        top:50%;
+
+        transform:
+            translate(-50%,-50%);
+
+        pointer-events:none;
+
+        z-index:1;
+
+        opacity:.72;
+
+        filter:
+            blur(.1px);
+
+    }
+
+
+    /* =====================================================
+       RESPLANDOR CENTRAL
+    ===================================================== */
+
+    .corazon-resplandor{
+
+        position:absolute;
+
+        width:55%;
+
+        height:55%;
+
+        left:22.5%;
+
+        top:22%;
+
+        border-radius:50%;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+
+                rgba(150,125,255,.12)
+                0%,
+
+                rgba(120,90,220,.07)
+                28%,
+
+                rgba(100,70,190,.035)
+                48%,
+
+                transparent
+                72%
+            );
+
+        filter:
+            blur(28px);
+
+        animation:
+            respirarNebulosa
+            9s ease-in-out infinite;
+
+    }
+
+
+    @keyframes respirarNebulosa{
+
+        0%,100%{
+
+            transform:
+                scale(.92);
+
+            opacity:.45;
+
+        }
+
+        50%{
+
+            transform:
+                scale(1.08);
+
+            opacity:.8;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       PARTÍCULAS DEL CORAZÓN
+    ===================================================== */
+
+    .corazon-particulas{
+
+        position:absolute;
+
+        inset:0;
+
+    }
+
+
+    .estrella-corazon{
+
+        position:absolute;
+
+        width:
+            var(--tamano);
+
+        height:
+            var(--tamano);
+
+        border-radius:50%;
+
+        background:white;
+
+        box-shadow:
+
+            0 0
+            calc(var(--tamano) * 2)
+            rgba(255,255,255,.9),
+
+            0 0
+            calc(var(--tamano) * 5)
+            rgba(175,155,255,.8),
+
+            0 0
+            calc(var(--tamano) * 9)
+            rgba(130,105,255,.35);
+
+        opacity:
+            var(--opacidad);
+
+        transform:
+            translate(-50%,-50%)
+            scale(var(--escala));
+
+        animation:
+            latidoEstrella
+            var(--duracion)
+            ease-in-out infinite;
+
+        animation-delay:
+            var(--retraso);
+
+    }
+
+
+    @keyframes latidoEstrella{
+
+        0%,100%{
+
+            opacity:
+                calc(var(--opacidad) * .55);
+
+            transform:
+                translate(-50%,-50%)
+                scale(
+                    calc(var(--escala) * .72)
+                );
+
+        }
+
+        50%{
+
+            opacity:
+                var(--opacidad);
+
+            transform:
+                translate(-50%,-50%)
+                scale(
+                    calc(var(--escala) * 1.35)
+                );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       POLVO ALREDEDOR
+    ===================================================== */
+
+    .corazon-polvo{
+
+        position:absolute;
+
+        inset:-12%;
+
+    }
+
+
+    .particula-polvo{
+
+        position:absolute;
+
+        width:
+            var(--tamano-polvo);
+
+        height:
+            var(--tamano-polvo);
+
+        border-radius:50%;
+
+        background:
+            rgba(190,175,255,.75);
+
+        box-shadow:
+            0 0 7px
+            rgba(185,165,255,.65);
+
+        opacity:
+            var(--opacidad-polvo);
+
+        animation:
+            polvoOrbita
+            var(--duracion-polvo)
+            linear infinite;
+
+        animation-delay:
+            var(--retraso-polvo);
+
+    }
+
+
+    @keyframes polvoOrbita{
+
+        0%{
+
+            transform:
+                rotate(0deg)
+                translateX(
+                    var(--distancia)
+                )
+                rotate(0deg);
+
+        }
+
+        100%{
+
+            transform:
+                rotate(360deg)
+                translateX(
+                    var(--distancia)
+                )
+                rotate(-360deg);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SUAVIZAR EL CORAZÓN PARA QUE NO PAREZCA UN ICONO
+    ===================================================== */
+
+    .corazon-nebular::before{
+
+        content:"";
+
+        position:absolute;
+
+        inset:8%;
+
+        border-radius:50%;
+
+        background:
+            radial-gradient(
+                ellipse at center,
+
+                transparent 0%,
+
+                transparent 42%,
+
+                rgba(130,110,230,.025)
+                60%,
+
+                transparent 76%
+            );
+
+        filter:
+            blur(18px);
+
+    }
+
+
+    /* =====================================================
+       MÓVIL
+    ===================================================== */
+
+    @media(max-width:600px){
+
+        .corazon-nebular{
+
+            width:90vw;
+
+            height:90vw;
+
+            opacity:.58;
+
+            top:48%;
+
+        }
+
+        .corazon-resplandor{
+
+            filter:
+                blur(23px);
+
+        }
+
+    }
+
+
+    /* =====================================================
+       RESPETO A REDUCCIÓN DE MOVIMIENTO
+    ===================================================== */
+
+    @media(prefers-reduced-motion:reduce){
+
+        .corazon-resplandor,
+        .estrella-corazon,
+        .particula-polvo{
+
+            animation:none !important;
+
+        }
+
+    }
+
+    `;
+
+    document.head.appendChild(
+        estilo
+    );
+
+
+    /* =====================================================
+       GENERAR LAS ESTRELLAS
+       
+       Ecuación paramétrica de un corazón.
+       Se altera ligeramente para que no sea
+       perfectamente geométrico.
+    ===================================================== */
+
+    const contenedorParticulas =
+        document.getElementById(
+            "particulasCorazon"
+        );
+
+
+    const cantidadEstrellas = 175;
+
+
+    for(
+        let i = 0;
+        i < cantidadEstrellas;
+        i++
+    ){
+
+        const t =
+            Math.PI * 2 *
+            (i / cantidadEstrellas);
+
+
+        /*
+           Fórmula clásica del corazón:
+
+           x = 16 sin³(t)
+           y = 13 cos(t)
+               - 5 cos(2t)
+               - 2 cos(3t)
+               - cos(4t)
+        */
+
+        let x =
+            16 *
+            Math.pow(
+                Math.sin(t),
+                3
+            );
+
+
+        let y =
+            13 *
+            Math.cos(t)
+            - 5 *
+            Math.cos(2*t)
+            - 2 *
+            Math.cos(3*t)
+            - Math.cos(4*t);
+
+
+        /*
+           Imperfección orgánica.
+           Hace que parezca una formación
+           estelar y no un dibujo perfecto.
+        */
+
+        x +=
+            Math.sin(i * 4.71) *
+            .8;
+
+        y +=
+            Math.cos(i * 3.17) *
+            .65;
+
+
+        /*
+           Convertir coordenadas.
+        */
+
+        const escala =
+            2.45;
+
+
+        const izquierda =
+            50 +
+            x * escala /
+            16;
+
+
+        const arriba =
+            50 -
+            y * escala /
+            16;
+
+
+        const estrella =
+            document.createElement(
+                "span"
+            );
+
+
+        estrella.className =
+            "estrella-corazon";
+
+
+        estrella.style.left =
+            izquierda + "%";
+
+
+        estrella.style.top =
+            arriba + "%";
+
+
+        const tamano =
+            .7 +
+            Math.random() * 1.9;
+
+
+        estrella.style.setProperty(
+            "--tamano",
+            tamano + "px"
+        );
+
+
+        estrella.style.setProperty(
+            "--opacidad",
+            .25 +
+            Math.random() * .65
+        );
+
+
+        estrella.style.setProperty(
+            "--escala",
+            .65 +
+            Math.random() * .7
+        );
+
+
+        estrella.style.setProperty(
+            "--duracion",
+            (2.5 +
+            Math.random() * 4) +
+            "s"
+        );
+
+
+        estrella.style.setProperty(
+            "--retraso",
+            (Math.random() * -5) +
+            "s"
+        );
+
+
+        contenedorParticulas.appendChild(
+            estrella
+        );
+
+    }
+
+
+    /* =====================================================
+       CREAR POLVO CÓSMICO
+    ===================================================== */
+
+    const polvo =
+        document.getElementById(
+            "polvoCorazon"
+        );
+
+
+    for(
+        let i = 0;
+        i < 55;
+        i++
+    ){
+
+        const particula =
+            document.createElement(
+                "span"
+            );
+
+
+        particula.className =
+            "particula-polvo";
+
+
+        const angulo =
+            Math.random() *
+            360;
+
+
+        const distancia =
+            45 +
+            Math.random() *
+            42;
+
+
+        particula.style.left =
+            "50%";
+
+
+        particula.style.top =
+            "50%";
+
+
+        particula.style.transform =
+            `rotate(${angulo}deg)
+             translateX(${distancia}px)`;
+
+
+        particula.style.setProperty(
+            "--distancia",
+            distancia + "px"
+        );
+
+
+        particula.style.setProperty(
+            "--tamano-polvo",
+            (.5 +
+            Math.random() * 1.4) +
+            "px"
+        );
+
+
+        particula.style.setProperty(
+            "--opacidad-polvo",
+            (.08 +
+            Math.random() * .35)
+        );
+
+
+        particula.style.setProperty(
+            "--duracion-polvo",
+            (25 +
+            Math.random() * 30) +
+            "s"
+        );
+
+
+        particula.style.setProperty(
+            "--retraso-polvo",
+            (Math.random() * -30) +
+            "s"
+        );
+
+
+        polvo.appendChild(
+            particula
+        );
+
+    }
+
+
+})();
+
+
+    
 </script>
     
 </body>
