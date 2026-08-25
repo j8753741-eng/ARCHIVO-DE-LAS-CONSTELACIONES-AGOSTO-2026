@@ -278,6 +278,99 @@ h1{
 
 /* VARIABLES */
 
+    
+
+
+    /* 🌙 REDUCCIÓN GENERAL DE BRILLO */
+
+    #universo,
+    #universo * {
+
+        text-shadow:
+            0 0 4px rgba(255,255,255,.18) !important;
+
+    }
+
+
+    /* ✦ ESTRELLAS */
+
+    .estrella,
+    .star,
+    .estrella-hora,
+    .punto-fecha {
+
+        opacity: .55 !important;
+
+        box-shadow:
+            0 0 5px rgba(255,255,255,.35) !important;
+
+    }
+
+
+    /* ✦ LUCES DE LAS ESTRELLAS */
+
+    [class*="estrella"],
+    [class*="star"] {
+
+        filter:
+            brightness(.65)
+            saturate(.8) !important;
+
+    }
+
+
+    /* ✦ CORAZONES Y ELEMENTOS BRILLANTES */
+
+    .corazon,
+    .heart,
+    .luna,
+    .moon {
+
+        filter:
+            brightness(.72)
+            saturate(.85) !important;
+
+    }
+
+
+    /* ✦ REDUCIR NEONES */
+
+    [class*="neon"],
+    [class*="glow"],
+    [class*="brillo"],
+    [class*="luz"] {
+
+        filter:
+            brightness(.65) !important;
+
+    }
+
+
+    /* ✦ BOTONES */
+
+    button {
+
+        box-shadow:
+            0 0 8px rgba(150,130,255,.12) !important;
+
+    }
+
+
+    /* ✦ EVITAR ANIMACIONES DEMASIADO INTENSAS */
+
+    @keyframes brilloSuave {
+
+        0%,100% {
+            opacity:.45;
+        }
+
+        50% {
+            opacity:.7;
+        }
+
+    }
+
+
 </style>
 
 </head>
